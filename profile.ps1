@@ -1,4 +1,5 @@
 sal gh help
+function ll([string[]]$Path = '.') { gci $Path -Exclude .* }
 function sl.. { sl .. }
 function sl~ { sl ~ }
 

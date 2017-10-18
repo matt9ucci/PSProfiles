@@ -4,6 +4,11 @@ sv PROFILEDIR (Split-Path $PROFILE) -Option ReadOnly, AllScope
 sv SCRIPTS (Join-Path $HOME Scripts) -Option ReadOnly, AllScope
 
 sal gh help
+
+sal d docker
+sal dc docker-compose
+sal dm docker-machine
+
 function ll([string[]]$Path = '.') { gci $Path -Exclude .* }
 function sl.. { sl .. }
 function sl~ { sl ~ }

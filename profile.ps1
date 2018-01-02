@@ -4,6 +4,8 @@ sv PROFILEDIR (Split-Path $PROFILE) -Option ReadOnly, AllScope
 sv SCRIPTS (Join-Path $HOME Scripts) -Option ReadOnly, AllScope
 
 sal gh help
+sal gcb Get-Clipboard
+sal scb Set-Clipboard
 
 sal d docker
 sal dc docker-compose

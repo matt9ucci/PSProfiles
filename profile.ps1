@@ -8,6 +8,7 @@ sal gh help
 sal d docker
 sal dc docker-compose
 sal dm docker-machine
+sal g git
 
 function ll([string[]]$Path = '.') { gci $Path -Exclude .* }
 function sl.. { sl .. }

@@ -21,6 +21,7 @@ $env:PSModulePath = -join ((Join-Path $PROFILEDIR PSModules), [System.IO.Path]::
 
 $env:Path = @(
 	$SCRIPTS
+	"$HOME\Apps\Git\cmd"
 	$env:Path
 ) -join ";"
 

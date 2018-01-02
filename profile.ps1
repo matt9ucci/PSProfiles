@@ -16,6 +16,8 @@ function ll([string[]]$Path = '.') { gci $Path -Exclude .* }
 function sl.. { sl .. }
 function sl~ { sl ~ }
 function Get-FileHash { $fh = Microsoft.PowerShell.Utility\Get-FileHash @Args; Set-Clipboard $fh.hash; $fh }
+function codep { code $PROFILEDIR $PROFILE.CurrentUserAllHosts }
+function codes { code $SCRIPTS }
 
 $env:PSModulePath = -join ((Join-Path $PROFILEDIR PSModules), [System.IO.Path]::PathSeparator, $env:PSModulePath)
 

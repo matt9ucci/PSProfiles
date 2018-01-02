@@ -19,6 +19,11 @@ function Get-FileHash { $fh = Microsoft.PowerShell.Utility\Get-FileHash @Args; S
 
 $env:PSModulePath = -join ((Join-Path $PROFILEDIR PSModules), [System.IO.Path]::PathSeparator, $env:PSModulePath)
 
+$env:Path = @(
+	$SCRIPTS
+	$env:Path
+) -join ";"
+
 function prompt {
 	$Host.UI.RawUI.WindowTitle = "PS $($ExecutionContext.SessionState.Path.CurrentLocation)$('>' * ($NestedPromptLevel + 1))"
 	return 'PS> '

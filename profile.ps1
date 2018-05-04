@@ -12,7 +12,7 @@ sal dc docker-compose
 sal dm docker-machine
 sal g git
 
-function ll([string[]]$Path = '.') { gci $Path -Exclude .* }
+function ll { gci @Args | ? Name -NotLike .* }
 function sl.. { sl .. }
 function sl~ { sl ~ }
 function Get-FileHash { $fh = Microsoft.PowerShell.Utility\Get-FileHash @Args; Set-Clipboard $fh.hash; $fh }

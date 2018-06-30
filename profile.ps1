@@ -40,3 +40,8 @@ function prompt {
 	$Host.UI.RawUI.WindowTitle = "PS $($ExecutionContext.SessionState.Path.CurrentLocation)$('>' * ($NestedPromptLevel + 1))"
 	return 'PS> '
 }
+
+if (Test-Path $HOME\.psprofiles\profile.ps1) {
+	function codep { code $PROFILEDIR $PROFILE.CurrentUserAllHosts $HOME\.psprofiles\profile.ps1 }
+	. $HOME\.psprofiles\profile.ps1
+}

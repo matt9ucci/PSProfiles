@@ -38,7 +38,7 @@ if ([System.Net.ServicePointManager]::SecurityProtocol -ne [System.Net.SecurityP
 
 function prompt {
 	$Host.UI.RawUI.WindowTitle = "PS $($ExecutionContext.SessionState.Path.CurrentLocation)$('>' * ($NestedPromptLevel + 1))"
-	return 'PS> '
+	return "$($PSVersionTable.PSVersion.Major).$($PSVersionTable.PSVersion.Minor)> "
 }
 
 if (Test-Path $HOME\.psprofiles\profile.ps1) {

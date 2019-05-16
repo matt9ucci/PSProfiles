@@ -8,6 +8,7 @@ sal gh help
 sal gcb Get-Clipboard
 sal scb Set-Clipboard
 
+sal c code
 sal d docker
 sal dc docker-compose
 sal dm docker-machine

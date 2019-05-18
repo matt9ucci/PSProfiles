@@ -1,3 +1,5 @@
+. $PSScriptRoot\Directory.ps1
+
 function Grant-Administrator {
 	$ps = switch ($PSVersionTable.PSVersion.Major) {
 		{ $_ -le 5 } { 'powershell' }
@@ -5,9 +7,6 @@ function Grant-Administrator {
 	}
 	saps $ps -ArgumentList "-ExecutionPolicy $(Get-ExecutionPolicy)" -Verb RunAs
 }
-
-function New-Directory([string[]]$Path) { New-Item $Path -Force -ItemType Directory }
-Set-Alias nd New-Directory
 
 function Get-Accelerator([string]$Name = '*') {
 	$accelerators = [powershell].Assembly.GetType('System.Management.Automation.TypeAccelerators')::Get

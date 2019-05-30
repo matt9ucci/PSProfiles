@@ -7,3 +7,7 @@ function Get-Accelerator([string]$Name = '*') {
 }
 
 function Edit-Hosts { saps notepad $env:SystemRoot\System32\drivers\etc\hosts -Verb RunAs }
+
+function Export-HttpProxyCredential([string]$Path = "$HOME\.psprofiles\HttpProxyCredential.xml") {
+	Get-Credential | Export-Clixml $Path
+}

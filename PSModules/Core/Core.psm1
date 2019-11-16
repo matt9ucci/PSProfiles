@@ -1,4 +1,5 @@
 . $PSScriptRoot\Administrator.ps1
+. $PSScriptRoot\Command.ps1
 . $PSScriptRoot\Directory.ps1
 
 function Get-Accelerator([string]$Name = '*') {

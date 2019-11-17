@@ -7,6 +7,8 @@ sv SCRIPTS (Join-Path $HOME Scripts) -Option ReadOnly, AllScope
 sal gh help
 sal gcb Get-Clipboard
 sal scb Set-Clipboard
+sal FromJson ConvertFrom-Json
+sal ToJson ConvertTo-Json
 
 sal c code
 sal d docker

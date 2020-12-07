@@ -24,6 +24,8 @@ function c. { code . }
 function codep { code $PROFILEDIR $PROFILE.CurrentUserAllHosts }
 function codes { code $SCRIPTS }
 
+function Update-Profile { pushd $PROFILEDIR; git pull --rebase; popd }
+
 $env:PSModulePath = -join ((Join-Path $PROFILEDIR PSModules), [System.IO.Path]::PathSeparator, $env:PSModulePath)
 
 $env:Path = @(

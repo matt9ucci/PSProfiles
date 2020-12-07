@@ -29,3 +29,24 @@ function Edit-Hosts { saps notepad $env:SystemRoot\System32\drivers\etc\hosts -V
 function Export-HttpProxyCredential([string]$Path = "$HOME\.psprofiles\HttpProxyCredential.xml") {
 	Get-Credential | Export-Clixml $Path
 }
+
+function Export-PwshProxyClixml {
+	param (
+		[Parameter(Mandatory)]
+		[uri]
+		$Proxy,
+
+		[pscredential]
+		$ProxyCredential,
+
+		[string]
+		$Path = (Join-Path (Split-Path $PROFILE) PwshProxy.xml)
+	)
+
+	$pwshProxy = [pscustomobject]@{
+		Proxy = $Proxy
+		ProxyCredential = $ProxyCredential
+	}
+
+	Export-Clixml -Path $Path -InputObject $pwshProxy
+}

@@ -1,3 +1,7 @@
 {
-	"powershell.scriptAnalysis.enable": false
+	"powershell.scriptAnalysis.enable": false,
+	"workbench.colorCustomizations": {
+		"terminal.background": "#012456",
+		"terminal.foreground": "#CCCCCC"
+	}
 }

@@ -42,6 +42,8 @@ if ([System.Net.ServicePointManager]::SecurityProtocol -ne [System.Net.SecurityP
 	[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12
 }
 
+$PSDefaultParameterValues['Import-Module:Force'] = $true
+
 function prompt {
 	$Host.UI.RawUI.WindowTitle = "PS $($ExecutionContext.SessionState.Path.CurrentLocation)$('>' * ($NestedPromptLevel + 1))"
 	return "$($PSVersionTable.PSVersion.Major).$($PSVersionTable.PSVersion.Minor)> "

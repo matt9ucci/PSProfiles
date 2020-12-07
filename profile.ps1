@@ -16,6 +16,9 @@ sal dc docker-compose
 sal dm docker-machine
 sal g git
 
+sal .n dotnet
+function .nr { dotnet run @Args }
+
 function gho { Get-Help @Args -Online }
 function ll { gci @Args | ? Name -NotLike .* }
 function sl.. { sl .. }

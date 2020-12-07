@@ -19,7 +19,6 @@ sal g git
 function gho { Get-Help @Args -Online }
 function ll { gci @Args | ? Name -NotLike .* }
 function sl.. { sl .. }
-function sl~ { sl ~ }
 function Get-FileHash { $fh = Microsoft.PowerShell.Utility\Get-FileHash @Args; Set-Clipboard $fh.hash; $fh }
 function c. { code . }
 function codep { code $PROFILEDIR $PROFILE.CurrentUserAllHosts }

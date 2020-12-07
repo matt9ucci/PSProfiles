@@ -16,6 +16,7 @@ sal dc docker-compose
 sal dm docker-machine
 sal g git
 
+function gho { Get-Help @Args -Online }
 function ll { gci @Args | ? Name -NotLike .* }
 function sl.. { sl .. }
 function sl~ { sl ~ }

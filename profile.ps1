@@ -2,6 +2,7 @@ sv APPS (Join-Path $HOME Apps) -Option ReadOnly, AllScope
 sv DESKTOP ([Environment]::GetFolderPath([Environment+SpecialFolder]::Desktop)) -Option ReadOnly, AllScope
 sv DOWNLOADS (Join-Path $HOME Downloads) -Option ReadOnly, AllScope
 sv PROFILEDIR (Split-Path $PROFILE) -Option ReadOnly, AllScope
+Add-Member -InputObject $PROFILEDIR -Name Private -Value "$HOME\.psprofiles" -MemberType NoteProperty
 sv SCRIPTS (Join-Path $HOME Scripts) -Option ReadOnly, AllScope
 
 sal gh help
@@ -24,7 +25,6 @@ function ll { gci @Args | ? Name -NotLike .* }
 function sl.. { sl .. }
 function Get-FileHash { $fh = Microsoft.PowerShell.Utility\Get-FileHash @Args; Set-Clipboard $fh.hash; $fh }
 function c. { code . }
-function codep { code $PROFILEDIR $PROFILE.CurrentUserAllHosts }
 function codes { code $SCRIPTS }
 
 function Update-Profile { pushd $PROFILEDIR; git pull --rebase; popd }
@@ -53,7 +53,9 @@ function prompt {
 	return "$($PSVersionTable.PSVersion.Major).$($PSVersionTable.PSVersion.Minor)> "
 }
 
-if (Test-Path $HOME\.psprofiles\profile.ps1) {
-	function codep { code $PROFILEDIR $PROFILE.CurrentUserAllHosts $HOME\.psprofiles\profile.ps1 }
+if (Test-Path "$($PROFILEDIR.Private)\profile.ps1") {
+	function codep { code $PROFILEDIR $PROFILE.CurrentUserAllHosts "$($PROFILEDIR.Private)\profile.ps1" }
 	. $HOME\.psprofiles\profile.ps1
+} else {
+	function codep { code $PROFILEDIR $PROFILE.CurrentUserAllHosts }
 }

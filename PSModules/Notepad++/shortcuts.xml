@@ -1,0 +1,41 @@
+<NotepadPlus>
+	<InternalCommands>
+		<Shortcut id="42014" Ctrl="no" Alt="yes" Shift="no" Key="38" /><!-- Move Up Current Line -->
+		<Shortcut id="42015" Ctrl="no" Alt="yes" Shift="no" Key="40" /><!-- Move Down Current Line -->
+		<Shortcut id="42022" Ctrl="yes" Alt="no" Shift="no" Key="191" /><!-- Toggle Single Line Comment -->
+		<Shortcut id="42029" Ctrl="no" Alt="yes" Shift="yes" Key="67" /><!-- Current Full File path to Clipboard -->
+		<Shortcut id="42036" Ctrl="no" Alt="no" Shift="no" Key="0" /><!-- Clear: Single Line Uncomment -->
+		<Shortcut id="42074" Ctrl="no" Alt="yes" Shift="yes" Key="82" /><!-- Open Containing Folder in Explorer -->
+		<Shortcut id="44022" Ctrl="no" Alt="yes" Shift="no" Key="90" /><!-- Word wrap -->
+	</InternalCommands>
+	<Macros>
+		<Macro name="Trim Trailing Space and Save" Ctrl="no" Alt="yes" Shift="yes" Key="83">
+			<Action type="2" message="0" wParam="42024" lParam="0" sParam="" />
+			<Action type="2" message="0" wParam="41006" lParam="0" sParam="" />
+		</Macro>
+	</Macros>
+	<UserDefinedCommands>
+		<Command name="Get PHP help" Ctrl="no" Alt="yes" Shift="no" Key="112">https://www.php.net/$(CURRENT_WORD)</Command>
+		<Command name="Wikipedia Search" Ctrl="no" Alt="yes" Shift="no" Key="114">https://en.wikipedia.org/wiki/Special:Search?search=$(CURRENT_WORD)</Command>
+		<Command name="Open file in another instance" Ctrl="no" Alt="yes" Shift="no" Key="117">$(NPP_FULL_FILE_PATH) $(CURRENT_WORD) -nosession -multiInst</Command>
+	</UserDefinedCommands>
+	<PluginCommands />
+	<ScintillaKeys>
+		<ScintKey ScintID="2338" menuCmdID="0" Ctrl="yes" Alt="no" Shift="yes" Key="75" /><!-- SCI_LINEDELETE -->
+		<ScintKey ScintID="2390" menuCmdID="0" Ctrl="no" Alt="no" Shift="no" Key="0" /><!-- Clear: SCI_WORDPARTLEFT -->
+		<ScintKey ScintID="2404" menuCmdID="0" Ctrl="no" Alt="yes" Shift="yes" Key="38" /><!-- SCI_LINEDUPLICATE -->
+		<ScintKey ScintID="2426" menuCmdID="0" Ctrl="yes" Alt="yes" Shift="yes" Key="40" /><!-- SCI_LINEDOWNRECTEXTEND -->
+		<ScintKey ScintID="2427" menuCmdID="0" Ctrl="yes" Alt="yes" Shift="yes" Key="38" /><!-- SCI_LINEUPRECTEXTEND -->
+		<ScintKey ScintID="2428" menuCmdID="0" Ctrl="yes" Alt="yes" Shift="yes" Key="37" /><!-- SCI_CHARLEFTRECTEXTEND -->
+		<ScintKey ScintID="2429" menuCmdID="0" Ctrl="yes" Alt="yes" Shift="yes" Key="39" /><!-- SCI_CHARRIGHTRECTEXTEND -->
+		<ScintKey ScintID="2431" menuCmdID="0" Ctrl="yes" Alt="yes" Shift="yes" Key="36" /><!-- SCI_VCHOMERECTEXTEND -->
+		<ScintKey ScintID="2432" menuCmdID="0" Ctrl="yes" Alt="yes" Shift="yes" Key="35" /><!-- SCI_LINEENDRECTEXTEND -->
+		<ScintKey ScintID="2433" menuCmdID="0" Ctrl="yes" Alt="yes" Shift="yes" Key="33" /><!-- SCI_PAGEUPRECTEXTEND -->
+		<ScintKey ScintID="2434" menuCmdID="0" Ctrl="yes" Alt="yes" Shift="yes" Key="34" /><!-- SCI_PAGEDOWNRECTEXTEND -->
+	</ScintillaKeys>
+</NotepadPlus>
+<!--
+	ID values https://github.com/notepad-plus-plus/notepad-plus-plus/blob/master/PowerEditor/src/menuCmdID.h
+	Menu items https://github.com/notepad-plus-plus/notepad-plus-plus/blob/master/PowerEditor/src/Notepad_plus.rc
+	ScintID https://github.com/notepad-plus-plus/notepad-plus-plus/blob/master/scintilla/include/Scintilla.h
+-->

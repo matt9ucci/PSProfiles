@@ -1,4 +1,4 @@
-sv APPS (Join-Path $HOME Apps) -Option ReadOnly, AllScope
+sv USERAPPS (Join-Path $HOME Apps) -Option ReadOnly, AllScope
 sv DESKTOP ([Environment]::GetFolderPath([Environment+SpecialFolder]::Desktop)) -Option ReadOnly, AllScope
 sv DOWNLOADS (Join-Path $HOME Downloads) -Option ReadOnly, AllScope
 sv PROFILEDIR (Split-Path $PROFILE) -Option ReadOnly, AllScope

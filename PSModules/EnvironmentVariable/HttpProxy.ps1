@@ -1,9 +1,9 @@
 function Set-HttpProxyEnv {
-	Param(
+	param (
 		[System.EnvironmentVariableTarget]$Target = [System.EnvironmentVariableTarget]::Process,
-		[Parameter(Mandatory = $true)]
+		[Parameter(Mandatory)]
 		[string]$Server,
-		[Parameter(Mandatory = $true)]
+		[Parameter(Mandatory)]
 		[string]$Port,
 		[switch]$AuthenticationRequired
 	)
@@ -16,19 +16,19 @@ function Set-HttpProxyEnv {
 		$proxy = "$($credential.UserName):$($credential.Password)@${proxy}"
 	}
 
-	Set-Env "HTTP_PROXY" "http://$proxy" $Target
-	Set-Env "HTTPS_PROXY" "https://$proxy" $Target
-	Set-Env "http_proxy" "http://$proxy" $Target
-	Set-Env "https_proxy" "https://$proxy" $Target
+	Set-Env HTTP_PROXY "http://$proxy" $Target
+	Set-Env HTTPS_PROXY "https://$proxy" $Target
+	Set-Env http_proxy "http://$proxy" $Target
+	Set-Env https_proxy "https://$proxy" $Target
 }
 
 function Remove-HttpProxyEnv {
-	Param(
+	param (
 		[System.EnvironmentVariableTarget]$Target = [System.EnvironmentVariableTarget]::Process
 	)
 
-	Set-Env "HTTP_PROXY" $null $Target
-	Set-Env "HTTPS_PROXY" $null $Target
-	Set-Env "http_proxy" $null $Target
-	Set-Env "https_proxy" $null $Target
+	Set-Env HTTP_PROXY $null $Target
+	Set-Env HTTPS_PROXY $null $Target
+	Set-Env http_proxy $null $Target
+	Set-Env https_proxy $null $Target
 }

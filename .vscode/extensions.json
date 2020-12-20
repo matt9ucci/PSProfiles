@@ -1,6 +1,7 @@
 {
 	// See https://go.microsoft.com/fwlink/?LinkId=827846
 	"recommendations": [
-		"ms-vscode.PowerShell"
+		"ms-vscode.PowerShell",
+		"shd101wyy.markdown-preview-enhanced"
 	]
 }

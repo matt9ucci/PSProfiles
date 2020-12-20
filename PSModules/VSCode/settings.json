@@ -1,0 +1,44 @@
+{
+	"debug.internalConsoleOptions": "openOnSessionStart",
+	"diffEditor.renderSideBySide": false,
+	"editor.fontFamily": "'Cascadia Mono PL', Consolas, 'Courier New', monospace",
+	"editor.insertSpaces": false,
+	"editor.renderWhitespace": "boundary",
+	"editor.tabCompletion": "on",
+	"explorer.confirmDelete": false,
+	"extensions.ignoreRecommendations": true,
+	"files.trimTrailingWhitespace": true,
+	"json.schemas": [
+		{
+			"fileMatch": [
+				"package.json"
+			],
+			"url": "http://json.schemastore.org/package"
+		}
+	],
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "PS Launch Current File",
+				"type": "PowerShell",
+				"request": "launch",
+				"script": "${file}",
+				"cwd": "${file}"
+			}
+		]
+	},
+	"powershell.codeFormatting.newLineAfterCloseBrace": false,
+	"powershell.integratedConsole.showOnStartup": false,
+	"powershell.promptToUpdatePowerShell": false,
+	"terminal.integrated.shell.windows": "C:/Program Files/PowerShell/7/pwsh.exe",
+	"terminal.integrated.shellArgs.windows": [
+		"-NoLogo"
+	],
+	"typescript.format.semicolons": "remove",
+	"update.mode": "none",
+	"window.newWindowDimensions": "maximized",
+	"workbench.settings.editor": "json",
+	"workbench.settings.useSplitJSON": true,
+	"workbench.startupEditor": "newUntitledFile"
+}

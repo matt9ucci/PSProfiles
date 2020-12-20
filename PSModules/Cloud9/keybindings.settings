@@ -1,0 +1,9 @@
+[
+	{ "command": "jumptodef", "keys": "F12" },
+	{ "command": "removeline", "keys": "Ctrl-Shift-K" },
+	{ "command": "vsplit", "keys": { "win": ["Alt-Shift--"] } },
+	{ "command": "hsplit", "keys": { "win": ["Alt-Shift-;"] } },
+	{ "command": "openterminal", "keys": { "win": ["Alt-Shift-T"] } },
+	{ "command": "maximizeconsole", "keys": { "win": ["Ctrl-M"] } },
+	{ "command": "toggleWordWrap", "keys": { "win": ["Alt-Z"] } }
+]

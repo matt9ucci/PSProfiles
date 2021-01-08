@@ -1,3 +1,5 @@
+#Requires -RunAsAdministrator
+
 param (
 	[string]$VMName
 )
@@ -5,11 +7,6 @@ param (
 <#
 See https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/user-guide/nested-virtualization
 #>
-
-if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)) {
-	Write-Error 'Elevation is required : Open a PowerShell console as Administrator'
-	return
-}
 
 $sVMP = Get-Command -Name Set-VMProcessor -Module Hyper-V -CommandType Cmdlet -ErrorAction Stop
 $gVMP = Get-Command -Name Get-VMProcessor -Module Hyper-V -CommandType Cmdlet -ErrorAction Stop

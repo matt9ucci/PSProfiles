@@ -1,3 +1,5 @@
+#Requires -RunAsAdministrator
+
 param (
 	[string]$VMName
 )
@@ -6,11 +8,6 @@ param (
 For Ubuntu 18.04
 See https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/supported-ubuntu-virtual-machines-on-hyper-v
 #>
-
-if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)) {
-	Write-Error 'Elevation is required : Open a PowerShell console as Administrator'
-	return
-}
 
 # Get 'Guest Service Interface' ID from VM
 $vm = Get-VM $VMName

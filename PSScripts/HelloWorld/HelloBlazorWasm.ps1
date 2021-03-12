@@ -22,9 +22,9 @@ if ([version]$sdkVersion -lt [version]'3.1.300') {
 
 # For information about these options, run `dotnet new blazorwasm --help`
 if ($Pwa) {
-	dotnet new blazorwasm --output $Name --no-https --pwa
+	dotnet new blazorwasm --output $Name --pwa
 } else {
-	dotnet new blazorwasm --output $Name --no-https
+	dotnet new blazorwasm --output $Name
 }
 
 dotnet run --project $Name

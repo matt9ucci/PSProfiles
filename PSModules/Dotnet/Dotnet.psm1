@@ -62,22 +62,49 @@ function Save-SdkBinary {
 		$ChannelVersion = (Get-DotnetChannelVersion -Lts -Latest),
 
 		[string]
-		$Location = $env:TEMP
+		$Location = (Get-Location)
 	)
 
 	$releaseMetadata = Get-DotnetReleaseMetadata -ChannelVersion $ChannelVersion -Latest
-	$fileMetadata = $releaseMetadata.sdk.files | ? rid -EQ $Rid | ? name -Match '\w+\.(zip|tar\.gz)$'
+	$sdk = $releaseMetadata.sdk.files | ? rid -EQ $Rid | ? name -Match '\w+\.(zip|tar\.gz)$'
 
-	$outFile = Join-Path $Location $fileMetadata.name
-	Invoke-WebRequest $fileMetadata.url -OutFile $outFile -Verbose
+	$outFile = Join-Path $Location $sdk.name
+
+	$params = @{
+		Uri     = $sdk.url
+		OutFile = $outfile
+		Verbose = $true
+	}
+	Invoke-WebRequest @params
 
 	$fileHashInfo = Get-FileHash $outFile -Algorithm SHA512
-	if ($fileHashInfo.Hash.ToUpper() -eq $fileMetadata.hash.ToUpper()) {
-		Write-Information ('Valid hash [{0}]' -f $fileHashInfo.Hash.ToUpper())
+	if ($fileHashInfo.Hash -eq $sdk.hash) {
+		Write-Information ('Valid hash [{0}]' -f $fileHashInfo.Hash)
 		(Resolve-Path $outFile).Path
 	} else {
-		throw 'Invalid hash [{0}]: expected [{1}]' -f $fileHashInfo.Hash.ToUpper(), $fileMetadata.hash.ToUpper()
+		throw 'Invalid hash [{0}]: expected [{1}]' -f $fileHashInfo.Hash, $sdk.hash
 	}
+}
+
+function Use-Sdk {
+	param (
+		[string]
+		$Version
+	)
+
+	$targetDir = if ($Version) {
+		Get-ChildItem $USERAPPS\Dotnet | ? Name -eq $Version
+	} else {
+		Get-ChildItem $USERAPPS\Dotnet | sort -Descending | select -First 1
+	}
+
+	$junctionPath = Join-Path $USERAPPS bin Dotnet
+	if (Test-Path $junctionPath) {
+		Remove-Item $junctionPath
+	}
+	New-Item -ItemType Junction -Path (Join-Path $USERAPPS bin Dotnet) -Value $targetDir.FullName | Out-Null
+
+	$env:DOTNET_MULTILEVEL_LOOKUP = $false
 }
 
 function Show-DownloadPage {

@@ -1,4 +1,5 @@
 {
+	"csharp.suppressBuildAssetsNotification": true,
 	"debug.internalConsoleOptions": "openOnSessionStart",
 	"diffEditor.renderSideBySide": false,
 	"editor.fontFamily": "'Cascadia Mono PL', Consolas, 'Courier New', monospace",

@@ -131,3 +131,14 @@ function Start-MultipassVscode {
 	$hostName = "$Name.mshome.net"
 	code --folder-uri "vscode-remote://ssh-remote+$hostName/$Path"
 }
+
+function Add-MultipassSshConfig {
+	$sshConfigPath = Join-Path $HOME .ssh config
+
+	Add-Content $sshConfigPath @'
+Host *.mshome.net
+	IdentityFile C:\Windows\System32\config\systemprofile\AppData\Roaming\multipassd\ssh-keys\id_rsa
+	User ubuntu
+'@
+	code $sshConfigPath
+}

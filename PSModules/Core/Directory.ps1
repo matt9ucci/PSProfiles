@@ -1,17 +1,27 @@
 function New-Directory {
+	[CmdletBinding(SupportsShouldProcess)]
 	[Alias('nd')]
 	param (
+		[Parameter(Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName)]
 		[string[]]
 		$Path
 	)
-	New-Item $Path -ItemType Directory -Force
+
+	process {
+		New-Item $Path -ItemType Directory -Force
+	}
 }
 
 function Remove-Directory {
 	[CmdletBinding(SupportsShouldProcess)]
 	[Alias('rd')]
-	param ([string[]]$Path)
+	param (
+		[Parameter(Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+		[string[]]$Path
+	)
 
-	Remove-Item $Path -Recurse -Force
+	process {
+		Remove-Item $Path -Recurse -Force
+	}
 }
 

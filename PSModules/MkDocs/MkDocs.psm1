@@ -32,9 +32,12 @@ function New-Project {
 	python -m pip freeze > requirements.txt
 
 	mkdocs new .
-	Add-Content mkdocs.yml @(
+	Set-Content mkdocs.yml @(
+		"site_name: $(Split-Path $Path -Leaf)"
 		'theme:'
 		'  name: material'
+		'  features:'
+		'    - navigation.instant'
 	)
 
 	Set-Content .gitignore @(
@@ -42,9 +45,28 @@ function New-Project {
 		'site/'
 	)
 
-	mkdocs build
-	Start-Process site\index.html
-
 	deactivate
 	Pop-Location
+}
+
+function Start-Server {
+	if (!(Test-VirtualEnvironment)) {
+		Enable-VirtualEnvironment
+	}
+	mkdocs serve
+}
+
+function Enable-VirtualEnvironment {
+	[CmdletBinding()]
+	param()
+
+	if (!(Test-Path .venv -PathType Container)) {
+		throw 'Directory not found: .venv'
+	}
+
+	.\.venv\Scripts\Activate.ps1
+}
+
+function Test-VirtualEnvironment {
+	[bool]$env:VIRTUAL_ENV
 }

@@ -38,6 +38,7 @@ function New-Project {
 		'  name: material'
 		'  features:'
 		'    - navigation.instant'
+		'use_directory_urls: false'
 	)
 
 	Set-Content .gitignore @(

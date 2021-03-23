@@ -58,14 +58,17 @@ function Start-Server {
 }
 
 function Enable-VirtualEnvironment {
-	[CmdletBinding()]
-	param()
-
 	if (!(Test-Path .venv -PathType Container)) {
 		throw 'Directory not found: .venv'
 	}
 
 	.\.venv\Scripts\Activate.ps1
+}
+
+function Disable-VirtualEnvironment {
+	if (Test-VirtualEnvironment) {
+		deactivate
+	}
 }
 
 function Test-VirtualEnvironment {

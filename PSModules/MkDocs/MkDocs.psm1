@@ -34,11 +34,14 @@ function New-Project {
 	mkdocs new .
 	Set-Content mkdocs.yml @(
 		"site_name: $(Split-Path $Path -Leaf)"
+		'use_directory_urls: false'
 		'theme:'
 		'  name: material'
 		'  features:'
 		'    - navigation.instant'
-		'use_directory_urls: false'
+		'markdown_extensions:'
+		'  - toc:'
+		'      permalink: true'
 	)
 
 	Set-Content .gitignore @(

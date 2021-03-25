@@ -61,6 +61,9 @@ function Start-Server {
 }
 
 function Enable-VirtualEnvironment {
+	[CmdletBinding()]
+	param ()
+
 	if (!(Test-Path .venv -PathType Container)) {
 		throw 'Directory not found: .venv'
 	}

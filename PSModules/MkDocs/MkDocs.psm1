@@ -77,6 +77,13 @@ function Disable-VirtualEnvironment {
 	}
 }
 
+function Restore-VirtualEnvironment {
+	if (!(Test-VirtualEnvironment)) {
+		Enable-VirtualEnvironment
+	}
+	pip install -r requirements.txt
+}
+
 function Test-VirtualEnvironment {
 	[bool]$env:VIRTUAL_ENV
 }

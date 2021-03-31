@@ -13,4 +13,5 @@ sal igit Invoke-DefaultGitCommand
 
 . $PSScriptRoot\Branch.ps1
 . $PSScriptRoot\Config.ps1
+. $PSScriptRoot\LogPretty.ps1
 . $PSScriptRoot\Tag.ps1

@@ -1,3 +1,18 @@
+function New-VirtualEnvironment {
+	param (
+		[Parameter(Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+		[string[]]
+		$Path = '.venv'
+	)
+
+	$params = @(
+		'-m'
+		'venv'
+		$Path
+	)
+	python @params
+}
+
 function Enable-VirtualEnvironment {
 	[CmdletBinding()]
 	param ()

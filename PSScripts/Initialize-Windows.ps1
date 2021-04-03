@@ -19,14 +19,4 @@ Pop-Location
 New-Item $HOME\github.com -ItemType Directory -Force
 New-Item $HOME\gitlocal -ItemType Directory -Force
 
-@(
-    'Microsoft.BingWeather'
-    'Microsoft.MicrosoftOfficeHub'
-    'Microsoft.MicrosoftSolitaireCollection'
-    'Microsoft.People'
-    'Microsoft.SkypeApp'
-    'microsoft.windowscommunicationsapps'
-    'Microsoft.XboxApp'
-    'king.com.CandyCrush*'
-    'king.com.FarmHeroesSaga'
-) | % { Get-AppxPackage $_ | Remove-AppxPackage }
+. $PSScriptRoot/Uninstall-WindowsApps.ps1

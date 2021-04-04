@@ -25,6 +25,7 @@ if (Test-Path $PROFILEDIR\PwshProxy.xml) {
 
 . "$PSScriptRoot/Keybindings.ps1"
 . "$PSScriptRoot/Settings.ps1"
+. "$PSScriptRoot/Preferences/Preferences.ps1"
 
 function Get-VscodeVersion([switch]$Latest) {
 	if ($Latest) {

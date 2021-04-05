@@ -2,7 +2,6 @@ switch ($env:OS) {
 	'Windows_NT' {
 		Set-Variable VSCODE_HOME "$HOME/Apps/VSCode" -Option ReadOnly, AllScope -Scope Global -Force
 		Set-Variable VSCODE_USER_DIR "$env:APPDATA\Code\User" -Option ReadOnly, AllScope -Scope Global -Force
-		Set-Variable VSCODE_EXTENSION_DIR "$HOME\.vscode\extensions" -Option ReadOnly, AllScope -Scope Global -Force
 		Set-Variable VSCODE_USER_SETTINGS_JSON "$VSCODE_USER_DIR\settings.json" -Option ReadOnly, AllScope -Scope Global -Force
 		Set-Variable VSCODE_USER_KEYBINDINGS_JSON "$VSCODE_USER_DIR\keybindings.json" -Option ReadOnly, AllScope -Scope Global -Force
 		Set-Variable VSCODE_ZIP_URL https://go.microsoft.com/fwlink/?Linkid=850641 -Option ReadOnly, AllScope -Scope Global -Force

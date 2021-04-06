@@ -5,7 +5,10 @@ function Use-VscodePreference {
 		$Name
 	)
 
-	$env:VSCODE_EXTENSIONS = Join-Path $USERAPPS VsCode preferences $Name extensions
+	$extensionsDir = Join-Path $USERAPPS VsCode preferences $Name extensions
+	if (Test-Path $extensionsDir) {
+		$env:VSCODE_EXTENSIONS = Join-Path $USERAPPS VsCode preferences $Name extensions
+	}
 }
 
 function Initialize-VscodePreference {

@@ -1,5 +1,3 @@
-#Requires -Modules Core
-
 function Backup-VSCodeUserSettingsJson {
 	Backup-Item $VSCODE_USER_SETTINGS_JSON
 }

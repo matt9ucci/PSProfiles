@@ -31,9 +31,7 @@ function sl.... { sl ../../.. }
 
 function c. { code . }
 function codes { code $SCRIPTS }
-if (!$IsLinux -and !$IsMacOS -and !(gcm Set-Clipboard -ErrorAction Ignore)) {
-	function Set-Clipboard { param ([Parameter(Mandatory, ValueFromPipeline)][string]$Value) $Value | clip.exe }
-}
+
 function cssh {
 	param (
 		[string]

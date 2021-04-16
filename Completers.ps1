@@ -2,6 +2,7 @@ Register-ArgumentCompleter -CommandName code, c -Native -ScriptBlock {
 	param ([string]$wordToComplete)
 
 	@(
+		"$HOME\gitlocal"
 		"$HOME\github.com"
 		"$HOME\bitbucket.org"
 		"$HOME\CodeCommit"

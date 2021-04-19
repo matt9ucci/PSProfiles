@@ -1,3 +1,5 @@
+. $PSScriptRoot/Venv.ps1
+
 function Start-PythonHttpServer {
 	param (
 		[UInt16]

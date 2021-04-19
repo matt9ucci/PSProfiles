@@ -6,9 +6,9 @@
 	}
 }
 
-. $PSScriptRoot/Venv.ps1
+Import-Module Python
 
-function New-Project {
+function New-MaterialProject {
 	[CmdletBinding()]
 	param (
 		[Parameter(Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName)]
@@ -41,6 +41,49 @@ function New-Project {
 		'  name: material'
 		'  features:'
 		'    - navigation.instant'
+		'markdown_extensions:'
+		'  - toc:'
+		'      permalink: true'
+	)
+
+	Set-Content .gitignore @(
+		'.venv/'
+		'site/'
+	)
+
+	deactivate
+	Pop-Location
+}
+
+function New-Project {
+	[CmdletBinding()]
+	param (
+		[Parameter(Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+		[string]
+		$Path
+	)
+
+	if (!$PSBoundParameters.ContainsKey('Path')) {
+		$Path = '.'
+	} elseif (Test-Path $Path) {
+		if ((Get-ChildItem $Path).Count) {
+			throw "The `$Path ($Path) is not empty."
+		}
+	} else {
+		New-Item $Path -ItemType Directory
+	}
+
+	Push-Location $Path
+
+	python -m venv .venv
+	.\.venv\Scripts\Activate.ps1
+	pip install mkdocs
+	python -m pip freeze > requirements.txt
+
+	mkdocs new .
+	Set-Content mkdocs.yml @(
+		"site_name: $(Split-Path $Path -Leaf)"
+		'use_directory_urls: false'
 		'markdown_extensions:'
 		'  - toc:'
 		'      permalink: true'

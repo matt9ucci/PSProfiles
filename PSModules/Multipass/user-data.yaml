@@ -10,7 +10,7 @@ packages:
 
 users:
   - name: ubuntu
-  - groups: docker
+    groups: docker
 
 apt:
   preserve_sources_list: true
@@ -36,8 +36,7 @@ runcmd:
 
 write_files:
   - content: |
-
-      # START: Added by cloud-init
+      # ---- Content of user-data.yaml START ----
       alias sl='cd'
       alias sl..='cd ..'
       alias sl...='cd ../..'
@@ -56,13 +55,12 @@ write_files:
         COMPREPLY=($(compgen -W "$completions" -- "$word"))
       }
       complete -f -F _dotnet_bash_complete dotnet
-      # END: Added by cloud-init
+      # ---- Content of user-data.yaml END ----
     append: true
     path: /etc/skel/.bashrc
   - content: |
-
-      # START: Added by cloud-init
+      # ---- Content of user-data.yaml START ----
       Subsystem powershell /snap/bin/pwsh -sshs -NoLogo
-      # END: Added by cloud-init
+      # ---- Content of user-data.yaml END ----
     append: true
     path: /etc/ssh/sshd_config

@@ -40,7 +40,7 @@
 		"-NoLogo"
 	],
 	"typescript.format.semicolons": "remove",
-	"update.mode": "none",
+	"update.mode": "manual",
 	"window.newWindowDimensions": "maximized",
 	"workbench.settings.editor": "json",
 	"workbench.settings.useSplitJSON": true,

@@ -29,7 +29,17 @@ function New-Instance {
 	multipass launch @param
 }
 
-function New-DmContext {
+function Start-Instance {
+	param (
+		[Parameter(Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+		[string[]]
+		$Name = 'DockerMultipass'
+	)
+
+	multipass start $Name
+}
+
+function New-Context {
 	param (
 		[string]
 		$Name = 'DockerMultipass'

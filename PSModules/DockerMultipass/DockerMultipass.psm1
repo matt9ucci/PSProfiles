@@ -39,6 +39,16 @@ function Start-Instance {
 	multipass start $Name
 }
 
+function Get-InstanceInfo {
+	param (
+		[Parameter(Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+		[string[]]
+		$Name = 'DockerMultipass'
+	)
+
+	multipass info --format csv $Name | ConvertFrom-Csv
+}
+
 function New-Context {
 	param (
 		[string]

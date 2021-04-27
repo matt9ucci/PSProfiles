@@ -36,7 +36,11 @@ function Start-Instance {
 		$Name = 'DockerMultipass'
 	)
 
-	multipass start $Name
+	$params = @(
+		'start'
+		$Name
+	)
+	multipass @params
 }
 
 function Get-InstanceInfo {
@@ -46,7 +50,13 @@ function Get-InstanceInfo {
 		$Name = 'DockerMultipass'
 	)
 
-	multipass info --format csv $Name | ConvertFrom-Csv
+	$params = @(
+		'info'
+		'--format'
+		'csv'
+		$Name
+	)
+	multipass @params | ConvertFrom-Csv
 }
 
 function New-Context {

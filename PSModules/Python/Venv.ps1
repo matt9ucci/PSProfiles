@@ -1,8 +1,10 @@
+$ENV_DIR = '.venv'
+
 function New-VirtualEnvironment {
 	param (
 		[Parameter(Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName)]
 		[string[]]
-		$Path = '.venv'
+		$Path = $ENV_DIR
 	)
 
 	$params = @(
@@ -17,11 +19,11 @@ function Enable-VirtualEnvironment {
 	[CmdletBinding()]
 	param ()
 
-	if (!(Test-Path .venv -PathType Container)) {
-		throw 'Directory not found: .venv'
+	if (!(Test-Path $ENV_DIR -PathType Container)) {
+		throw "Directory not found: $ENV_DIR"
 	}
 
-	.\.venv\Scripts\Activate.ps1
+	& (Join-Path $ENV_DIR Scripts Activate.ps1)
 }
 
 function Disable-VirtualEnvironment {

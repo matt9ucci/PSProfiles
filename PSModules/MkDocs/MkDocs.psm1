@@ -75,8 +75,9 @@ function New-Project {
 
 	Push-Location $Path
 
-	python -m venv .venv
-	.\.venv\Scripts\Activate.ps1
+	New-PythonVirtualEnvironment
+	Enable-PythonVirtualEnvironment
+
 	pip install mkdocs
 	python -m pip freeze > requirements.txt
 
@@ -94,7 +95,8 @@ function New-Project {
 		'site/'
 	)
 
-	deactivate
+	Disable-PythonVirtualEnvironment
+
 	Pop-Location
 }
 

@@ -28,10 +28,11 @@ function New-MaterialProject {
 
 	Push-Location $Path
 
-	python -m venv .venv
-	.\.venv\Scripts\Activate.ps1
+	New-PythonVirtualEnvironment
+	Enable-PythonVirtualEnvironment
+
 	pip install mkdocs mkdocs-material
-	python -m pip freeze > requirements.txt
+	Save-PythonVirtualEnvironment
 
 	mkdocs new .
 	Set-Content mkdocs.yml @(
@@ -79,7 +80,7 @@ function New-Project {
 	Enable-PythonVirtualEnvironment
 
 	pip install mkdocs
-	python -m pip freeze > requirements.txt
+	Save-PythonVirtualEnvironment
 
 	mkdocs new .
 	Set-Content mkdocs.yml @(

@@ -39,6 +39,13 @@ function Restore-VirtualEnvironment {
 	pip install -r requirements.txt
 }
 
+function Save-VirtualEnvironment {
+	if (!(Test-VirtualEnvironment)) {
+		Enable-VirtualEnvironment
+	}
+	pip freeze > requirements.txt
+}
+
 function Test-VirtualEnvironment {
 	[bool]$env:VIRTUAL_ENV
 }

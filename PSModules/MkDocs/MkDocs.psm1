@@ -30,7 +30,6 @@ function New-MaterialProject {
 
 	New-PythonVirtualEnvironment
 	Enable-PythonVirtualEnvironment
-
 	pip install mkdocs mkdocs-material
 	Save-PythonVirtualEnvironment
 
@@ -52,7 +51,7 @@ function New-MaterialProject {
 		'site/'
 	)
 
-	deactivate
+	Disable-PythonVirtualEnvironment
 	Pop-Location
 }
 

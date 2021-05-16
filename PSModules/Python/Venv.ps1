@@ -23,7 +23,11 @@ function Enable-VirtualEnvironment {
 		throw "Directory not found: $ENV_DIR"
 	}
 
-	& (Join-Path $ENV_DIR Scripts Activate.ps1)
+	if (Test-VirtualEnvironment) {
+		Write-Debug 'Venv is already enabled'
+	} else {
+		& (Join-Path $ENV_DIR Scripts Activate.ps1)
+	}
 }
 
 function Disable-VirtualEnvironment {
@@ -33,16 +37,12 @@ function Disable-VirtualEnvironment {
 }
 
 function Restore-VirtualEnvironment {
-	if (!(Test-VirtualEnvironment)) {
-		Enable-VirtualEnvironment
-	}
+	Enable-VirtualEnvironment
 	pip install -r requirements.txt
 }
 
 function Save-VirtualEnvironment {
-	if (!(Test-VirtualEnvironment)) {
-		Enable-VirtualEnvironment
-	}
+	Enable-VirtualEnvironment
 	pip freeze > requirements.txt
 }
 

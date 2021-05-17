@@ -1,6 +1,6 @@
 . $PSScriptRoot/Venv.ps1
 
-function Start-PythonHttpServer {
+function Start-HttpServer {
 	param (
 		[UInt16]
 		$Port = 8000

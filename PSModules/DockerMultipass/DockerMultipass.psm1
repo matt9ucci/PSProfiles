@@ -1,8 +1,10 @@
+$DEFAULT_INSTANCE_NAME = 'DockerMultipass'
+
 function New-Instance {
 	param (
 		[Parameter(Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName)]
 		[string[]]
-		$Name = 'DockerMultipass',
+		$Name = $DEFAULT_INSTANCE_NAME,
 
 		[ValidateRange(1, [UInt16]::MaxValue)]
 		[UInt16]
@@ -33,7 +35,7 @@ function Start-Instance {
 	param (
 		[Parameter(Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName)]
 		[string[]]
-		$Name = 'DockerMultipass'
+		$Name = $DEFAULT_INSTANCE_NAME
 	)
 
 	$params = @(
@@ -47,7 +49,7 @@ function Get-InstanceInfo {
 	param (
 		[Parameter(Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName)]
 		[string[]]
-		$Name = 'DockerMultipass'
+		$Name = $DEFAULT_INSTANCE_NAME
 	)
 
 	$params = @(
@@ -62,7 +64,7 @@ function Get-InstanceInfo {
 function New-Context {
 	param (
 		[string]
-		$Name = 'DockerMultipass'
+		$Name = $DEFAULT_INSTANCE_NAME
 	)
 
 	$params = @(

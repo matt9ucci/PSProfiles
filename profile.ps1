@@ -66,7 +66,6 @@ $env:Path = @(
 	$env:Path
 ) -join [System.IO.Path]::PathSeparator
 
-ipmo Core
 ipmo DockerCompletion
 
 function Use-Sed { Add-PathEnvValue "$HOME\scoop\apps\git\current\usr\bin" }

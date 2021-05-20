@@ -10,6 +10,8 @@ sal gcb Get-Clipboard
 sal scb Set-Clipboard
 sal FromJson ConvertFrom-Json
 sal ToJson ConvertTo-Json
+sal FromZip Expand-Archive
+sal ToZip Compress-Archive
 
 sal c code
 sal d docker

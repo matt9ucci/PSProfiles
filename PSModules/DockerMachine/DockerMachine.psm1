@@ -107,7 +107,7 @@ function Get-DockerMachineVersion {
 		[Parameter(ParameterSetName = 'All')]
 		[switch]
 		$All,
-		
+
 		[Parameter(ParameterSetName = 'Latest')]
 		[switch]
 		$Latest
@@ -150,4 +150,5 @@ function Install-DockerMachine {
 	Get-FileHash $outFile -Algorithm SHA256
 }
 
-Set-Alias ccdm Connect-DockerMachine
+sal dm docker-machine
+sal ccdm Connect-DockerMachine

@@ -16,7 +16,6 @@ sal ToZip Compress-Archive
 sal c code
 sal d docker
 sal dc docker-compose
-sal dm docker-machine
 sal g git
 
 sal .n dotnet

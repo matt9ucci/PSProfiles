@@ -29,6 +29,16 @@
 			}
 		]
 	},
+	"markdownlint.config": {
+		"default": true,
+		"no-hard-tabs": false,
+		"MD004": {
+			"style": "sublist"
+		},
+		"MD007": {
+			"indent": 1
+		}
+	},
 	"powershell.codeFormatting.newLineAfterCloseBrace": false,
 	"powershell.integratedConsole.showOnStartup": false,
 	"powershell.promptToUpdatePowerShell": false,

@@ -29,6 +29,7 @@
 			}
 		]
 	},
+	"markdown.extension.list.indentationSize": "inherit",
 	"markdownlint.config": {
 		"default": true,
 		"no-hard-tabs": false,

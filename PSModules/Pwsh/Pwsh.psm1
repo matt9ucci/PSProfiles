@@ -34,7 +34,7 @@ function Save-PwshBinary {
 
 	$response = Invoke-RestMethod $uri -Verbose
 	$assets = $response.assets
-	if ($IsWindows) {
+	if (!(Get-Variable IsWindows -ErrorAction Ignore) -or $IsWindows) {
 		$assets = $assets | ? name -Like "*-win-$ProcessorArchitecture*"
 	}
 

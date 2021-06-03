@@ -16,6 +16,7 @@ function New-VirtualEnvironment {
 }
 
 function Enable-VirtualEnvironment {
+	[Alias('Activate')]
 	[CmdletBinding()]
 	param ()
 

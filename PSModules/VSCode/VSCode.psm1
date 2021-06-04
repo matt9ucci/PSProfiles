@@ -1,11 +1,10 @@
-switch ($env:OS) {
-	'Windows_NT' {
-		Set-Variable VSCODE_HOME "$HOME/Apps/VSCode" -Option ReadOnly, AllScope -Scope Global -Force
-		Set-Variable VSCODE_USER_DIR "$env:APPDATA\Code\User" -Option ReadOnly, AllScope -Scope Global -Force
-		Set-Variable VSCODE_USER_SETTINGS_JSON "$VSCODE_USER_DIR\settings.json" -Option ReadOnly, AllScope -Scope Global -Force
-		Set-Variable VSCODE_USER_KEYBINDINGS_JSON "$VSCODE_USER_DIR\keybindings.json" -Option ReadOnly, AllScope -Scope Global -Force
-		Set-Variable VSCODE_ZIP_URL https://go.microsoft.com/fwlink/?Linkid=850641 -Option ReadOnly, AllScope -Scope Global -Force
-	}
+if ($IsWindows) {
+	Set-Variable VSCODE_HOME "$USERAPPS\Vscode" -Option ReadOnly, AllScope -Scope Global -Force
+	Set-Variable VSCODE_USER_DIR "$env:APPDATA\Code\User" -Option ReadOnly, AllScope -Scope Global -Force
+	Set-Variable VSCODE_USER_SETTINGS_JSON "$VSCODE_USER_DIR\settings.json" -Option ReadOnly, AllScope -Scope Global -Force
+	Set-Variable VSCODE_USER_KEYBINDINGS_JSON "$VSCODE_USER_DIR\keybindings.json" -Option ReadOnly, AllScope -Scope Global -Force
+	Set-Variable VSCODE_ZIP_URL https://go.microsoft.com/fwlink/?Linkid=850641 -Option ReadOnly, AllScope -Scope Global -Force
+} else {
 	# Mac $HOME/Library/Application Support/Code/User/settings.json
 	# Linux $HOME/.config/Code/User/settings.json
 	# See https://code.visualstudio.com/docs/getstarted/settings#_settings-file-locations
@@ -44,33 +43,42 @@ function Save-VscodeInstaller {
 		$Version = 'latest',
 
 		[string]
-		$Path
+		$Path = '.'
 	)
 
 	$uri = "https://update.code.visualstudio.com/$Version/win32-x64-user/stable"
 
-	if (!$Path) {
-		$params = @{
-			Uri     = $uri
-			Method  = 'Head'
-			Verbose = $true
-		}
-		$response = Invoke-WebRequest @params
-		$Path = if ($response.Headers.'Content-Disposition'[0] -match '(?=attachment;\s+filename="(.+)")') {
-			$Matches[1]
-		} else {
-			"VscodeInstaller-$Version.exe"
-		}
+	$params = @{
+		Uri     = $uri
+		Method  = 'Head'
+		Verbose = $true
+	}
+	$response = Invoke-WebRequest @params
+
+	$fileName = if ($response.Headers.'Content-Disposition'[0] -match '(?=attachment;\s+filename="(.+)")') {
+		$Matches[1]
+	} else {
+		Write-Warning 'filename not found'
+		"VscodeInstaller-$Version.exe"
 	}
 
 	$params = @{
 		Uri     = $uri
-		OutFile = $Path
+		OutFile = Join-Path $Path $fileName
 		Verbose = $true
 	}
 	Invoke-WebRequest @params
 
 	(Resolve-Path $params.OutFile).Path
+}
+
+function Invoke-VscodeInstaller {
+	param (
+		[string]
+		$Path
+	)
+
+	Start-Process $Path @("/DIR=$(Join-Path $USERAPPS Vscode)")
 }
 
 function Save-VscodeArchive {
@@ -185,8 +193,7 @@ function Save-VscodeIcon {
 }
 
 function Set-VscodeDirctoryIcon {
-	Save-VscodeIcon
-	New-Desktop.ini.ps1 -Directory $USERAPPS\Vscode -IconFile $USERAPPS\Vscode\favicon.ico
+	New-Desktop.ini.ps1 -Directory $VSCODE_HOME -IconFile $VSCODE_HOME\Code.exe
 }
 
 try {

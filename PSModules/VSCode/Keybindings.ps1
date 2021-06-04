@@ -4,6 +4,6 @@ function Backup-VSCodeUserKeybindingsJson {
 	Backup-Item $VSCODE_USER_KEYBINDINGS_JSON
 }
 
-function Install-VSCodeUserKeybindingsJson {
+function Update-VscodeUserKeybindingsJson {
 	Copy-Item $PSScriptRoot\keybindings.json $VSCODE_USER_KEYBINDINGS_JSON
 }

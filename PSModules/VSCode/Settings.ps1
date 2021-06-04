@@ -2,7 +2,7 @@ function Backup-VSCodeUserSettingsJson {
 	Backup-Item $VSCODE_USER_SETTINGS_JSON
 }
 
-function Update-VSCodeUserSettingsJson {
+function Update-VscodeUserSettingsJson {
 	$settings = if (Test-Path $VSCODE_USER_SETTINGS_JSON) {
 		Get-Content $VSCODE_USER_SETTINGS_JSON | ConvertFrom-Json -AsHashtable -Depth 10
 	} else {

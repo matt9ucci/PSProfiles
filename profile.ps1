@@ -86,7 +86,7 @@ if ($PSVersionTable.PSVersion.Major -le 5) {
 	}
 } else {
 	function prompt {
-		"`e[34;1m`e[47m `e[0m`e[44;1m $($ExecutionContext.SessionState.Path.CurrentLocation) `e[0m`n$('$' * ($NestedPromptLevel + 1)) "
+		"`e[34;1m`e[47m `e[0m`e[48;5;20m $($ExecutionContext.SessionState.Path.CurrentLocation) `e[0m`n$('$' * ($NestedPromptLevel + 1)) "
 	}
 }
 

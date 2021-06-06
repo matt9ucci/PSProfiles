@@ -1,6 +1,7 @@
 {
 	"editor.formatOnSave": false,
 	"editor.codeLens": false,
+	"workbench.colorTheme": "Default Dark+",
 	"workbench.colorCustomizations": {
 		"titleBar.activeBackground": "#012456",
 		"titleBar.activeForeground": "#cccccc",

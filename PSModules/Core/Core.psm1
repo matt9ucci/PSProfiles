@@ -383,3 +383,17 @@ function Set-Prompt {
 	}
 	Set-Item -Path Function:prompt -Value $value
 }
+
+function New-Pathto {
+	param (
+		[Parameter(Mandatory)]
+		[string]
+		$Path,
+
+		[Parameter(Mandatory)]
+		[string]
+		$Name
+	)
+
+	New-Item -ItemType Junction -Path $USERAPPS\pathto\$Name -Value $Path
+}

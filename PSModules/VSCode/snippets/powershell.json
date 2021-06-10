@@ -1,0 +1,74 @@
+{
+	//
+	// [type]
+	// $Variable
+	//
+	"$Name": {
+		"prefix": "Name",
+		"body": [
+			"[string]",
+			"\\$Name"
+		],
+		"description": "$Name"
+	},
+	"param($Path)": {
+		"prefix": "Path",
+		"body": [
+			"[Parameter(Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName)]"
+			"[string[]]",
+			"\\$Path"
+		],
+		"description": "Param"
+	},
+
+	//
+	// [Parameter()]
+	//
+	"[Parameter(Mandatory)]": {
+		"prefix": "Mandatory",
+		"body": [
+			"[Parameter(Mandatory)]",
+			"$0"
+		],
+		"description": "[Parameter(Mandatory)]"
+	},
+	"[Parameter(ValueFromPipeline)]": {
+		"prefix": "ValueFromPipeline",
+		"body": [
+			"[Parameter(Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName)]",
+			"$0"
+		],
+		"description": "[Parameter(ValueFromPipeline)]"
+	},
+
+	//
+	// [CmdletBinding()]
+	// param()
+	//
+	"param()": {
+		"prefix": "param",
+		"body": [
+			"param(",
+			"\t$0",
+			")"
+		],
+		"description": "param()"
+	},
+	"param() CmdletBinding()": {
+		"prefix": "param CmdletBinding",
+		"body": [
+			"[CmdletBinding($0)]",
+			"param(",
+			"\t$1",
+			")"
+		],
+		"description": "[CmdletBinding()] param()"
+	},
+	"CmdletBinding()": {
+		"prefix": "CmdletBinding",
+		"body": [
+			"[CmdletBinding($0)]"
+		],
+		"description": "[CmdletBinding()]"
+	}
+}

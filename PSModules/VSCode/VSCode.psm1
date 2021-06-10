@@ -246,3 +246,7 @@ function Get-VsCodeExtension {
 
 	$extensions -like "*$Name*"
 }
+
+function Update-VscodeUserSnippets {
+	Copy-Item $PSScriptRoot\snippets\*.json $VSCODE_USER_DIR\snippets\
+}

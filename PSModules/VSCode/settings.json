@@ -41,6 +41,9 @@
 		}
 	},
 	"powershell.codeFormatting.newLineAfterCloseBrace": false,
+	"powershell.codeFormatting.useConstantStrings": true,
+	"powershell.codeFormatting.useCorrectCasing": true,
+	"powershell.codeFormatting.whitespaceBetweenParameters": true,
 	"powershell.integratedConsole.showOnStartup": false,
 	"powershell.promptToUpdatePowerShell": false,
 	"remote.SSH.remotePlatform": {

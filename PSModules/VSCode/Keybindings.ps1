@@ -1,6 +1,6 @@
 #Requires -Modules Core
 
-function Backup-VSCodeUserKeybindingsJson {
+function Backup-VscodeUserKeybindingsJson {
 	Backup-Item $VSCODE_USER_KEYBINDINGS_JSON
 }
 

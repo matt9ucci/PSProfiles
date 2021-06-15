@@ -1,4 +1,4 @@
-function Backup-VSCodeUserSettingsJson {
+function Backup-VscodeUserSettingsJson {
 	Backup-Item $VSCODE_USER_SETTINGS_JSON
 }
 

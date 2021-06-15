@@ -202,7 +202,7 @@ try {
 	Write-Host ('Command `{0}` is required but not found' -f $Error[0].TargetObject) -ForegroundColor Red
 }
 
-function Install-VSCodeExtension {
+function Install-VscodeExtension {
 	[CmdletBinding(DefaultParameterSetName = 'Name')]
 	param (
 		[Parameter(ParameterSetName = 'Name', Mandatory, Position = 0)]
@@ -217,7 +217,7 @@ function Install-VSCodeExtension {
 	$Name | % { code --install-extension $_ }
 }
 
-function Uninstall-VSCodeExtension {
+function Uninstall-VscodeExtension {
 	[CmdletBinding(DefaultParameterSetName = 'Name')]
 	param (
 		[Parameter(ParameterSetName = 'Name', Mandatory, Position = 0)]

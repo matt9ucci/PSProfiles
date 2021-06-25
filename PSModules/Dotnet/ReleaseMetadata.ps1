@@ -1,67 +1,35 @@
-$ReleaseMetadataCache = [pscustomobject]@{
-	releasesIndexJson = $null
-}
+${releases-index.json} = { Invoke-RestMethod https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json }
 
-# See: .NET Core Release Notes https://github.com/dotnet/core/blob/master/release-notes/README.md
-$ReleaseMetadataCache | Add-Member ScriptProperty 'releases-index.json' {
-	if (!$this.releasesIndexJson) {
-		$response = Invoke-RestMethod https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json
-		$this.releasesIndexJson = $response.'releases-index' | sort channel-version -Descending
-	}
-	$this.releasesIndexJson
-}
-
-function Clear-ReleaseMetadataCache {
-	$ReleaseMetadataCache.releasesIndexJson = $null
-}
-
-function Get-ChannelVersion {
-	[CmdletBinding(DefaultParameterSetName = 'SupportPhase')]
+<#
+.LINK
+	.NET Release Notes https://github.com/dotnet/core/tree/main/release-notes
+#>
+function Get-DotnetReleaseMetadataIndex {
 	param (
-		[Parameter(ParameterSetName = 'SupportPhase', Position = 0)]
 		[ValidateSet('current', 'eol', 'lts', 'preview')]
 		[string[]]
-		$SupportPhase = @('current', 'lts'),
-
-		[Parameter(ParameterSetName = 'Lts')]
-		[switch]
-		$Lts,
-
-		[switch]
-		$Latest
+		$SupportPhase
 	)
 
-	$json = $ReleaseMetadataCache.'releases-index.json'
-
-	$json = switch ($PSCmdlet.ParameterSetName) {
-		SupportPhase { $json | ? support-phase -in $SupportPhase }
-		Lts { if ($Lts) { $json | ? support-phase -eq lts } }
+	$index = ${releases-index.json}.Invoke().'releases-index'
+	if ($SupportPhase) {
+		$index = $index | ? support-phase -In $SupportPhase
 	}
-
-	if ($Latest) {
-		$json = $json | sort channel-version -Bottom 1
-	}
-
-	$json.'channel-version' | sort -Descending
+	$index
 }
 
 <#
 .LINK
-	.NET Core Release Notes https://github.com/dotnet/core/blob/master/release-notes/README.md
+	.NET Release Notes https://github.com/dotnet/core/tree/main/release-notes
 #>
-function Get-ReleaseMetadata {
+function Get-DotnetReleaseMetadata {
 	param (
-		[string]
-		$ChannelVersion = (Get-DotnetChannelVersion -Lts -Latest),
-
-		[switch]
-		$Latest
+		[ValidateSet('current', 'eol', 'lts', 'preview')]
+		[string[]]
+		$SupportPhase = 'lts'
 	)
 
-	$channelMetadata = Invoke-RestMethod https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/$ChannelVersion/releases.json
-	$releaseMetadata = $channelMetadata.releases
-	if ($Latest) {
-		$releaseMetadata = $releaseMetadata | ? release-version -eq $channelMetadata.'latest-release'
+	foreach ($index in Get-DotnetReleaseMetadataIndex -SupportPhase $SupportPhase) {
+		Invoke-RestMethod $index.'releases.json'
 	}
-	$releaseMetadata
 }

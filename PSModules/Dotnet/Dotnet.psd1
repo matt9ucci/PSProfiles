@@ -12,6 +12,4 @@ CmdletsToExport      = '*'
 VariablesToExport    = '*'
 AliasesToExport      = '*'
 
-DefaultCommandPrefix = 'Dotnet'
-
 }

@@ -8,7 +8,7 @@ $installScriptName = 'dotnet-install.ps1'
 
 . $PSScriptRoot\ReleaseMetadata.ps1
 
-function Install-Cli4User {
+function Install-DotnetCli4User {
 	[CmdletBinding(SupportsShouldProcess)]
 	param (
 		[string]
@@ -18,7 +18,7 @@ function Install-Cli4User {
 		$Version = 'Latest'
 	)
 
-	$installScript = Save-InstallScript -Path (Join-Path $env:TEMP $installScriptName)
+	$installScript = Save-DotnetInstallScript -Path (Join-Path $env:TEMP $installScriptName)
 
 	$param = @{
 		Channel = $Channel
@@ -28,11 +28,11 @@ function Install-Cli4User {
 	& $installScript @param
 }
 
-function Uninstall-Cli4User {
+function Uninstall-DotnetCli4User {
 	Remove-Item $DOTNET_CLI4USER_ROOT -Recurse -Force
 }
 
-function Save-InstallScript {
+function Save-DotnetInstallScript {
 	param (
 		[string]
 		$Path = $installScriptName
@@ -107,7 +107,7 @@ function Use-Sdk {
 	$env:DOTNET_MULTILEVEL_LOOKUP = $false
 }
 
-function Show-DownloadPage {
+function Show-DotnetDownloadPage {
 	param (
 		[string]
 		$ChannelVersion = (Get-DotnetChannelVersion -Lts -Latest)

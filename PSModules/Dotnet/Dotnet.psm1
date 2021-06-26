@@ -33,22 +33,29 @@ function Uninstall-DotnetCli4User {
 }
 
 function Save-DotnetInstallScript {
+	[CmdletBinding(SupportsShouldProcess)]
 	param (
 		[string]
-		$Path = $installScriptName
+		$Path = $installScriptName,
+
+		[switch]
+		$Force
 	)
 
-	if (Test-Path $Path) {
-		Write-Warning "$Path already exists."
-	} else {
-		$param = @{
-			Uri     = 'https://dot.net/v1/dotnet-install.ps1'
-			OutFile = $Path
-		}
-		Invoke-WebRequest @param
+	if ((Test-Path $Path) -and !$Force -and !$PSCmdlet.ShouldContinue($Path, 'Overwrite the existing script:')) {
+		return
 	}
 
-	Get-Item $Path
+	if ($PSCmdlet.ShouldProcess($Path)) {
+		$params = @{
+			Uri     = 'https://dot.net/v1/dotnet-install.ps1'
+			OutFile = $Path
+			Verbose = $true
+		}
+		Invoke-WebRequest @params
+
+		Get-Item $Path
+	}
 }
 
 function Save-SdkBinary {

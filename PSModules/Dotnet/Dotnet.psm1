@@ -1,7 +1,7 @@
 . $PSScriptRoot\InstallScript.ps1
 . $PSScriptRoot\ReleaseMetadata.ps1
 
-function Save-SdkBinary {
+function Save-DotnetSdkBinary {
 	param (
 		[Parameter(Mandatory)]
 		[ValidateSet('linux-arm', 'linux-arm64', 'linux-musl-x64', 'linux-x64', 'osx-x64', 'rhel.6-x64', 'win-arm', 'win-x64', 'win-x86')]
@@ -36,7 +36,7 @@ function Save-SdkBinary {
 	}
 }
 
-function Use-Sdk {
+function Use-DotnetSdk {
 	param (
 		[string]
 		$Version

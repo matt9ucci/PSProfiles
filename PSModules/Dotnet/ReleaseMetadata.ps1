@@ -33,3 +33,29 @@ function Get-DotnetReleaseMetadata {
 		Invoke-RestMethod $index.'releases.json'
 	}
 }
+
+function Get-DotnetLatestSdkMetadata {
+	param (
+		[ValidateSet('current', 'eol', 'lts', 'preview')]
+		[string[]]
+		$SupportPhase = 'lts'
+	)
+
+	foreach ($r in Get-DotnetReleaseMetadata -SupportPhase $SupportPhase) {
+		$latestVersion = $r.'latest-sdk'
+		$r.releases.sdk | ? version -EQ $latestVersion
+	}
+}
+
+function Get-DotnetLatestRuntimeMetadata {
+	param (
+		[ValidateSet('current', 'eol', 'lts', 'preview')]
+		[string[]]
+		$SupportPhase = 'lts'
+	)
+
+	foreach ($r in Get-DotnetReleaseMetadata -SupportPhase $SupportPhase) {
+		$latestVersion = $r.'latest-runtime'
+		$r.releases.runtime | ? version -EQ $latestVersion
+	}
+}

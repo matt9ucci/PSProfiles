@@ -4,6 +4,7 @@ if ($IsWindows) {
 }
 
 . $PSScriptRoot\Ec2.ps1
+. $PSScriptRoot\Cloud9.ps1
 
 <#
 .LINK

@@ -5,9 +5,12 @@ function Open-C9Environment {
 			(Get-C9EnvironmentList | Get-C9EnvironmentData | ? Name -like "$WordToComplete*").Name
 		})]
 		[string]
-		$Name
+		$Name,
+
+		[Amazon.PowerShell.Common.AWSRegion]
+		$Region = (Get-DefaultAWSRegion)
 	)
 
 	$id = (Get-C9EnvironmentList | Get-C9EnvironmentData | ? Name -EQ $Name).Id
-	Start-Process https://console.aws.amazon.com/cloud9/ide/$id
+	Start-Process https://$Region.console.aws.amazon.com/cloud9/ide/$id
 }

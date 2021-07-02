@@ -2,21 +2,32 @@
 . $PSScriptRoot\ReleaseMetadata.ps1
 
 function Save-DotnetSdkBinary {
+	[CmdletBinding()]
 	param (
-		[Parameter(Mandatory)]
+		[ValidateSet('current', 'eol', 'lts', 'preview')]
+		[string[]]
+		$SupportPhase = 'lts',
+
 		[ValidateSet('linux-arm', 'linux-arm64', 'linux-musl-x64', 'linux-x64', 'osx-x64', 'rhel.6-x64', 'win-arm', 'win-x64', 'win-x86')]
 		[string]
 		$Rid,
 
 		[string]
-		$ChannelVersion = (Get-DotnetChannelVersion -Lts -Latest),
-
-		[string]
 		$Location = (Get-Location)
 	)
 
-	$releaseMetadata = Get-DotnetReleaseMetadata -ChannelVersion $ChannelVersion -Latest
-	$sdk = $releaseMetadata.sdk.files | ? rid -EQ $Rid | ? name -Match '\w+\.(zip|tar\.gz)$'
+	if (!$PSBoundParameters.ContainsKey('Rid')) {
+		$Rid = if ($IsWindows) {
+			'win-x64'
+		}
+	}
+
+	$sdk = Get-DotnetLatestSdkMetadata -SupportPhase $SupportPhase |
+		sort version |
+		select -Last 1 |
+		% files |
+		? rid -EQ $Rid |
+		? name -Match '\w+\.(zip|tar\.gz)$'
 
 	$outFile = Join-Path $Location $sdk.name
 

@@ -29,19 +29,17 @@ function Save-DotnetSdkBinary {
 		? rid -EQ $Rid |
 		? name -Match '\w+\.(zip|tar\.gz)$'
 
-	$outFile = Join-Path $Location $sdk.name
-
 	$params = @{
 		Uri     = $sdk.url
-		OutFile = $outfile
+		OutFile = Join-Path $Location (Split-Path $sdk.url -Leaf)
 		Verbose = $true
 	}
 	Invoke-WebRequest @params
 
-	$fileHashInfo = Get-FileHash $outFile -Algorithm SHA512
+	$fileHashInfo = Get-FileHash $params.OutFile -Algorithm SHA512
 	if ($fileHashInfo.Hash -eq $sdk.hash) {
 		Write-Information ('Valid hash [{0}]' -f $fileHashInfo.Hash)
-		(Resolve-Path $outFile).Path
+		(Resolve-Path $params.OutFile).Path
 	} else {
 		throw 'Invalid hash [{0}]: expected [{1}]' -f $fileHashInfo.Hash, $sdk.hash
 	}

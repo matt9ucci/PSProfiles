@@ -397,3 +397,11 @@ function New-Pathto {
 
 	New-Item -ItemType Junction -Path $USERAPPS\pathto\$Name -Value $Path
 }
+
+filter FromBase64 {
+	param(
+		[System.Text.Encoding]
+		$Encoding = [System.Text.Encoding]::UTF8
+	)
+	$Encoding.GetString([System.Convert]::FromBase64String($_))
+}

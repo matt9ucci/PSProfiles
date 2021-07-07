@@ -10,6 +10,7 @@ Register-ArgumentCompleter -CommandName syntax -ParameterName Name -ScriptBlock 
 }
 
 function Get-CommandDefinition([string[]]$Name) { (gcm $Name).Definition }
+sal gcmdefinition Get-CommandDefinition
 
 function Show-CommandLocation {
 	param (

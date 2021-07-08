@@ -39,29 +39,6 @@ function New-MultipassOfMyOwn {
 	multipass exec $Name -- pwsh -nop -c 'Install-Module DockerCompletion -Scope CurrentUser'
 }
 
-function New-MultipassDockerMachine {
-	param (
-		[string]
-		$Name = 'docker',
-
-		[UInt16]
-		$Cpu = 2,
-
-		[UInt64]
-		$Disk = 16GB
-	)
-
-	$param = @(
-		'--cloud-init', "$PSScriptRoot/docker-machine.yaml"
-		'--name', $Name
-		'--cpus', $Cpu
-		'--disk', $Disk
-		'-vvv'
-	)
-
-	multipass launch @param
-}
-
 function Remove-MultipassInstance {
 	[CmdletBinding(SupportsShouldProcess)]
 	param (

@@ -28,7 +28,6 @@ function ll { gci @Args | ? Name -NotLike .* }
 function more { $input | Out-Host -Paging }
 function sl.. { sl .. }
 function sl... { sl ../.. }
-function sl.... { sl ../../.. }
 
 function c. { code . }
 function codes { code $SCRIPTS }

@@ -12,6 +12,7 @@ switch ($env:OS) {
 	# See https://code.visualstudio.com/docs/getstarted/settings#_settings-file-locations
 }
 
+. "$PSScriptRoot/Keybindings.ps1"
 . "$PSScriptRoot/Settings.ps1"
 
 function Save-VSCodeBinary([string]$Path = "$DOWNLOADS\vscode.zip") {

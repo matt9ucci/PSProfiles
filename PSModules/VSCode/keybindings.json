@@ -1,0 +1,76 @@
+[
+	{
+		"key": "ctrl+0",
+		"command": "workbench.action.zoomReset"
+	},
+	{
+		"key": "ctrl+numpad0",
+		"command": "-workbench.action.zoomReset"
+	},
+	{
+		"key": "shift+alt+5",
+		"command": "editor.action.jumpToBracket",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "shift+alt+oem_plus",
+		"command": "workbench.action.splitEditor"
+	},
+	{
+		"key": "ctrl+oem_5",
+		"command": "-workbench.action.splitEditor"
+	},
+	{
+		"key": "shift+alt+oem_minus",
+		"command": "workbench.action.splitEditorOrthogonal"
+	},
+	{
+		"key": "ctrl+k ctrl+oem_5",
+		"command": "-workbench.action.splitEditorOrthogonal"
+	},
+	{
+		"key": "shift+alt+r",
+		"command": "revealFileInOS"
+	},
+	{
+		"key": "shift+alt+r",
+		"command": "-revealFileInOS",
+		"when": "!editorFocus"
+	},
+	{
+		"key": "shift+alt+c",
+		"command": "copyFilePath"
+	},
+	{
+		"key": "shift+alt+c",
+		"command": "-copyFilePath",
+		"when": "!editorFocus"
+	},
+
+	// Maximize
+	{ "key": "ctrl+m", "command": "workbench.action.toggleMaximizedPanel", "when": "panelFocus" },
+	{ "key": "ctrl+m", "command": "workbench.action.toggleZenMode",        "when": "!panelFocus" },
+
+	// Terminal
+	{ "key": "alt+t",       "command": "workbench.action.terminal.toggleTerminal" },
+	{ "key": "shift+alt+t", "command": "workbench.action.terminal.new" },
+
+	// Suggestion Next/Previous
+	{ "key": "tab",       "command": "selectNextSuggestion", "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus" },
+	{ "key": "shift+tab", "command": "selectPrevSuggestion", "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus" },
+
+	// Quick Open Next/Previous
+	{ "key": "tab",       "command": "workbench.action.quickOpenSelectNext",     "when": "inQuickOpen" },
+	{ "key": "shift+tab", "command": "workbench.action.quickOpenSelectPrevious", "when": "inQuickOpen" },
+
+	// Vim-like cursor
+	{ "key": "alt+win+h", "command": "cursorLeft",  "when": "textInputFocus" },
+	{ "key": "alt+win+j", "command": "cursorDown",  "when": "textInputFocus" },
+	{ "key": "alt+win+k", "command": "cursorUp",    "when": "textInputFocus" },
+	{ "key": "alt+win+l", "command": "cursorRight", "when": "textInputFocus" },
+	{ "key": "ctrl+alt+win+h", "command": "cursorWordLeft",  "when": "textInputFocus && !accessibilityModeEnabled" },
+	{ "key": "ctrl+alt+win+l", "command": "cursorWordRight", "when": "textInputFocus && !accessibilityModeEnabled" },
+	{ "key": "ctrl+alt+win+b", "command": "cursorPageUp",   "when": "textInputFocus" },
+	{ "key": "ctrl+alt+win+f", "command": "cursorPageDown", "when": "textInputFocus" },
+	{ "key": "shift+alt+win+g", "command": "cursorBottom", "when": "textInputFocus" },
+]

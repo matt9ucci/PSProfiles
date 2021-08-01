@@ -1,0 +1,92 @@
+{
+	"[html]": {
+		"editor.defaultFormatter": "vscode.html-language-features"
+	},
+	"[javascript]": {
+		"editor.defaultFormatter": "vscode.typescript-language-features"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "vscode.typescript-language-features"
+	},
+	"csharp.suppressBuildAssetsNotification": true,
+	"debug.internalConsoleOptions": "openOnSessionStart",
+	"diffEditor.renderSideBySide": false,
+	"editor.fontFamily": "'Cascadia Mono PL', Consolas, 'Courier New', monospace",
+	"editor.insertSpaces": false,
+	"editor.renderWhitespace": "boundary",
+	"editor.tabCompletion": "on",
+	"explorer.confirmDelete": false,
+	"extensions.ignoreRecommendations": true,
+	"files.trimTrailingWhitespace": true,
+	"json.schemas": [
+		{
+			"fileMatch": [
+				"package.json"
+			],
+			"url": "http://json.schemastore.org/package"
+		}
+	],
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "PS Launch Current File",
+				"type": "PowerShell",
+				"request": "launch",
+				"script": "${file}",
+				"cwd": "${file}"
+			}
+		]
+	},
+	"markdown.extension.list.indentationSize": "inherit",
+	"markdownlint.config": {
+		"default": true,
+		"no-hard-tabs": false,
+		"MD004": {
+			"style": "sublist"
+		},
+		"MD007": {
+			"indent": 1
+		}
+	},
+	"powershell.codeFormatting.newLineAfterCloseBrace": false,
+	"powershell.codeFormatting.useConstantStrings": true,
+	"powershell.codeFormatting.useCorrectCasing": true,
+	"powershell.codeFormatting.whitespaceBetweenParameters": true,
+	"powershell.integratedConsole.showOnStartup": false,
+	"powershell.promptToUpdatePowerShell": false,
+	"powershell.sideBar.CommandExplorerVisibility": false,
+	"remote.SSH.remotePlatform": {
+		"primary.mshome.net": "linux"
+	},
+	"terminal.integrated.defaultProfile.linux": "pwsh",
+	"terminal.integrated.defaultProfile.windows": "PowerShell",
+	"terminal.integrated.profiles.linux": {
+		"pwsh": {
+			"path": "pwsh",
+			"args": [
+				"-NoLogo"
+			]
+		}
+	},
+	"terminal.integrated.profiles.windows": {
+		"PowerShell": {
+			"source": "PowerShell",
+			"args": [
+				"-NoLogo"
+			]
+		}
+	},
+	"typescript.format.semicolons": "remove",
+	"update.mode": "manual",
+	"window.newWindowDimensions": "maximized",
+	"workbench.settings.editor": "json",
+	"workbench.settings.useSplitJSON": true,
+	"workbench.startupEditor": "newUntitledFile"
+}

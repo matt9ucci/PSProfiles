@@ -1,8 +1,12 @@
-function gcms { param ([string[]]$Name) Get-Command -Name $Name -Syntax }
-Register-ArgumentCompleter -CommandName gcms -ParameterName Name -ScriptBlock {
-	param ($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameter)
-
-	Get-Command -Name $wordToComplete* | % Name
+function syntax {
+	param (
+		[ArgumentCompleter({
+			param ($commandName, $parameterName, $wordToComplete)
+			Get-Command -Name $wordToComplete* | % Name
+		})]
+		[string[]]$Name
+	)
+	(Get-Command -Name $Name -Syntax) -replace ' (?=\[-\w+( <.+>)?\] \[)', "`n`t" -replace ' \[<CommonParameters>\]'
 }
 
 function Get-CommandDefinition([string[]]$Name) { (gcm $Name).Definition }

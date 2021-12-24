@@ -51,3 +51,57 @@ function Export-PwshProxyClixml {
 
 	Export-Clixml -Path $Path -InputObject $pwshProxy
 }
+
+<#
+.LINK
+	https://docs.github.com/en/rest/reference/licenses#get-all-commonly-used-licenses
+#>
+function Get-LicenseFromGithub {
+	param (
+		[ValidateSet('apache-2.0', 'mit', 'mpl-2.0')]
+		[string]
+		$Key
+	)
+
+	$params = @{
+		Uri = 'https://api.github.com/licenses' + ($Key ? "/$Key" : '')
+	}
+	Invoke-RestMethod @params
+}
+
+<#
+.LINK
+	https://docs.github.com/en/rest/reference/licenses#get-a-license
+#>
+function New-LicenseFile {
+	param (
+		[ValidateSet('agpl-3.0', 'apache-2.0', 'bsd-2-clause', 'bsd-3-clause', 'bsl-1.0', 'cc0-1.0', 'epl-2.0', 'gpl-2.0', 'gpl-3.0', 'lgpl-2.1', 'mit', 'mpl-2.0', 'unlicense')]
+		[Parameter(Mandatory)]
+		[string]
+		$Key,
+
+		[switch]
+		$Commit
+	)
+
+	$response = Get-LicenseFromGithub $Key
+
+	$licenseText = $response.body
+	if ($key -eq 'mit') {
+		$licenseText = $licenseText -replace '\[year\]', [datetime]::Today.Year
+		$licenseText = $licenseText -replace '\[fullname\]', 'Masatoshi Higuchi'
+	}
+
+	$params = @{
+		Path  = 'LICENSE'
+		Value = $licenseText
+	}
+	Set-Content @params -NoNewline
+
+	$response | Select-Object name, description, implementation | Format-List
+
+	if ($Commit) {
+		git add $params.Path
+		git commit -m 'New LICENSE'
+	}
+}

@@ -2,6 +2,23 @@
 . $PSScriptRoot\Command.ps1
 . $PSScriptRoot\Directory.ps1
 
+function New-Junction {
+	param (
+		[Parameter(Mandatory, Position = 0)]
+		[Alias('Target')]
+		[string]
+		$Value,
+
+		[string]
+		$Path = '.',
+
+		[string]
+		$Name = (Split-Path $Value -Leaf)
+	)
+
+	New-Item -Path $Path -Name $Name -Value $Value -ItemType Junction
+}
+
 function New-SymbolicLink {
 	param (
 		[Parameter(Mandatory, Position = 0)]

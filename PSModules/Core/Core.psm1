@@ -38,7 +38,7 @@ function Export-PwshProxyClixml {
 		$Proxy,
 
 		[pscredential]
-		$ProxyCredential,
+		$ProxyCredential = (Get-Credential -UserName $env:USERNAME),
 
 		[string]
 		$Path = (Join-Path (Split-Path $PROFILE) PwshProxy.xml)

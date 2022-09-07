@@ -122,3 +122,21 @@ function New-LicenseFile {
 		git commit -m 'New LICENSE'
 	}
 }
+
+function New-ReadmeFile {
+	param (
+		[switch]
+		$Commit
+	)
+
+	$params = @{
+		Path  = 'README.md'
+		Value = "# $(Split-Path (Get-Location) -Leaf)"
+	}
+	Set-Content @params
+
+	if ($Commit) {
+		git add $params.Path
+		git commit -m 'New README'
+	}
+}

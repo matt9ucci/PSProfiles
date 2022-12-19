@@ -22,7 +22,7 @@
 	"popupBackgroundColor": "#FFFFFF",
 	"popupBorderRadius": 2,
 	"popupDelay": 0,
-	"popupDisableCommand": "Ctrl+Shift+U",
+	"popupDisableCommand": "",
 	"popupHighlightColor": "#3399FF",
 	"popupItemBorderRadius": 0,
 	"popupItemHoverBehaviour": "highlight-and-move",
@@ -40,36 +40,40 @@
 	"searchEngineIconsSource": "favicon-kit",
 	"searchEngines": [
 		{
-			"type": "browser",
+			"type": "custom",
 			"name": "Google",
 			"iconUrl": "https://api.faviconkit.com/www.google.com/64",
 			"searchUrl": "https://www.google.com/search?q={searchTerms}",
 			"isEnabled": true,
-			"isEnabledInContextMenu": true
+			"isEnabledInContextMenu": true,
+			"uniqueId": "inppkvnpse"
 		},
 		{
-			"type": "browser",
+			"type": "custom",
 			"name": "Twitter",
 			"iconUrl": "https://api.faviconkit.com/twitter.com/64",
 			"searchUrl": "https://twitter.com/search?q={searchTerms}",
 			"isEnabled": true,
-			"isEnabledInContextMenu": true
+			"isEnabledInContextMenu": true,
+			"uniqueId": "truzmii79b"
 		},
 		{
-			"type": "browser",
+			"type": "custom",
 			"name": "YouTube",
 			"iconUrl": "https://api.faviconkit.com/www.youtube.com/64",
 			"searchUrl": "https://www.youtube.com/results?search_query={searchTerms}",
 			"isEnabled": true,
-			"isEnabledInContextMenu": true
+			"isEnabledInContextMenu": true,
+			"uniqueId": "w8xkud212kg"
 		},
 		{
-			"type": "browser",
+			"type": "custom",
 			"name": "Google Maps",
-			"iconUrl": "https://www.google.com/images/branding/product/ico/maps15_bnuw3a_32dp.ico",
+			"iconUrl": "https://api.faviconkit.com/www.google.co.jp/maps/64",
 			"searchUrl": "https://www.google.co.jp/maps/search/{searchTerms}",
 			"isEnabled": true,
-			"isEnabledInContextMenu": true
+			"isEnabledInContextMenu": true,
+			"uniqueId": "a2r1g58z17u"
 		},
 		{
 			"type": "custom",
@@ -77,13 +81,24 @@
 			"searchUrl": "https://www.merriam-webster.com/dictionary/{searchTerms}",
 			"iconUrl": "https://api.faviconkit.com/www.merriam-webster.com/64",
 			"isEnabled": true,
-			"isEnabledInContextMenu": true
+			"isEnabledInContextMenu": true,
+			"uniqueId": "0l4moo0cxi3j"
 		},
 		{
 			"type": "custom",
 			"name": "Cambridge Dictionary",
 			"searchUrl": "https://dictionary.cambridge.org/dictionary/english/{searchTerms}",
 			"iconUrl": "https://api.faviconkit.com/dictionary.cambridge.org/64",
+			"isEnabled": true,
+			"isEnabledInContextMenu": true,
+			"uniqueId": "rn4wpd9w7gp"
+		},
+		{
+			"type": "custom",
+			"name": "Longman en-ja",
+			"searchUrl": "https://www.ldoceonline.com/dictionary/english-japanese/{searchTerms}",
+			"iconUrl": "https://api.faviconkit.com/www.ldoceonline.com/64",
+			"uniqueId": "u5dc8tan0u",
 			"isEnabled": true,
 			"isEnabledInContextMenu": true
 		},
@@ -93,29 +108,42 @@
 			"searchUrl": "https://eow.alc.co.jp/search?q={searchTerms}",
 			"iconUrl": "https://api.faviconkit.com/eow.alc.co.jp/64",
 			"isEnabled": true,
-			"isEnabledInContextMenu": true
+			"isEnabledInContextMenu": true,
+			"uniqueId": "rlerq572hl"
 		},
 		{
-			"type": "browser",
+			"type": "custom",
 			"name": "Weblio英和和英",
 			"iconUrl": "https://api.faviconkit.com/ejje.weblio.jp/64",
 			"searchUrl": "http://ejje.weblio.jp/content?query={searchTerms}",
 			"isEnabled": true,
-			"isEnabledInContextMenu": true
+			"isEnabledInContextMenu": true,
+			"uniqueId": "otwdskg4tp"
 		},
 		{
-			"type": "browser",
+			"type": "custom",
 			"name": "Weblio類語",
 			"iconUrl": "https://api.faviconkit.com/thesaurus.weblio.jp/64",
 			"searchUrl": "http://thesaurus.weblio.jp/content?query={searchTerms}",
 			"isEnabled": true,
-			"isEnabledInContextMenu": true
+			"isEnabledInContextMenu": true,
+			"uniqueId": "is0n708dde9"
 		},
 		{
-			"type": "browser",
+			"type": "custom",
 			"name": "Weblio辞書",
 			"iconUrl": "https://api.faviconkit.com/www.weblio.jp/64",
 			"searchUrl": "http://www.weblio.jp/content?query={searchTerms}",
+			"isEnabled": true,
+			"isEnabledInContextMenu": true,
+			"uniqueId": "1vfxt9jcd6lh"
+		},
+		{
+			"type": "custom",
+			"name": "コトバンク",
+			"searchUrl": "https://kotobank.jp/word/{searchTerms}",
+			"iconUrl": "https://api.faviconkit.com/kotobank.jp/64",
+			"uniqueId": "tmmjayteds9",
 			"isEnabled": true,
 			"isEnabledInContextMenu": true
 		},
@@ -125,41 +153,92 @@
 			"searchUrl": "https://www.amazon.co.jp/s?k={searchTerms}",
 			"iconUrl": "https://api.faviconkit.com/www.amazon.co.jp/64",
 			"isEnabled": true,
-			"isEnabledInContextMenu": true
+			"isEnabledInContextMenu": true,
+			"uniqueId": "qi2f3sovek"
 		},
 		{
-			"type": "browser",
+			"type": "custom",
 			"name": "GitHub",
 			"iconUrl": "https://api.faviconkit.com/github.com/64",
 			"searchUrl": "https://github.com/search?q={searchTerms}",
 			"isEnabled": true,
+			"isEnabledInContextMenu": true,
+			"uniqueId": "gr0r4uo4tc"
+		},
+		{
+			"type": "custom",
+			"name": "NuGet Gallery",
+			"searchUrl": "https://www.nuget.org/packages?q={searchTerms}",
+			"iconUrl": "https://www.nuget.org/favicon.ico",
+			"uniqueId": "5sijrnb8jx3",
+			"isEnabled": true,
 			"isEnabledInContextMenu": true
 		},
 		{
-			"type": "browser",
+			"type": "custom",
+			"name": "MDN",
+			"searchUrl": "https://developer.mozilla.org/en-US/search?q={searchTerms}",
+			"iconUrl": "https://api.faviconkit.com/developer.mozilla.org/64",
+			"uniqueId": "vr6ynyssl3o",
+			"isEnabled": true,
+			"isEnabledInContextMenu": true
+		},
+		{
+			"type": "custom",
+			"name": "PowerShell Gallery",
+			"searchUrl": "https://www.powershellgallery.com/packages?q={searchTerms}",
+			"iconUrl": "https://api.faviconkit.com/www.powershellgallery.com/64",
+			"uniqueId": "lpiuf7kdjtm",
+			"isEnabled": true,
+			"isEnabledInContextMenu": true
+		},
+		{
+			"type": "custom",
+			"name": "O'Reilly",
+			"searchUrl": "https://learning.oreilly.com/search/?query={searchTerms}",
+			"iconUrl": "https://api.faviconkit.com/learning.oreilly.com/64",
+			"uniqueId": "w1acwiie009",
+			"isEnabled": true,
+			"isEnabledInContextMenu": true
+		},
+		{
+			"type": "custom",
+			"name": "Pocket",
+			"searchUrl": "https://getpocket.com/my-list/search?query={searchTerms}",
+			"iconUrl": "https://api.faviconkit.com/getpocket.com/64",
+			"uniqueId": "37mlhdv4sg5",
+			"isEnabled": true,
+			"isEnabledInContextMenu": true
+		},
+		{
+			"type": "custom",
 			"name": "DuckDuckGo",
 			"iconUrl": "https://api.faviconkit.com/duckduckgo.com/64",
 			"searchUrl": "https://duckduckgo.com/?q={searchTerms}",
 			"isEnabled": true,
-			"isEnabledInContextMenu": true
+			"isEnabledInContextMenu": true,
+			"uniqueId": "2s12am1zv7y"
 		},
 		{
 			"type": "sss",
 			"id": "separator",
 			"isEnabled": true,
-			"isEnabledInContextMenu": true
+			"isEnabledInContextMenu": true,
+			"uniqueId": "54zaqlpna0p"
 		},
 		{
 			"type": "sss",
 			"id": "openAsLink",
 			"isEnabled": true,
-			"isEnabledInContextMenu": true
+			"isEnabledInContextMenu": true,
+			"uniqueId": "gfm7mtd3bh"
 		},
 		{
 			"type": "sss",
 			"id": "copyToClipboard",
 			"isEnabled": false,
-			"isEnabledInContextMenu": false
+			"isEnabledInContextMenu": false,
+			"uniqueId": "jr3qk3p6nd9"
 		}
 	],
 	"sectionsExpansionState": {

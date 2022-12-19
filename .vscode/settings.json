@@ -1,5 +1,11 @@
 {
-	"powershell.scriptAnalysis.enable": false,
+
+	"powershell.codeFormatting.newLineAfterCloseBrace": false,
+	"powershell.codeFormatting.openBraceOnSameLine": true,
+	"powershell.codeFormatting.useConstantStrings": true,
+	"powershell.codeFormatting.useCorrectCasing": true,
+	"powershell.codeFormatting.whitespaceBetweenParameters": true,
+
 	"workbench.colorCustomizations": {
 		"terminal.background": "#012456",
 		"terminal.foreground": "#CCCCCC"

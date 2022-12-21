@@ -73,9 +73,16 @@ function prompt {
 	}
 }
 
-if (Test-Path "$($PROFILEDIR.Private)\profile.ps1") {
-	function codep { code $PROFILEDIR $PROFILE.CurrentUserAllHosts "$($PROFILEDIR.Private)\profile.ps1" }
-	. $HOME\.psprofiles\profile.ps1
+if (Test-Path $PROFILEDIR.Private) {
+	function codep {
+		$params = @(
+			$PROFILEDIR
+			$PROFILE.CurrentUserAllHosts
+			(Get-ChildItem $PROFILEDIR.Private -File)
+		)
+		code @params
+	}
+	. "$($PROFILEDIR.Private)\profile.ps1"
 } else {
 	function codep { code $PROFILEDIR $PROFILE.CurrentUserAllHosts }
 }

@@ -27,6 +27,19 @@ function Get-FileHash { $fh = Microsoft.PowerShell.Utility\Get-FileHash @Args; S
 function c. { code . }
 function codes { code $SCRIPTS }
 
+function cssh {
+	param (
+		[string]
+		$Name = 'default',
+
+		[Parameter(HelpMessage = 'e.g. /home/me or home/me')]
+		[string]
+		$Path = 'home'
+	)
+
+	code --folder-uri "vscode-remote://ssh-remote+$Name/$Path"
+}
+
 function Update-Profile { pushd $PROFILEDIR; git pull --rebase; popd }
 
 $env:PSModulePath = -join ((Join-Path $PROFILEDIR PSModules), [System.IO.Path]::PathSeparator, $env:PSModulePath)

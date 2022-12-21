@@ -16,6 +16,7 @@ sal d docker
 sal dc docker-compose
 sal dm docker-machine
 sal g git
+sal s syntax
 
 sal .n dotnet
 function .nr { dotnet run @Args }

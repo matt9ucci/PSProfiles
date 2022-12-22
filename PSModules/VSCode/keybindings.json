@@ -28,28 +28,21 @@
 		"key": "ctrl+k ctrl+oem_5",
 		"command": "-workbench.action.splitEditorOrthogonal"
 	},
-	{
-		"key": "shift+alt+r",
-		"command": "revealFileInOS"
-	},
-	{
-		"key": "shift+alt+r",
-		"command": "-revealFileInOS",
-		"when": "!editorFocus"
-	},
-	{
-		"key": "shift+alt+c",
-		"command": "copyFilePath"
-	},
-	{
-		"key": "shift+alt+c",
-		"command": "-copyFilePath",
-		"when": "!editorFocus"
-	},
+
+	// File: Copy Path
+	{ "key": "shift+alt+c", "command": "workbench.action.files.copyPathOfActiveFile" },
+
+	// File: Reveal
+	{ "key": "shift+alt+r", "command": "workbench.action.files.revealActiveFileInWindows" },
+	{ "key": "ctrl+k r", "command": "-workbench.action.files.revealActiveFileInWindows" },
 
 	// Maximize
 	{ "key": "ctrl+m", "command": "workbench.action.toggleMaximizedPanel", "when": "panelFocus" },
 	{ "key": "ctrl+m", "command": "workbench.action.toggleZenMode",        "when": "!panelFocus" },
+
+	// Selection
+	{ "key": "alt+s", "command": "editor.action.smartSelect.expand", "when": "editorTextFocus" },
+	{ "key": "shift+alt+s", "command": "editor.action.smartSelect.shrink", "when": "editorTextFocus" },
 
 	// Terminal
 	{ "key": "alt+t",       "command": "workbench.action.terminal.toggleTerminal" },
@@ -62,6 +55,9 @@
 	// Quick Open Next/Previous
 	{ "key": "tab",       "command": "workbench.action.quickOpenSelectNext",     "when": "inQuickOpen" },
 	{ "key": "shift+tab", "command": "workbench.action.quickOpenSelectPrevious", "when": "inQuickOpen" },
+
+	// View: Close Other Editors in Group
+	{ "key": "ctrl+alt+w", "command": "workbench.action.closeOtherEditors" },
 
 	// Vim-like cursor
 	{ "key": "alt+win+h", "command": "cursorLeft",  "when": "textInputFocus" },

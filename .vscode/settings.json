@@ -1,4 +1,6 @@
 {
+	"files.insertFinalNewline": true,
+	"files.trimTrailingWhitespace": true,
 
 	"powershell.codeFormatting.newLineAfterCloseBrace": false,
 	"powershell.codeFormatting.openBraceOnSameLine": true,

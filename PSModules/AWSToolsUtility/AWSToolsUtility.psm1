@@ -3,7 +3,28 @@ if ($IsWindows) {
 	Set-Variable AWS_SHARED_CREDENTIAL_LOCATION "$HOME\.aws\credentials" -Option ReadOnly, AllScope -Scope Global -Force
 }
 
+function Register-ArgumentCompleterByModuleName {
+	param (
+		[Parameter(Mandatory)]
+		[string]
+		$ModuleName,
+
+		[Parameter(Mandatory)]
+		[string]
+		$ParameterName,
+
+		[Parameter(Mandatory)]
+		[scriptblock]
+		$ScriptBlock
+	)
+
+	if ($cms = Get-Command -Module $ModuleName -ParameterName $ParameterName) {
+		Register-ArgumentCompleter -CommandName $cms.Name -ParameterName $ParameterName -ScriptBlock $ScriptBlock
+	}
+}
+
 . $PSScriptRoot\Ec2.ps1
+. $PSScriptRoot\Iam.ps1
 
 <#
 .LINK

@@ -17,13 +17,19 @@
 	"csharp.suppressBuildAssetsNotification": true,
 	"debug.internalConsoleOptions": "openOnSessionStart",
 	"diffEditor.renderSideBySide": false,
+	"dotfiles.repository": "https://bitbucket.org/matt9ucci/dotfiles.git",
 	"editor.fontFamily": "'Cascadia Mono PL', Consolas, 'Courier New', monospace",
 	"editor.insertSpaces": false,
 	"editor.renderWhitespace": "boundary",
 	"editor.tabCompletion": "on",
 	"explorer.confirmDelete": false,
 	"extensions.ignoreRecommendations": true,
+	"files.associations": {
+		"*.ps1xml": "xml"
+	},
+	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
+	"javascript.format.semicolons": "remove",
 	"json.schemas": [
 		{
 			"fileMatch": [
@@ -88,5 +94,6 @@
 	"window.newWindowDimensions": "maximized",
 	"workbench.settings.editor": "json",
 	"workbench.settings.useSplitJSON": true,
-	"workbench.startupEditor": "newUntitledFile"
+	"workbench.startupEditor": "newUntitledFile",
+	"zenMode.hideLineNumbers": false,
 }

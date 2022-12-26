@@ -1,0 +1,120 @@
+{
+	//
+	// [type]
+	// $Variable
+	//
+	"$Name": {
+		"prefix": "Name",
+		"body": [
+			"[string]",
+			"\\$Name"
+		],
+		"description": "$Name"
+	},
+	"param ($Path)": {
+		"prefix": "Path",
+		"body": [
+			"[Parameter(Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName)]",
+			"[string[]]",
+			"\\$Path"
+		],
+		"description": "Param"
+	},
+	"$Switch": {
+		"prefix": "switch",
+		"body": [
+			"[switch]",
+			"\\$${1:Switch}",
+		],
+		"description": "[switch]$Switch",
+	},
+
+	"Completer param ()": {
+		"prefix": "Completer param ()",
+		"body": [
+			"param ([string]\\$CommandName, [string]\\$ParameterName, [string]\\$WordToComplete, [System.Management.Automation.Language.CommandAst]\\$CommandAst, [hashtable]\\$FakeBoundParameters)",
+			"$0",
+		],
+		"description": "param ([string]$CommandName, ...)",
+	},
+
+	"Completer param () for Native": {
+		"prefix": "Completer param () for Native",
+		"body": [
+			"param ([string]\\$WordToComplete, [System.Management.Automation.Language.CommandAst]\\$CommandAst, [System.Management.Automation.Language.IScriptPosition]\\$CursorPosition)",
+			"$0",
+		],
+		"description": "param ([string]$WordToComplete, ...)",
+	},
+
+	//
+	// [Parameter()]
+	//
+	"[Parameter(Mandatory)]": {
+		"prefix": "Mandatory",
+		"body": [
+			"[Parameter(Mandatory)]",
+			"$0"
+		],
+		"description": "[Parameter(Mandatory)]"
+	},
+	"[Parameter(ValueFromPipeline)]": {
+		"prefix": "ValueFromPipeline",
+		"body": [
+			"[Parameter(Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName)]",
+			"$0"
+		],
+		"description": "[Parameter(ValueFromPipeline)]"
+	},
+
+	//
+	// [CmdletBinding()]
+	// param ()
+	//
+	"param ()": {
+		"prefix": "param",
+		"body": [
+			"param (",
+			"\t$0",
+			")"
+		],
+		"description": "param ()"
+	},
+	"param () CmdletBinding()": {
+		"prefix": "param CmdletBinding",
+		"body": [
+			"[CmdletBinding($0)]",
+			"param (",
+			"\t$1",
+			")"
+		],
+		"description": "[CmdletBinding()] param ()"
+	},
+	"CmdletBinding()": {
+		"prefix": "CmdletBinding",
+		"body": [
+			"[CmdletBinding($0)]"
+		],
+		"description": "[CmdletBinding()]"
+	},
+
+	// [ArgumentCompleter({})]
+	"Cmdlet ArgumentCompleter": {
+		"prefix": "ArgumentCompleter",
+		"body": [
+			"[ArgumentCompleter(",
+			"\t{",
+			"\t\tparam ([string]\\$CommandName, [string]\\$ParameterName, [string]\\$WordToComplete, [System.Management.Automation.Language.CommandAst]\\$CommandAst, [hashtable]\\$FakeBoundParameters)",
+			"\t\tWrite-Debug \"CommandName = \\$CommandName\"",
+			"\t\tWrite-Debug \"ParameterName = \\$ParameterName\"",
+			"\t\tWrite-Debug \"WordToComplete = \\$WordToComplete\"",
+			"\t\tWrite-Debug \"CommandAst = \\$CommandAst\"",
+			"\t\tforeach (\\$entry in \\$FakeBoundParameters.GetEnumerator()) {",
+			"\t\t\tWrite-Debug ('FakeBoundParameters {0}={1}' -f (\\$entry.Key, \\$entry.Value))",
+			"\t\t}",
+			"\t}",
+			")]",
+		],
+		"description": "[ArgumentCompleter({})]",
+	},
+}

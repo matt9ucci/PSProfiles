@@ -1,42 +1,57 @@
-function Get-PathEnv {
-	Param(
-		[System.EnvironmentVariableTarget]$Target = [System.EnvironmentVariableTarget]::Process
+function Get-PathEnvironmentVariable {
+	[alias('Get-PathEnv')]
+	param (
+		[System.EnvironmentVariableTarget]
+		$Target = [System.EnvironmentVariableTarget]::Process
 	)
 
-	(Get-Env 'PATH' $Target).Value -split ';'
+	[System.Environment]::GetEnvironmentVariable('PATH', $Target) -split [System.IO.Path]::PathSeparator
 }
 
 function Set-PathEnv {
-	Param(
+	param (
 		[string[]]$Path,
 		[System.EnvironmentVariableTarget]$Target = [System.EnvironmentVariableTarget]::Process
 	)
 
-	Set-Env 'PATH' ($Path -join ';') $Target
+	Set-Env 'PATH' ($Path -join [System.IO.Path]::PathSeparator) $Target
 }
 
-function Add-PathEnv {
-	Param(
-		[string]$Path,
-		[System.EnvironmentVariableTarget]$Target = [System.EnvironmentVariableTarget]::Process
+function Add-PathEnvironmentVariable {
+	[alias('Add-PathEnv')]
+	param (
+		[string]
+		$Value,
+
+		[System.EnvironmentVariableTarget]
+		$Target = 'Process',
+
+		[switch]
+		$First
 	)
 
-	if ((Get-PathEnv $Target) -contains $Path) {
-		Write-Host $Target "PATH contains" $Path -ForegroundColor Green
+	if ((Get-PathEnv $Target) -contains $Value) {
+		Write-Host $Target "PATH contains" $Value -ForegroundColor Green
+	} elseif ($First) {
+		Set-PathEnv ((@(, $Value) + (Get-PathEnv $Target)) -join [System.IO.Path]::PathSeparator) $Target
 	} else {
-		Set-PathEnv ((Get-PathEnv $Target) + $Path) $Target
+		Set-PathEnv (((Get-PathEnv $Target) + $Value) -join [System.IO.Path]::PathSeparator) $Target
 	}
 }
 
-function Remove-PathEnv {
-	Param(
-		[string]$Path,
-		[System.EnvironmentVariableTarget]$Target = [System.EnvironmentVariableTarget]::Process
+function Remove-PathEnvironmentVariable {
+	[alias('Remove-PathEnv')]
+	param (
+		[string]
+		$Value,
+
+		[System.EnvironmentVariableTarget]
+		$Target = [System.EnvironmentVariableTarget]::Process
 	)
 
-	if ((Get-PathEnv $Target) -contains $Path) {
-		Set-PathEnv ((Get-PathEnv $Target) -ne @($Path)) $Target
+	if ((Get-PathEnv $Target) -contains $Value) {
+		Set-PathEnv ((Get-PathEnv $Target) -ne $Value) $Target
 	} else {
-		Write-Host $Target "PATH does not contain" $Path -ForegroundColor Green
+		Write-Host $Target "PATH does not contain" $Value -ForegroundColor Green
 	}
 }

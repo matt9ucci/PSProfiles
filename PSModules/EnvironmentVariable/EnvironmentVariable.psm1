@@ -1,25 +1,44 @@
-function Get-Env {
-	Param(
-		[string[]]$Name = '*',
-		[System.EnvironmentVariableTarget]$Target = [System.EnvironmentVariableTarget]::Process
+function Get-EnvironmentVariable {
+	[alias('Get-Env')]
+	param (
+		[string[]]
+		$Name,
+
+		[string[]]
+		$Value,
+
+		[System.EnvironmentVariableTarget]
+		$Target = [System.EnvironmentVariableTarget]::Process
 	)
 
+	$all = [System.Environment]::GetEnvironmentVariables($Target)
+
+	$result = if (!$Name -and !$Value) { $all.GetEnumerator() }
 	foreach ($n in $Name) {
-		[System.Environment]::GetEnvironmentVariables($Target).GetEnumerator() | Where-Object Key -Like $n
+		$result += $all.GetEnumerator() | Where-Object Key -Like $n
 	}
+	foreach ($v in $Value) {
+		$result += $all.GetEnumerator() | Where-Object Value -Like $v
+	}
+
+	$result | Sort-Object Key -Unique
 }
 
-function Set-Env {
-	Param(
-		[Parameter(Mandatory = $true)]
-		[string[]]$Name,
-		[string]$Value,
-		[System.EnvironmentVariableTarget]$Target = [System.EnvironmentVariableTarget]::Process
+function Set-EnvironmentVariable {
+	[alias('Set-Env')]
+	param (
+		[Parameter(Mandatory)]
+		[string]
+		$Name,
+
+		[string]
+		$Value,
+
+		[System.EnvironmentVariableTarget]
+		$Target = [System.EnvironmentVariableTarget]::Process
 	)
 
-	foreach ($n in $Name) {
-		[System.Environment]::SetEnvironmentVariable($n, $Value, $Target)
-	}
+	[System.Environment]::SetEnvironmentVariable($Name, $Value, $Target)
 }
 
 . (Join-Path $PSScriptRoot PATH.ps1)

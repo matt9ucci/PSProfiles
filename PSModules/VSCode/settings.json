@@ -15,20 +15,26 @@
 		"editor.defaultFormatter": "vscode.typescript-language-features"
 	},
 	"csharp.suppressBuildAssetsNotification": true,
+	"csharp.suppressDotnetRestoreNotification": true,
 	"debug.internalConsoleOptions": "openOnSessionStart",
 	"diffEditor.renderSideBySide": false,
-	"dotfiles.repository": "https://bitbucket.org/matt9ucci/dotfiles.git",
+	"dotfiles.repository": "https://github.com/matt9ucci/dotfiles.git",
+	"editor.acceptSuggestionOnCommitCharacter": false,
+	"editor.cursorBlinking": "solid",
 	"editor.fontFamily": "'Cascadia Mono PL', Consolas, 'Courier New', monospace",
+	"editor.formatOnType": true,
 	"editor.insertSpaces": false,
 	"editor.renderWhitespace": "boundary",
 	"editor.tabCompletion": "on",
 	"explorer.confirmDelete": false,
+	"explorer.confirmDragAndDrop": false,
 	"extensions.ignoreRecommendations": true,
 	"files.associations": {
 		"*.ps1xml": "xml"
 	},
 	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
+	"git-graph.openNewTabEditorGroup": "Two",
 	"javascript.format.semicolons": "remove",
 	"json.schemas": [
 		{
@@ -38,18 +44,6 @@
 			"url": "http://json.schemastore.org/package"
 		}
 	],
-	"launch": {
-		"version": "0.2.0",
-		"configurations": [
-			{
-				"name": "PS Launch Current File",
-				"type": "PowerShell",
-				"request": "launch",
-				"script": "${file}",
-				"cwd": "${file}"
-			}
-		]
-	},
 	"markdown.extension.list.indentationSize": "inherit",
 	"markdownlint.config": {
 		"default": true,
@@ -68,11 +62,27 @@
 	"powershell.integratedConsole.showOnStartup": false,
 	"powershell.promptToUpdatePowerShell": false,
 	"powershell.sideBar.CommandExplorerVisibility": false,
+	"remote.containers.defaultExtensions": [
+		"mhutchie.git-graph",
+		"ms-vscode.powershell",
+		"OnlyLys.leaper",
+		"yzhang.markdown-all-in-one",
+	],
+	"remote.SSH.defaultExtensions": [
+		"mhutchie.git-graph",
+		"ms-vscode.powershell",
+		"OnlyLys.leaper",
+		"yzhang.markdown-all-in-one",
+	],
 	"remote.SSH.remotePlatform": {
 		"primary.mshome.net": "linux"
 	},
+	"terminal.integrated.commandsToSkipShell": [
+		"workbench.action.toggleSidebarVisibility",
+	],
 	"terminal.integrated.defaultProfile.linux": "pwsh",
 	"terminal.integrated.defaultProfile.windows": "PowerShell",
+	"terminal.integrated.enablePersistentSessions": false,
 	"terminal.integrated.profiles.linux": {
 		"pwsh": {
 			"path": "pwsh",
@@ -92,8 +102,10 @@
 	"typescript.format.semicolons": "remove",
 	"update.mode": "manual",
 	"window.newWindowDimensions": "maximized",
+	"window.restoreWindows": "none",
 	"workbench.settings.editor": "json",
 	"workbench.settings.useSplitJSON": true,
 	"workbench.startupEditor": "newUntitledFile",
+	"xml.format.preserveAttributeLineBreaks": true,
 	"zenMode.hideLineNumbers": false,
 }

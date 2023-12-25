@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<NotepadPlus>
+	<FindHistory></FindHistory>
+	<History></History>
+	<GUIConfigs>
+		<GUIConfig name="Caret" width="1" blinkRate="0" />
+		<GUIConfig name="noUpdate">yes</GUIConfig>
+		<GUIConfig name="TabSetting" replaceBySpace="no" size="4" />
+		<GUIConfig name="ToolBar" visible="yes">large</GUIConfig>
+	</GUIConfigs>
+</NotepadPlus>

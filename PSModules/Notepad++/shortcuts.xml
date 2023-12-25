@@ -1,12 +1,15 @@
 <NotepadPlus>
 	<InternalCommands>
+		<Shortcut id="41005" Ctrl="yes" Alt="yes" Shift="no" Key="87" /><!-- Close All but Active Document -->
 		<Shortcut id="42014" Ctrl="no" Alt="yes" Shift="no" Key="38" /><!-- Move Up Current Line -->
 		<Shortcut id="42015" Ctrl="no" Alt="yes" Shift="no" Key="40" /><!-- Move Down Current Line -->
 		<Shortcut id="42022" Ctrl="yes" Alt="no" Shift="no" Key="191" /><!-- Toggle Single Line Comment -->
 		<Shortcut id="42029" Ctrl="no" Alt="yes" Shift="yes" Key="67" /><!-- Current Full File path to Clipboard -->
 		<Shortcut id="42036" Ctrl="no" Alt="no" Shift="no" Key="0" /><!-- Clear: Single Line Uncomment -->
 		<Shortcut id="42074" Ctrl="no" Alt="yes" Shift="yes" Key="82" /><!-- Open Containing Folder in Explorer -->
+		<Shortcut id="43009" Ctrl="no" Alt="no" Shift="no" Key="0" /><!-- Clear: Go to Matching Brace -->
 		<Shortcut id="44022" Ctrl="no" Alt="yes" Shift="no" Key="90" /><!-- Word wrap -->
+		<Shortcut id="44085" Ctrl="yes" Alt="no" Shift="no" Key="66" /><!-- Toggle Folder as Workspace -->
 	</InternalCommands>
 	<Macros>
 		<Macro name="Trim Trailing Space and Save" Ctrl="no" Alt="yes" Shift="yes" Key="83">

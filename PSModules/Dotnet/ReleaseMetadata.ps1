@@ -1,4 +1,8 @@
-${releases-index.json} = { Invoke-RestMethod https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json }
+${releases-index} = [System.Lazy[Object[]]]::new(
+	[System.Func[Object[]]] {
+		(Invoke-RestMethod https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json).'releases-index'
+	}
+)
 
 <#
 .LINK
@@ -10,11 +14,11 @@ function Get-DotnetReleaseMetadataIndex {
 		$SupportPhase
 	)
 
-	$index = ${releases-index.json}.Invoke().'releases-index'
-	if ($SupportPhase) {
-		$index = $index | ? support-phase -In $SupportPhase
+	if ($SupportPhase.Count) {
+		${releases-index}.Value | ? support-phase -In $SupportPhase
+	} else {
+		${releases-index}.Value
 	}
-	$index
 }
 
 <#
@@ -24,7 +28,7 @@ function Get-DotnetReleaseMetadataIndex {
 function Get-DotnetReleaseMetadata {
 	param (
 		[SupportPhase[]]
-		$SupportPhase = [SupportPhase]::lts
+		$SupportPhase = [SupportPhase]::active
 	)
 
 	foreach ($index in Get-DotnetReleaseMetadataIndex -SupportPhase $SupportPhase) {
@@ -35,7 +39,7 @@ function Get-DotnetReleaseMetadata {
 function Get-DotnetLatestSdkMetadata {
 	param (
 		[SupportPhase[]]
-		$SupportPhase = [SupportPhase]::lts
+		$SupportPhase = [SupportPhase]::active
 	)
 
 	foreach ($r in Get-DotnetReleaseMetadata -SupportPhase $SupportPhase) {
@@ -47,7 +51,7 @@ function Get-DotnetLatestSdkMetadata {
 function Get-DotnetLatestRuntimeMetadata {
 	param (
 		[SupportPhase[]]
-		$SupportPhase = [SupportPhase]::lts
+		$SupportPhase = [SupportPhase]::active
 	)
 
 	foreach ($r in Get-DotnetReleaseMetadata -SupportPhase $SupportPhase) {

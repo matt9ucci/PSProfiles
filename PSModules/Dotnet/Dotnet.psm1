@@ -1,11 +1,11 @@
 # https://github.com/SchemaStore/schemastore/blob/master/src/schemas/json/dotnet-releases-index.json
+# https://github.com/dotnet/deployment-tools/blob/main/src/Microsoft.Deployment.DotNet.Releases/src/SupportPhase.cs
 enum SupportPhase {
-	current
+	active
 	eol
-	lts
+	golive
 	maintenance
 	preview
-	rc
 	unknown
 }
 
@@ -22,7 +22,7 @@ function Save-DotnetSdkBinary {
 	[CmdletBinding()]
 	param (
 		[SupportPhase[]]
-		$SupportPhase = [SupportPhase]::lts,
+		$SupportPhase = [SupportPhase]::active,
 
 		[ValidateSet('linux-arm', 'linux-arm64', 'linux-musl-x64', 'linux-x64', 'osx-x64', 'rhel.6-x64', 'win-arm', 'win-x64', 'win-x86')]
 		[string]
@@ -39,11 +39,11 @@ function Save-DotnetSdkBinary {
 	}
 
 	$sdk = Get-DotnetLatestSdkMetadata -SupportPhase $SupportPhase |
-		Sort-Object version |
-		select -Last 1 |
-		% files |
-		? rid -EQ $Rid |
-		? name -Match '\w+\.(zip|tar\.gz)$'
+	Sort-Object version |
+	select -Last 1 |
+	% files |
+	? rid -EQ $Rid |
+	? name -Match '\w+\.(zip|tar\.gz)$'
 
 	$params = @{
 		Uri     = $sdk.url
@@ -64,15 +64,15 @@ function Save-DotnetSdkBinary {
 function Use-DotnetSdk {
 	param (
 		[ArgumentCompleter({
-			param ([string]$CommandName, [string]$ParameterName, [string]$WordToComplete)
-			@(Get-ChildItem "$USERAPPS\Dotnet" -Name) -like "$WordToComplete*"
-		})]
+				param ([string]$CommandName, [string]$ParameterName, [string]$WordToComplete)
+				@(Get-ChildItem "$USERAPPS\Dotnet" -Name) -like "$WordToComplete*"
+			})]
 		[string]
 		$Version
 	)
 
 	$targetDir = if ($Version) {
-		Get-ChildItem $DotnetRoot | ? Name -eq $Version
+		Get-ChildItem $DotnetRoot | ? Name -EQ $Version
 	} else {
 		Get-ChildItem $DotnetRoot | Sort-Object | select -Last 1
 	}
@@ -84,8 +84,8 @@ function Use-DotnetSdk {
 
 	$params = @{
 		ItemType = 'Junction'
-		Path = $junctionPath
-		Value = $targetDir.FullName
+		Path     = $junctionPath
+		Value    = $targetDir.FullName
 	}
 	New-Item @params | Out-Null
 
@@ -96,7 +96,7 @@ function Show-DotnetDownloadPage {
 	param (
 		[ArgumentCompleter( { Get-DotnetChannelVersion })]
 		[string]
-		$ChannelVersion = (Get-DotnetChannelVersion -SupportPhase current)
+		$ChannelVersion = (Get-DotnetChannelVersion -SupportPhase active)
 	)
 
 	Start-Process "https://dotnet.microsoft.com/en-us/download/dotnet/$ChannelVersion"

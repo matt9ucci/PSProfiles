@@ -37,7 +37,7 @@ function Install-DotnetSdkByInstallScript {
 	param (
 		[ArgumentCompleter( { Get-DotnetChannelVersion })]
 		[string]
-		$Channel = (Get-DotnetChannelVersion -SupportPhase lts | Sort-Object | select -Last 1),
+		$Channel = (Get-DotnetChannelVersion -SupportPhase active | Sort-Object | select -Last 1),
 
 		[ValidateSet('daily', 'GA', 'preview', 'signed', 'validated')]
 		[string]

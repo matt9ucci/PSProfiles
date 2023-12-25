@@ -1,4 +1,8 @@
 {
+	"editor.codeLens": false,
+	"editor.detectIndentation": false,
+	"editor.formatOnSave": false,
+	"editor.insertSpaces": false,
 	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
 
@@ -8,8 +12,13 @@
 	"powershell.codeFormatting.useCorrectCasing": true,
 	"powershell.codeFormatting.whitespaceBetweenParameters": true,
 
+	"workbench.colorTheme": "Default Dark+",
 	"workbench.colorCustomizations": {
+		"titleBar.activeBackground": "#012456",
+		"titleBar.activeForeground": "#cccccc",
+		"activityBar.inactiveForeground": "#cccccc",
+		"activityBar.background": "#012456",
 		"terminal.background": "#012456",
-		"terminal.foreground": "#CCCCCC"
+		"terminal.foreground": "#cccccc"
 	}
 }

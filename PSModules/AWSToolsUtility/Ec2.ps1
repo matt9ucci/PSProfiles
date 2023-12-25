@@ -9,7 +9,7 @@ function Get-Ec2InstanceState {
 		@{ n = 'StateName'; e = { $_.State.Name } }
 		'StateReason'
 		'StateTransitionReason'
-	) | sort InstanceName
+	) | Sort-Object InstanceName
 }
 
 function Save-Ec2ConsoleScreenshot {

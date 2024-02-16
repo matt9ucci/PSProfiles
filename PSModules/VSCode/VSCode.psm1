@@ -1,5 +1,5 @@
 if ($IsWindows) {
-	Set-Variable VSCODE_HOME "$USERAPPS\Vscode" -Option ReadOnly, AllScope -Scope Global -Force
+	Set-Variable VSCODE_HOME "$env:LOCALAPPDATA\Programs\Microsoft VS Code" -Option ReadOnly, AllScope -Scope Global -Force
 	Set-Variable VSCODE_USER_DIR "$env:APPDATA\Code\User" -Option ReadOnly, AllScope -Scope Global -Force
 	Set-Variable VSCODE_USER_SETTINGS_JSON "$VSCODE_USER_DIR\settings.json" -Option ReadOnly, AllScope -Scope Global -Force
 	Set-Variable VSCODE_USER_KEYBINDINGS_JSON "$VSCODE_USER_DIR\keybindings.json" -Option ReadOnly, AllScope -Scope Global -Force
@@ -35,9 +35,9 @@ function Get-VscodeVersion([switch]$Latest) {
 function Save-VscodeInstaller {
 	param (
 		[ArgumentCompleter({
-				param ([string]$CommandName, [string]$ParameterName, [string]$WordToComplete)
+			param ([string]$CommandName, [string]$ParameterName, [string]$WordToComplete)
 			(Get-VscodeVersion) -like "$WordToComplete*"
-			})]
+		})]
 		[string]
 		$Version = 'latest',
 
@@ -68,7 +68,7 @@ function Save-VscodeInstaller {
 	}
 	Invoke-WebRequest @params
 
-	(Resolve-Path $params.OutFile).Path
+		(Resolve-Path $params.OutFile).Path
 }
 
 function Invoke-VscodeInstaller {
@@ -83,9 +83,9 @@ function Invoke-VscodeInstaller {
 function Save-VscodeArchive {
 	param (
 		[ArgumentCompleter({
-			param ([string]$CommandName, [string]$ParameterName, [string]$WordToComplete)
-			(Get-VscodeVersion) -like "$WordToComplete*"
-		})]
+				param ([string]$CommandName, [string]$ParameterName, [string]$WordToComplete)
+				(Get-VscodeVersion) -like "$WordToComplete*"
+			})]
 		[string]
 		$Version = 'latest',
 
@@ -115,15 +115,15 @@ function Save-VscodeArchive {
 	}
 	Invoke-WebRequest @params
 
-	(Resolve-Path $params.OutFile).Path
+		(Resolve-Path $params.OutFile).Path
 }
 
 function Install-VscodeArchive {
 	param (
 		[ArgumentCompleter({
-			param ([string]$CommandName, [string]$ParameterName, [string]$WordToComplete)
-			(Get-VscodeVersion) -like "$WordToComplete*"
-		})]
+				param ([string]$CommandName, [string]$ParameterName, [string]$WordToComplete)
+				(Get-VscodeVersion) -like "$WordToComplete*"
+			})]
 		[string]
 		$Version = 'latest',
 
@@ -146,7 +146,7 @@ function Install-VscodeArchive {
 	$archive = Save-VscodeArchive -Version $Version
 
 	Expand-Archive -Path $archive -DestinationPath $Path
-	(Resolve-Path $Path).Path
+		(Resolve-Path $Path).Path
 }
 
 function Use-Vscode {
@@ -154,7 +154,7 @@ function Use-Vscode {
 		[ArgumentCompleter({
 				param ([string]$CommandName, [string]$ParameterName, [string]$WordToComplete)
 				$results = @(
-				(Get-ChildItem $USERAPPS\Vscode).FullName | % { Join-Path $_ 'bin' }
+					(Get-ChildItem $USERAPPS\Vscode).FullName | % { Join-Path $_ 'bin' }
 					"$env:LOCALAPPDATA\Programs\Microsoft VS Code\bin"
 				) -like "$WordToComplete*"
 				$results | % { if ($_ -match ' ') { "'{0}'" -f $_ } else { $_ } }
@@ -169,7 +169,7 @@ function Use-Vscode {
 	}
 
 	$codePath = @(
-		(Get-ChildItem $USERAPPS\Vscode).FullName | % { Join-Path $_ 'bin' }
+			(Get-ChildItem $USERAPPS\Vscode).FullName | % { Join-Path $_ 'bin' }
 		"$env:LOCALAPPDATA\Programs\Microsoft VS Code\bin"
 	)
 
@@ -241,12 +241,12 @@ function Update-VscodeUserSnippetsJson {
 }
 
 <#
-.SYNOPSIS
-	VS Code opens Remote Repository (rr) from GitHub
-.LINK
-	https://github.com/microsoft/vscode/blob/791b350c034b3a488a54ec2b6cd1cc017d702f1f/src/vs/platform/environment/node/argv.ts#L85
-	https://github.com/microsoft/vscode/wiki/Virtual-Workspaces#review-that-the-code-is-ready-for-virtual-resources
-#>
+	.SYNOPSIS
+		VS Code opens Remote Repository (rr) from GitHub
+	.LINK
+		https://github.com/microsoft/vscode/blob/791b350c034b3a488a54ec2b6cd1cc017d702f1f/src/vs/platform/environment/node/argv.ts#L85
+		https://github.com/microsoft/vscode/wiki/Virtual-Workspaces#review-that-the-code-is-ready-for-virtual-resources
+	#>
 function coderr {
 	param (
 		[ArgumentCompleter(
@@ -294,4 +294,14 @@ function Expand-VscodeArchivePortable {
 	New-Item -Path $Destination\data\tmp -ItemType Directory -Verbose | Out-Null
 
 	& (Get-Item $Destination\bin\code*.cmd) --version
+}
+
+<#
+.LINK
+	https://code.visualstudio.com/docs/setup/uninstall
+#>
+function Remove-VscodeDirectory {
+	Remove-Item -Path $env:APPDATA/Code -Recurse -Confirm
+	Remove-Item -Path $HOME/.vscode -Recurse -Confirm
+	Remove-Item -Path $VSCODE_HOME -Recurse -Confirm
 }

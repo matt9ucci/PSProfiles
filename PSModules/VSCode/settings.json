@@ -1,4 +1,16 @@
 {
+	"editor.renderWhitespace": "boundary",
+
+	"files.insertFinalNewline": true,
+
+	"terminal.integrated.copyOnSelection": true,
+
+	"workbench.settings.applyToAllProfiles": [
+		"editor.renderWhitespace",
+		"files.insertFinalNewline",
+		"terminal.integrated.copyOnSelection",
+	],
+
 	"[html]": {
 		"editor.defaultFormatter": "vscode.html-language-features"
 	},
@@ -24,7 +36,6 @@
 	"editor.fontFamily": "'Cascadia Mono PL', Consolas, 'Courier New', monospace",
 	"editor.formatOnType": true,
 	"editor.insertSpaces": false,
-	"editor.renderWhitespace": "boundary",
 	"editor.tabCompletion": "on",
 	"explorer.confirmDelete": false,
 	"explorer.confirmDragAndDrop": false,
@@ -32,9 +43,9 @@
 	"files.associations": {
 		"*.ps1xml": "xml"
 	},
-	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
 	"git-graph.openNewTabEditorGroup": "Two",
+	"git.enableSmartCommit": true,
 	"javascript.format.semicolons": "remove",
 	"json.schemas": [
 		{
@@ -105,7 +116,7 @@
 	"window.restoreWindows": "none",
 	"workbench.settings.editor": "json",
 	"workbench.settings.useSplitJSON": true,
-	"workbench.startupEditor": "newUntitledFile",
+	"workbench.startupEditor": "none",
 	"xml.format.preserveAttributeLineBreaks": true,
 	"zenMode.hideLineNumbers": false,
 }

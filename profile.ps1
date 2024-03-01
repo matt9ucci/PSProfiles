@@ -151,12 +151,14 @@ if (Test-Path $PROFILEDIR\PwshProxy.xml) {
 		)
 		$env:http_proxy = 'http://{0}:{1}@{2}' -f $httpProxyEnv
 		$env:https_proxy = 'https://{0}:{1}@{2}' -f $httpProxyEnv
+
+		Remove-Variable proxyCredential, httpProxyEnv
 	} else {
 		$env:http_proxy = 'http://{0}' -f $proxy.Authority
 		$env:https_proxy = 'https://{0}' -f $proxy.Authority
 	}
 
-	Remove-Variable pwshProxy, proxy, proxyCredential, httpProxyEnv -ErrorAction Ignore
+	Remove-Variable pwshProxy, proxy
 }
 
 if (Test-Path $PROFILEDIR.Private) {

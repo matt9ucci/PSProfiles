@@ -1,7 +1,7 @@
 {
 	"recommendations": [
 		"ms-vscode.powershell",
-		"onlylys.leaper",
 		"yzhang.markdown-all-in-one",
+		"albert.tabout",
 	]
 }

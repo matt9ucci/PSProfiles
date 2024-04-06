@@ -1,9 +1,9 @@
 if ($IsWindows) {
 	Set-Variable VSCODE_HOME "$env:LOCALAPPDATA\Programs\Microsoft VS Code" -Option ReadOnly, AllScope -Scope Global -Force
-	Set-Variable VSCODE_USER_DIR "$env:APPDATA\Code\User" -Option ReadOnly, AllScope -Scope Global -Force
-	Set-Variable VSCODE_USER_SETTINGS_JSON "$VSCODE_USER_DIR\settings.json" -Option ReadOnly, AllScope -Scope Global -Force
-	Set-Variable VSCODE_USER_KEYBINDINGS_JSON "$VSCODE_USER_DIR\keybindings.json" -Option ReadOnly, AllScope -Scope Global -Force
-	Set-Variable VSCODE_ZIP_URL https://go.microsoft.com/fwlink/?Linkid=850641 -Option ReadOnly, AllScope -Scope Global -Force
+	Set-Variable VSCODE_USER_DIR "$env:APPDATA\Code" -Option ReadOnly, AllScope -Scope Global -Force
+	Set-Variable VSCODE_USER_SNIPPETS_DIR "$VSCODE_USER_DIR\User\snippets\" -Option ReadOnly, AllScope -Scope Global -Force
+	Set-Variable VSCODE_USER_SETTINGS_JSON "$VSCODE_USER_DIR\User\settings.json" -Option ReadOnly, AllScope -Scope Global -Force
+	Set-Variable VSCODE_USER_KEYBINDINGS_JSON "$VSCODE_USER_DIR\User\keybindings.json" -Option ReadOnly, AllScope -Scope Global -Force
 } else {
 	# Mac $HOME/Library/Application Support/Code/User/settings.json
 	# Linux $HOME/.config/Code/User/settings.json
@@ -237,7 +237,7 @@ function Get-VsCodeExtension([string]$Name = '*', [switch]$Full) {
 }
 
 function Update-VscodeUserSnippetsJson {
-	Copy-Item $PSScriptRoot\snippets\*.json $VSCODE_USER_DIR\snippets\
+	Copy-Item $PSScriptRoot\snippets\*.json $VSCODE_USER_SNIPPETS_DIR
 }
 
 <#

@@ -5,10 +5,15 @@
 
 	"terminal.integrated.copyOnSelection": true,
 
+	"workbench.settings.editor": "json",
+	"workbench.startupEditor": "none",
+
 	"workbench.settings.applyToAllProfiles": [
 		"editor.renderWhitespace",
 		"files.insertFinalNewline",
 		"terminal.integrated.copyOnSelection",
+		"workbench.settings.editor",
+		"workbench.startupEditor",
 	],
 
 	"[html]": {
@@ -114,9 +119,7 @@
 	"update.mode": "manual",
 	"window.newWindowDimensions": "maximized",
 	"window.restoreWindows": "none",
-	"workbench.settings.editor": "json",
 	"workbench.settings.useSplitJSON": true,
-	"workbench.startupEditor": "none",
 	"xml.format.preserveAttributeLineBreaks": true,
 	"zenMode.hideLineNumbers": false,
 }

@@ -95,6 +95,18 @@ function Uninstall-NodeJs {
 	Remove-Item (Join-Path $config['RootInstallationLocation'] $Version) -Recurse -Confirm
 }
 
+function Get-NodeJsEnv {
+	param (
+		[string]
+		$Name = '*'
+	)
+
+	(node -e 'console.log(process.env)' | ConvertFrom-Json -AsHashtable).GetEnumerator()
+	 | ? Name -Like $Name
+	 | Sort-Object -Property Name
+	 | % { $result = [ordered]@{} } { $result[$_.Name] =$_.Value } { $result }
+}
+
 <#
 .EXAMPLE
 	Open-NodeJsLocation
@@ -109,7 +121,7 @@ function Open-NodeJsLocation {
 		$Version
 	)
 
-	Invoke-Item (Join-Path $config['RootInstallationLocation'] $Version) 
+	Invoke-Item (Join-Path $config['RootInstallationLocation'] $Version)
 }
 
 function Use-NodeJs {

@@ -79,16 +79,18 @@
 	"powershell.promptToUpdatePowerShell": false,
 	"powershell.sideBar.CommandExplorerVisibility": false,
 	"remote.containers.defaultExtensions": [
-		"mhutchie.git-graph",
+		"albert.TabOut",
+		"donjayamanne.githistory",
 		"ms-vscode.powershell",
-		"OnlyLys.leaper",
-		"yzhang.markdown-all-in-one",
+		"waderyan.gitblame",
+		"yzhang.markdown-all-in-one"
 	],
 	"remote.SSH.defaultExtensions": [
-		"mhutchie.git-graph",
+		"albert.TabOut",
+		"donjayamanne.githistory",
 		"ms-vscode.powershell",
-		"OnlyLys.leaper",
-		"yzhang.markdown-all-in-one",
+		"waderyan.gitblame",
+		"yzhang.markdown-all-in-one"
 	],
 	"remote.SSH.remotePlatform": {
 		"primary.mshome.net": "linux"

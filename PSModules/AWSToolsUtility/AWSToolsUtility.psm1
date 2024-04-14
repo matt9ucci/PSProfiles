@@ -130,6 +130,44 @@ function Get-AwsIamGroupInlinePolicy {
 	}
 }
 
+function Save-AwsMfaCredential {
+	param (
+		[Parameter(Mandatory)]
+		[string]
+		$ProfileName,
+
+		[Parameter(Mandatory)]
+		[string]
+		$MfaDeviceSerialNumber,
+
+		[string]
+		$TokenCode,
+
+		[string]
+		$Region
+	)
+
+	$params = @{
+		ProfileName  = $ProfileName
+		SerialNumber = $MfaDeviceSerialNumber
+		TokenCode    = if ($TokenCode) { $TokenCode } else { Read-Host -Prompt 'TokenCode' }
+	}
+	if ($Region) { $params['Region'] = $Region }
+
+	$sessionToken = Get-STSSessionToken @params
+
+	$params = @{
+		AccessKey    = $sessionToken.AccessKeyId
+		SecretKey    = $sessionToken.SecretAccessKey
+		SessionToken = $sessionToken.SessionToken
+	}
+
+	# Save the MFA profile in AWS SDK store (Windows) or shared credential file
+	Set-AWSCredential -StoreAs ${ProfileName}_MFA @params
+	# Set the MFA profile for the current session
+	Set-AWSCredential -ProfileName ${ProfileName}_MFA -Scope Global
+}
+
 Set-Alias Add-AWSCredentialProfile Set-AWSCredential
 
 # Set aliases for tab completion

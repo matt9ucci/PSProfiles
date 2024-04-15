@@ -88,6 +88,9 @@ $env:Path = @(
 	$env:Path
 ) -join [System.IO.Path]::PathSeparator
 
+$env:DOTNET_CLI_UI_LANGUAGE = 'en'
+[System.Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
 function Use-Sed { Add-PathEnv "$HOME\scoop\apps\git\current\usr\bin" }
 
 . $PSScriptRoot\Completers.ps1

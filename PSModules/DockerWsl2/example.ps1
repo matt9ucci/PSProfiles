@@ -2,22 +2,39 @@ ipmo DockerWsl2
 
 $BaseDistroName = 'Ubuntu'
 $DockerDistroName = 'DockerOn' + $BaseDistroName
-$UserName = 'matt'
+$UserName = 'wsl-user'
 
-Install-Distro -DistroName $BaseDistroName
+Set-Clipboard -Value $UserName
 
-New-Sudoers -UserName $UserName
+# Clean installation
+Unregister-WslDistro -Name $BaseDistroName
+Register-WslDistro -Name $BaseDistroName
 
+# Allow `sudo` without password
+New-Sudoers -DistroName $BaseDistroName -UserName $UserName
+
+# Setup Docker and user
 Install-DockerOnUbuntu -DistroName $BaseDistroName
-
 Add-UserToDockerGroup -DistroName $BaseDistroName -UserName $UserName
+Enable-DockerRemoteAccess -DistroName $BaseDistroName
 
-$distroDirectoryPath = "D:\Wsl2Distro\"
+# Create a dir for distro tar files
+$distroDirectoryPath = "D:\WslDistro\"
 New-Item -Path $distroDirectoryPath -ItemType Directory -Force
 
-$exportedTar = Join-Path $distroDirectoryPath $BaseDistroName-Docker.tar
+# Export tar
+$exportedTar = Join-Path $distroDirectoryPath "$DockerDistroName.tar"
 wsl --export $BaseDistroName $exportedTar
 
+# Import tar
+Unregister-WslDistro -Name $DockerDistroName
 wsl --import $DockerDistroName (Join-Path $distroDirectoryPath $DockerDistroName) $exportedTar
 
+# Setup default user
 wsl --distribution $DockerDistroName echo "[user]`ndefault=$UserName" `>`> /etc/wsl.conf
+
+# Set the distro as default
+wsl --set-default $DockerDistroName
+
+# Run the distro in background
+Start-WslDistroInBackground -DistroName $DockerDistroName

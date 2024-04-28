@@ -36,5 +36,8 @@ wsl --distribution $DockerDistroName echo "[user]`ndefault=$UserName" `>`> /etc/
 # Set the distro as default
 wsl --set-default $DockerDistroName
 
+# Shutdown to restart
+Stop-WslDistro -DistroName $DockerDistroName
+
 # Run the distro in background
 Start-WslDistroInBackground -DistroName $DockerDistroName

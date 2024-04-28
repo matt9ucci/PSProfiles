@@ -64,23 +64,7 @@ function Install-DockerOnUbuntu {
 		$DistroName
 	)
 
-	& $wsl --distribution $DistroName sudo apt-get update
-	& $wsl --distribution $DistroName sudo apt-get install ca-certificates curl
-	& $wsl --distribution $DistroName sudo install -m 0755 -d /etc/apt/keyrings
-	& $wsl --distribution $DistroName sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-	& $wsl --distribution $DistroName sudo chmod a+r /etc/apt/keyrings/docker.asc
-
-	& $wsl --distribution $DistroName echo 'deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable' `| sudo tee /etc/apt/sources.list.d/docker.list `> /dev/null
-	& $wsl --distribution $DistroName sudo apt-get update
-
-	$dockerPackages = @(
-		'docker-ce'
-		'docker-ce-cli'
-		'containerd.io'
-		'docker-buildx-plugin'
-		'docker-compose-plugin'
-	)
-	& $wsl --distribution $DistroName sudo apt-get install -y @dockerPackages
+	& $wsl --distribution $DistroName --cd $PSScriptRoot ./install_docker.sh
 }
 
 function Add-UserToDockerGroup {
@@ -139,6 +123,74 @@ function Stop-WslDistro {
 	& $wsl --distribution $DistroName --shutdown
 }
 
+function Install-Nodejs {
+	param (
+		[Parameter(Mandatory)]
+		[string]
+		$DistroName
+	)
+
+	& $wsl --distribution $DistroName --cd $PSScriptRoot ./install_nodejs.sh
+}
+
+function Build-DevcontainerImage {
+	param (
+		[Parameter(Mandatory)]
+		[string]
+		$DistroName,
+
+		[Parameter(Mandatory)]
+		[string]
+		$Workspace,
+
+		[Parameter(Mandatory)]
+		[string]
+		$ImageName
+	)
+
+	& $wsl --distribution $DistroName --cd $Workspace --exec bash -i -c "devcontainer build --no-cache --workspace-folder . --image-name $ImageName"
+}
+
+function Export-Container {
+	param (
+		[Parameter(Mandatory)]
+		[string]
+		$ImageName,
+
+		[Parameter(Mandatory)]
+		[string]
+		$TarPath
+	)
+
+	$containerName = "converting$(Get-Random)"
+
+	docker run --name $containerName $ImageName
+	docker export --output $TarPath $containerName
+	docker container rm $containerName
+}
+
+function Import-WslDistro {
+	param (
+		[Parameter(Mandatory)]
+		[string]
+		$TarPath,
+
+		[Parameter(Mandatory)]
+		[string]
+		$DistroDirectory,
+
+		[string]
+		$DockerDistroName = (Get-Item -Path $TarPath).BaseName,
+
+		[Parameter(Mandatory)]
+		[string]
+		$UserName
+	)
+
+	& $wsl --import $DockerDistroName (Join-Path $DistroDirectory $DockerDistroName) $TarPath
+	& $wsl --distribution $DockerDistroName echo "[user]`ndefault=$UserName" `>`> /etc/wsl.conf
+}
+
 Register-ArgumentCompleter -ParameterName Name -ScriptBlock {
 	$params = @{
 		InitializationScript = { $env:WSL_UTF8 = 1 }
@@ -162,4 +214,6 @@ Register-ArgumentCompleter -ParameterName DistroName -ScriptBlock {
 	'Enable-DockerRemoteAccess'
 	'Start-WslDistroInBackground'
 	'Stop-WslDistro'
+	'Install-Nodejs'
+	'Build-DevcontainerImage'
 )

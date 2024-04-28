@@ -72,6 +72,11 @@ function Get-DocLocation {
 	rustup doc @params
 }
 
+function Uninstall-Rust {
+	rustup self uninstall
+	Uninstall-FmtConfigFile4User
+}
+
 if (([string[]]$pathArray = $env:Path -split [System.IO.Path]::PathSeparator) -notcontains "$HOME/.cargo/bin") {
 	$env:Path = ($pathArray + "$HOME/.cargo/bin") -join [System.IO.Path]::PathSeparator
 }

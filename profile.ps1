@@ -56,6 +56,30 @@ function cssh {
 	code --folder-uri "vscode-remote://ssh-remote+$Name/$Path"
 }
 
+function cwsl {
+	param (
+		[string]
+		$Name = 'default',
+
+		[Parameter(HelpMessage = 'e.g. /home/me')]
+		[string]
+		$Path
+	)
+
+	code --remote "wsl+$Name" $Path
+}
+Register-ArgumentCompleter -ParameterName Name -ScriptBlock {
+	param ($commandName, $parameterName, $wordToComplete)
+
+	$tmp, $env:WSL_UTF8 = $env:WSL_UTF8, 1
+
+	wsl --list --quiet | ? { $_ -like "$wordToComplete*" }
+
+	$env:WSL_UTF8 = $tmp
+} -CommandName @(
+	'cwsl'
+)
+
 function nop { pwsh -nop -c ($Args -join ' ') }
 
 function Update-Profile { pushd $PROFILEDIR; git pull --rebase; popd }

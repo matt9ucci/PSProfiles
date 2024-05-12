@@ -32,6 +32,15 @@ function Remove-FirefoxUserJs([string]$Name) {
 	Remove-Item (Get-FirefoxUserJs $Name)
 }
 
+function Copy-FirefoxUserCss([string]$Name) {
+	$chrome = Join-Path $PSScriptRoot chrome
+	Copy-Item $chrome (Get-FirefoxProfile $Name).FullName -Recurse -Force
+}
+
+function Remove-FirefoxUserCss([string]$Name) {
+	Remove-Item (Join-Path (Get-FirefoxProfile $Name) chrome) -Recurse -Force
+}
+
 function Start-Firefox([string]$Name) {
 	if ($Name) {
 		Start-Process -FilePath $FIREFOX_EXE -ArgumentList "-P $Name", '--no-remote'

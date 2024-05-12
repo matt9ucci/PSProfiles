@@ -1,0 +1,3 @@
+#PersonalToolbar .bookmark-item:not([container="true"])>.toolbarbutton-text {
+	display: none !important;
+}

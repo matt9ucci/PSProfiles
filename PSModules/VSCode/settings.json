@@ -1,17 +1,24 @@
 {
+	"editor.accessibilitySupport": "off",
 	"editor.renderWhitespace": "boundary",
 
-	"files.insertFinalNewline": true,
+	"explorer.confirmDelete": false,
+	"explorer.confirmDragAndDrop": false,
 
 	"terminal.integrated.copyOnSelection": true,
+
+	"window.commandCenter": false,
 
 	"workbench.settings.editor": "json",
 	"workbench.startupEditor": "none",
 
 	"workbench.settings.applyToAllProfiles": [
+		"editor.accessibilitySupport",
 		"editor.renderWhitespace",
-		"files.insertFinalNewline",
+		"explorer.confirmDelete",
+		"explorer.confirmDragAndDrop",
 		"terminal.integrated.copyOnSelection",
+		"window.commandCenter",
 		"workbench.settings.editor",
 		"workbench.startupEditor",
 	],
@@ -42,12 +49,11 @@
 	"editor.formatOnType": true,
 	"editor.insertSpaces": false,
 	"editor.tabCompletion": "on",
-	"explorer.confirmDelete": false,
-	"explorer.confirmDragAndDrop": false,
 	"extensions.ignoreRecommendations": true,
 	"files.associations": {
 		"*.ps1xml": "xml"
 	},
+	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
 	"git-graph.openNewTabEditorGroup": "Two",
 	"git.enableSmartCommit": true,
@@ -61,16 +67,6 @@
 		}
 	],
 	"markdown.extension.list.indentationSize": "inherit",
-	"markdownlint.config": {
-		"default": true,
-		"no-hard-tabs": false,
-		"MD004": {
-			"style": "sublist"
-		},
-		"MD007": {
-			"indent": 1
-		}
-	},
 	"powershell.codeFormatting.newLineAfterCloseBrace": false,
 	"powershell.codeFormatting.useConstantStrings": true,
 	"powershell.codeFormatting.useCorrectCasing": true,

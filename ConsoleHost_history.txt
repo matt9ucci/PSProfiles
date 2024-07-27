@@ -1,0 +1,61 @@
+$env:DOTNET_CLI_UI_LANGUAGE = 'en'
+$env:DOTNET_CLI_UI_LANGUAGE = 'ja'
+$env:Path -split [IO.Path]::PathSeparator
+$env:WSL_UTF8 = 1
+
+npm install --global npm
+npm install --global yarn
+
+./.env/bin/activate
+
+################################
+# 'For Windows'
+################################
+
+ii "$env:LOCALAPPDATA\Programs\Microsoft VS Code"
+
+winget
+winget --version
+winget configure
+winget install --help
+winget list
+winget list --help
+winget list Microsoft.DotNet.SDK
+winget list PowerShell
+winget search
+winget search Microsoft.DotNet.SDK
+winget search PowerShell
+winget show dotnet-sdk-8
+winget show Microsoft.DotNet.SDK.8
+winget upgrade
+winget upgrade --help
+winget upgrade --source winget Git.Git
+winget upgrade --source winget Kitware.CMake
+winget upgrade --source winget Microsoft.AppInstaller
+winget upgrade --source winget Microsoft.DotNet.SDK.8
+winget upgrade --source winget Microsoft.PowerShell
+winget upgrade --source winget Microsoft.VCRedist.2015+.x64
+winget upgrade --source winget Microsoft.VCRedist.2015+.x86
+winget upgrade --source winget Microsoft.VisualStudioCode
+winget upgrade --source winget OmegaT.OmegaT
+winget upgrade --source winget Schniz.fnm
+winget upgrade --source winget VideoLAN.VLC
+
+wsl --install Ubuntu
+wsl --list
+wsl --list --all
+wsl --list --online
+wsl --list --quiet
+wsl --list --running
+wsl --list --verbose
+wsl --release-notes
+wsl --set-default DockerOnUbuntu
+wsl --shutdown
+wsl --shutdown -d DockerOnUbuntu
+wsl --version
+wsl -l -o
+wsl -l -q
+wsl -l -v
+wsl -u root
+wsl -u wsl-user
+wsl -v

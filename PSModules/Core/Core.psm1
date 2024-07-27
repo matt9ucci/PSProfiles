@@ -4,6 +4,7 @@
 . $PSScriptRoot\Directory.ps1
 . $PSScriptRoot\Hash.ps1
 . $PSScriptRoot\HttpProxyWindows.ps1
+. $PSScriptRoot\PSReadLine.ps1
 
 function Backup-Item {
 	param (

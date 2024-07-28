@@ -1,75 +1,168 @@
-function Unregister-Distro {
+$wslPath = 'wsl'
+$wsl = Get-Command -Name $wslPath -ErrorAction Stop
+
+$env:WSL_DISTRO_DIRECTORY ??= 'C:\WslDistro'
+$env:WSL_USER ??= 'wsl-user'
+
+function Get-WslDistro {
+	param (
+		[switch]
+		$Online
+	)
+
+	$scriptBlock = if ($Online) {
+		{
+			foreach ($line in $(& $using:wsl --list --online).Where({ $_ -match 'NAME\s+.+$' }, 'SkipUntil') | Select-Object -Skip 1) {
+				$name, $friendlyName = $line -split '\s{4,}'
+				[pscustomobject]@{
+					Name         = $name.Trim()
+					FriendlyName = $friendlyName.Trim()
+				}
+			}
+		}
+	} else {
+		{
+			foreach ($line in $(& $using:wsl --list --verbose).Where({ $_ -match 'NAME\s+.+$' }, 'SkipUntil') | Select-Object -Skip 1) {
+				$name, $state, $version = $line -split '\s{4,}'
+				$default = $name -match '\*\s\w+'
+				[pscustomobject]@{
+					Default = $default
+					Name    = $name.Trim('*').Trim()
+					State   = $state
+					Version = $version
+				}
+			}
+		}
+	}
+
+	$params = @{
+		InitializationScript = { $env:WSL_UTF8 = 1 }
+		ScriptBlock          = $scriptBlock
+	}
+
+	Start-Job @params | Receive-Job -Wait -AutoRemoveJob | Select-Object $(
+		if ($Online) {
+			'Name', 'FriendlyName'
+		} else {
+			'Default', 'Name', 'State', 'Version'
+		}
+	)
+}
+
+function Register-WslDistro {
+	param (
+		[Parameter(Mandatory)]
+		[string]
+		$Name
+	)
+
+	& $wsl --install $Name
+}
+
+function Unregister-WslDistro {
 	[CmdletBinding(SupportsShouldProcess)]
 	param (
 		[Parameter(Mandatory)]
 		[string]
-		$DistroName
+		$Name
 	)
 
-	if ($PSCmdlet.ShouldProcess($DistroName, 'wsl --unregister')) {
-		wsl --unregister $DistroName
+	if ($PSCmdlet.ShouldProcess($Name, 'wsl --unregister')) {
+		& $wsl --unregister $Name
 	}
 }
 
-function Install-Distro {
+Register-ArgumentCompleter -ParameterName Name -ScriptBlock {
+	param ($commandName, $parameterName, $wordToComplete)
+
+	foreach ($available in (Get-WslDistro -Online | ? $parameterName -Like "$wordToComplete*")) {
+		[System.Management.Automation.CompletionResult]::new(
+			$available.Name, $available.Name, 'Text', $available.FriendlyName
+		)
+	}
+} -CommandName @(
+	'Register-WslDistro'
+)
+
+Register-ArgumentCompleter -ParameterName Name -ScriptBlock {
+	param ($commandName, $parameterName, $wordToComplete)
+
+	foreach ($installed in (Get-WslDistro | ? $parameterName -Like "$wordToComplete*")) {
+		[System.Management.Automation.CompletionResult]::new(
+			$installed.Name, $installed.Name, 'Text', "$installed."
+		)
+	}
+} -CommandName @(
+	'Unregister-WslDistro'
+	'Export-WslDistro'
+	'Import-WslDistro'
+	'Stop-WslDistro'
+	'Set-WslDistroDefaultUser'
+)
+
+function Export-WslDistro {
 	param (
 		[Parameter(Mandatory)]
 		[string]
-		$DistroName,
-
-		[switch]
-		$Clean
+		$Name
 	)
 
-	[string[]]$allDistroNames = wsl --list --all --quiet
-	if ($allDistroNames -contains $DistroName) {
-		if ($Clean) {
-			Unregister-Distro -DistroName $DistroName
-		} else {
-			throw "The distro '$DistroName' already exists."
-		}
+	if (!(Test-Path $env:WSL_DISTRO_DIRECTORY)) {
+		New-Item -Path $env:WSL_DISTRO_DIRECTORY -ItemType Directory -ErrorAction Stop
 	}
 
-	wsl --install $DistroName
+	$tar = Join-Path $env:WSL_DISTRO_DIRECTORY "$Name.tar"
+	& $wsl --export $Name $tar
 }
 
-function Add-Sudoers {
+function Import-WslDistro {
 	param (
 		[Parameter(Mandatory)]
 		[string]
-		$DistroName,
+		$Name,
+
+		[Parameter(Mandatory)]
+		[string]
+		$TarPath
+	)
+
+	if (!(Test-Path $env:WSL_DISTRO_DIRECTORY)) {
+		New-Item -Path $env:WSL_DISTRO_DIRECTORY -ItemType Directory -ErrorAction Stop
+	}
+
+	if (!(Test-Path $TarPath)) {
+		throw "Cannot find path '$TarPath' because it does not exist."
+	}
+
+	& $wsl --import $Name (Join-Path $env:WSL_DISTRO_DIRECTORY $Name) $TarPath
+
+}
+
+function Set-WslDistroDefaultUser {
+	param (
+		[Parameter(Mandatory)]
+		[string]
+		$Name,
 
 		[Parameter(Mandatory)]
 		[string]
 		$UserName
 	)
 
-	$sudoersFileContent = "$UserName ALL=(ALL) NOPASSWD: ALL"
-	$sudoersFilePath = "/etc/sudoers.d/$UserName"
-
-	wsl --distribution $DistroName --user root echo $sudoersFileContent `> $sudoersFilePath
+	$params = @(
+		'--distribution', $Name
+		'--user', 'root'
+		'echo', "[user]`ndefault=$UserName", '>>', '/etc/wsl.conf'
+	)
+	& $wsl @params
 }
 
-function Install-DockerOnUbuntu {
+function Stop-WslDistro {
 	param (
 		[Parameter(Mandatory)]
 		[string]
-		$DistroName
+		$Name
 	)
 
-	wsl --distribution $DistroName --user root --cd $PSScriptRoot\Ubuntu --exec ./install-docker.sh
-}
-
-function Add-DockerGroupUser {
-	param (
-		[Parameter(Mandatory)]
-		[string]
-		$DistroName,
-
-		[Parameter(Mandatory)]
-		[string]
-		$UserName
-	)
-
-	wsl --distribution $DistroName --user $UserName --cd $PSScriptRoot\Ubuntu --exec ./add-me-to-docker-group.sh
+	& $wsl --distribution $Name --shutdown
 }

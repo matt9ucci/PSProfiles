@@ -41,7 +41,7 @@ if (Get-Command docker-compose -ErrorAction Ignore) {
 $release = Get-Release docker compose $Tag
 $composeUrl = $release.assets.browser_download_url -like '*Windows-x86_64.exe' | Select-Object -First 1
 
-$outFile = Join-Path $SCRIPTS docker-compose.exe
+$outFile = Join-Path "$HOME\.docker\cli-plugins" docker-compose.exe
 Invoke-WebRequest -Uri $composeUrl -OutFile $outFile -Verbose
 
 $sumUrl = $composeUrl + '.sha256'

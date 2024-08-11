@@ -39,7 +39,7 @@ function Invoke-DockerEphemeralContainer {
 	docker run --rm -it $Image $Command
 }
 
-function Save-DockerCli {
+function Install-DockerCli {
 	param (
 		[ArgumentCompleter({
 			param ([string]$CommandName, [string]$ParameterName, [string]$WordToComplete, [System.Management.Automation.Language.CommandAst]$CommandAst, [hashtable]$FakeBoundParameters)
@@ -60,7 +60,9 @@ function Save-DockerCli {
 		Verbose = $true
 	}
 	Invoke-WebRequest @params
-	Expand-Archive $params.OutFile
+
+	Expand-Archive -Path $params.OutFile -DestinationPath $USERCOMMANDS -Force
+	Remove-Item -Path $params.OutFile
 }
 
 sal idephemeral Invoke-DockerEphemeralContainer

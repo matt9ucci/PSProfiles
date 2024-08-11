@@ -28,13 +28,13 @@ function Get-Release {
 	Invoke-RestMethod $uri -Method Get -Verbose
 }
 
-$release = Get-Release docker compose $Tag
-$composeUrl = $release.assets.browser_download_url -like '*Windows-x86_64.exe' | Select-Object -First 1
+$release = Get-Release docker buildx $Tag
+$buildxUrl = $release.assets.browser_download_url -like '*windows-amd64.exe' | Select-Object -First 1
 
-$outFile = Join-Path "$HOME\.docker\cli-plugins" docker-compose.exe
-Invoke-WebRequest -Uri $composeUrl -OutFile $outFile -Verbose
+$outFile = Join-Path "$HOME\.docker\cli-plugins" docker-buildx.exe
+Invoke-WebRequest -Uri $buildxUrl -OutFile $outFile -Verbose
 
-$sumUrl = $composeUrl + '.sha256'
+$sumUrl = $buildxUrl -replace 'buildx-.+.windows-amd64.exe','checksums.txt'
 (Invoke-WebRequest -Uri $sumUrl -Verbose).RawContent
 
 Get-FileHash -Path $outFile -Algorithm SHA256

@@ -126,15 +126,8 @@ if ([System.Net.ServicePointManager]::SecurityProtocol -ne [System.Net.SecurityP
 $PSDefaultParameterValues['Import-Module:Force'] = $true
 $PSDefaultParameterValues['Trace-Command:PSHost'] = $true
 
-if ($PSVersionTable.PSVersion.Major -le 5) {
 	function prompt {
-		$Host.UI.RawUI.WindowTitle = "PS $($ExecutionContext.SessionState.Path.CurrentLocation)$('>' * ($NestedPromptLevel + 1))"
-		return "$($PSVersionTable.PSVersion.Major).$($PSVersionTable.PSVersion.Minor)> "
-	}
-} else {
-	function prompt {
-		"`e[34;1m`e[47m `e[0m`e[48;5;20m $($ExecutionContext.SessionState.Path.CurrentLocation) `e[0m`n$('$' * ($NestedPromptLevel + 1)) "
-	}
+	return "`u{1F4BB} PS$($PSVersionTable.PSVersion.ToString()) $(Get-Date -Format 'yy-MM-ddTHH:mm:ssK') $($PSStyle.FileInfo.Directory)$($ExecutionContext.SessionState.Path.CurrentLocation)$($PSStyle.Reset)`n$('$' * ($NestedPromptLevel + 1)) "
 }
 
 if (Test-Path $PROFILEDIR\PwshProxy.xml) {

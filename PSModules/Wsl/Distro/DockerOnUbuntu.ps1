@@ -1,19 +1,22 @@
+param (
+	[string]
+	$Name = (Get-Item $PSCommandPath).BaseName,
+
+	[string]
+	$BaseDistroName = 'Ubuntu'
+)
+
 ipmo Wsl
 
-$Name = (Get-Item $PSCommandPath).BaseName
-$UserName = $env:WSL_USER
-
-$BaseDistroName = 'Ubuntu'
-
-# Export-WslDistro -Name $BaseDistroName
+($baseDistroTar = Export-WslDistro -Name $BaseDistroName)
 
 # Clean import
 Unregister-WslDistro -Name $Name
-Import-WslDistro -Name $Name -TarPath $(Join-Path $env:WSL_DISTRO_DIRECTORY "$BaseDistroName.tar")
+Import-WslDistro -Name $Name -TarPath $baseDistroTar
 
 wsl --distribution $Name --user $env:WSL_USER --cd $PSScriptRoot ./sh/install_docker_ubuntu.sh
 wsl --distribution $Name --user $env:WSL_USER sudo groupadd docker
-wsl --distribution $Name --user $env:WSL_USER sudo usermod -aG docker $UserName
+wsl --distribution $Name --user $env:WSL_USER sudo usermod -aG docker $env:WSL_USER
 
 # Enable Docker remote access
 # See https://docs.docker.com/config/daemon/remote-access/
@@ -40,7 +43,7 @@ wsl @params
 wsl --distribution $Name --user $env:WSL_USER --cd $PSScriptRoot ./sh/install_devcontainer_tools_ubuntu.sh
 
 # Setup default user
-Set-WslDistroDefaultUser -Name $Name -UserName $UserName
+Set-WslDistroDefaultUser -Name $Name -UserName $env:WSL_USER
 
 # Shutdown to restart
 Stop-WslDistro -Name $Name

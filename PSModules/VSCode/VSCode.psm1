@@ -300,7 +300,8 @@ function Expand-VscodeArchivePortable {
 .LINK
 	https://code.visualstudio.com/docs/setup/uninstall
 #>
-function Remove-VscodeDirectory {
+function Uninstall-Vscode {
+	winget uninstall --source winget --exact --id Microsoft.VisualStudioCode
 	Remove-Item -Path $env:APPDATA/Code -Recurse -Confirm
 	Remove-Item -Path $HOME/.vscode -Recurse -Confirm
 	Remove-Item -Path $VSCODE_HOME -Recurse -Confirm

@@ -1,7 +1,12 @@
-ipmo Wsl
+param (
+	[string]
+	$Name = (Get-Item $PSCommandPath).BaseName,
 
-$Name = (Get-Item $PSCommandPath).BaseName
-$UserName = $env:WSL_USER
+	[string]
+	$UserName = $env:WSL_USER ?? 'wsl-user'
+)
+
+ipmo Wsl
 
 # Paste this user name
 Set-Clipboard -Value $UserName
@@ -18,11 +23,13 @@ $params = @(
 )
 wsl @params
 
-# Update
+# Update packages & Install PowerShell
 $params = @(
 	'--distribution', $Name
 	'sudo', 'apt-get', 'update'
 	'&&'
 	'sudo', 'apt-get', 'upgrade', '--yes'
+	'&&'
+	'sudo', 'snap', 'install', 'powershell', '--classic'
 )
 wsl @params

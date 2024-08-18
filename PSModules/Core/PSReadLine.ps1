@@ -1,5 +1,5 @@
 function Edit-PsrlHistory {
-	code -r (Get-PSReadLineOption).HistorySavePath
+	code -r (Get-PSReadLineOption).HistorySavePath $PROFILEDIR\ConsoleHost_history.txt
 }
 
 function Remove-PsrlDuplicateHistory {

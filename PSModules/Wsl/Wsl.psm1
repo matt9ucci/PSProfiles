@@ -101,6 +101,7 @@ Register-ArgumentCompleter -ParameterName Name -ScriptBlock {
 )
 
 function Export-WslDistro {
+	[CmdletBinding(SupportsShouldProcess)]
 	param (
 		[Parameter(Mandatory)]
 		[string]
@@ -112,7 +113,10 @@ function Export-WslDistro {
 	}
 
 	$tar = Join-Path $env:WSL_DISTRO_DIRECTORY "$Name.tar"
-	& $wsl --export $Name $tar
+
+	& $wsl --export $Name $tar | Out-Null
+
+	return Get-Item -Path $tar
 }
 
 function Import-WslDistro {
@@ -135,7 +139,6 @@ function Import-WslDistro {
 	}
 
 	& $wsl --import $Name (Join-Path $env:WSL_DISTRO_DIRECTORY $Name) $TarPath
-
 }
 
 function Set-WslDistroDefaultUser {

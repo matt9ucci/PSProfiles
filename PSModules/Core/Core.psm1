@@ -614,3 +614,19 @@ function Set-BytesString {
 
 	Set-Content -Path $Path -Value $bytes -AsByteStream
 }
+
+function Expand-UserAppArchive {
+	param (
+		[Parameter(Mandatory, Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+		[string]
+		$Path,
+
+		[Parameter(Position = 1, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+		[string]
+		$Name = (Get-Item $Path).BaseName
+	)
+
+	$destinationPath = Join-Path $USERAPPS $Name
+	Expand-Archive -Path $Path -DestinationPath $destinationPath
+	Invoke-Item $destinationPath
+}

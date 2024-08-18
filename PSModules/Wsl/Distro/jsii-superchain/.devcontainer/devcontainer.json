@@ -1,0 +1,23 @@
+{
+	"name": "jsii-superchain",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/common-utils:2": {
+			"username": "superchain",
+		},
+		"ghcr.io/devcontainers/features/powershell:1": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"albert.TabOut",
+				"AmazonWebServices.aws-toolkit-vscode",
+				// "donjayamanne.githistory",
+				// "ms-vscode.powershell",
+				// "Orta.vscode-jest"
+			]
+		}
+	}
+}

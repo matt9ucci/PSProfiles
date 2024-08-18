@@ -6,7 +6,6 @@ sv PROFILEDIR (Split-Path $PROFILE) -Option ReadOnly, AllScope
 Add-Member -InputObject $PROFILEDIR -Name Private -Value "$HOME\.psprofiles" -MemberType NoteProperty
 sv SCRIPTS (Join-Path $HOME Scripts) -Option ReadOnly, AllScope
 
-sal gh help
 sal gcb Get-Clipboard
 sal scb Set-Clipboard
 sal FromJson ConvertFrom-Json
@@ -20,17 +19,12 @@ sal dc docker-compose
 sal g git
 sal s syntax
 
-if ($IsWindows) {
-	sal ghub gh.exe
-}
-
 sal .n dotnet
 function .nb { dotnet build @Args }
-function .nh { dotnet help @Args }
 function .nr { dotnet run @Args }
 function .nt { dotnet test @Args }
 
-function gho { Get-Help @Args -Online }
+function helpo { Get-Help @Args -Online }
 function l { gci @Args | Format-Wide Name -AutoSize }
 function la { gci @Args -Force | Format-Wide Name -AutoSize }
 function ll { gci @Args | ? Name -NotLike .* }
@@ -117,6 +111,27 @@ $env:DOTNET_CLI_UI_LANGUAGE = 'en'
 
 function Use-Sed { Add-PathEnv "$HOME\scoop\apps\git\current\usr\bin" }
 
+function google {
+	[CmdletBinding(DefaultParameterSetName = 'Default')]
+	param (
+		[Parameter(Position=0, ValueFromRemainingArguments)]
+		$Query,
+
+		[ValidateSet('en', 'ja', 'ko')]
+		$Lang,
+
+		[switch]
+		$Edge
+	)
+
+	$uri = 'https://www.google.com/search?q={0}&lr=lang_{1}' -f ($Query -join '+'), $Lang
+	if ($Edge) {
+		$uri = 'microsoft-edge:' + $uri
+	}
+
+	Start-Process -FilePath $uri
+}
+
 . $PSScriptRoot\Completers.ps1
 
 if ([System.Net.ServicePointManager]::SecurityProtocol -ne [System.Net.SecurityProtocolType]::SystemDefault) {
@@ -126,8 +141,8 @@ if ([System.Net.ServicePointManager]::SecurityProtocol -ne [System.Net.SecurityP
 $PSDefaultParameterValues['Import-Module:Force'] = $true
 $PSDefaultParameterValues['Trace-Command:PSHost'] = $true
 
-	function prompt {
-	return "`u{1F4BB} PS$($PSVersionTable.PSVersion.ToString()) $(Get-Date -Format 'yy-MM-ddTHH:mm:ssK') $($PSStyle.FileInfo.Directory)$($ExecutionContext.SessionState.Path.CurrentLocation)$($PSStyle.Reset)`n$('$' * ($NestedPromptLevel + 1)) "
+function prompt {
+	return "`u{1F4BB} PS-$($PSVersionTable.PSVersion.ToString()) $(Get-Date -Format 'yy-MM-ddTHH:mm:ssK') $([System.Environment]::UserName)@$($env:WSL_DISTRO_NAME ?? [System.Environment]::UserDomainName) $($PSStyle.FileInfo.Directory)$($ExecutionContext.SessionState.Path.CurrentLocation)$($PSStyle.Reset)`n$('$' * ($NestedPromptLevel + 1)) "
 }
 
 if (Test-Path $PROFILEDIR\PwshProxy.xml) {

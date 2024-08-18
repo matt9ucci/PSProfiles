@@ -1,23 +1,22 @@
 {
 	"editor.accessibilitySupport": "off",
 	"editor.renderWhitespace": "boundary",
-
+	"extensions.ignoreRecommendations": true,
 	"explorer.confirmDelete": false,
 	"explorer.confirmDragAndDrop": false,
-
 	"terminal.integrated.copyOnSelection": true,
-
+	"terminal.integrated.suggest.enabled": false,
 	"window.commandCenter": false,
-
 	"workbench.settings.editor": "json",
 	"workbench.startupEditor": "none",
-
 	"workbench.settings.applyToAllProfiles": [
 		"editor.accessibilitySupport",
 		"editor.renderWhitespace",
+		"extensions.ignoreRecommendations",
 		"explorer.confirmDelete",
 		"explorer.confirmDragAndDrop",
 		"terminal.integrated.copyOnSelection",
+		"terminal.integrated.suggest.enabled",
 		"window.commandCenter",
 		"workbench.settings.editor",
 		"workbench.startupEditor",
@@ -45,11 +44,10 @@
 	"dotfiles.repository": "https://github.com/matt9ucci/dotfiles.git",
 	"editor.acceptSuggestionOnCommitCharacter": false,
 	"editor.cursorBlinking": "solid",
-	"editor.fontFamily": "'Cascadia Mono PL', Consolas, 'Courier New', monospace",
+	"editor.fontFamily": "'Cascadia Mono', Consolas",
 	"editor.formatOnType": true,
 	"editor.insertSpaces": false,
 	"editor.tabCompletion": "on",
-	"extensions.ignoreRecommendations": true,
 	"files.associations": {
 		"*.ps1xml": "xml"
 	},
@@ -67,6 +65,7 @@
 		}
 	],
 	"markdown.extension.list.indentationSize": "inherit",
+	"openInGitHub.defaultRemote": "upstream",
 	"powershell.codeFormatting.newLineAfterCloseBrace": false,
 	"powershell.codeFormatting.useConstantStrings": true,
 	"powershell.codeFormatting.useCorrectCasing": true,
@@ -95,19 +94,10 @@
 		"workbench.action.toggleSidebarVisibility",
 	],
 	"terminal.integrated.defaultProfile.linux": "pwsh",
-	"terminal.integrated.defaultProfile.windows": "PowerShell",
 	"terminal.integrated.enablePersistentSessions": false,
 	"terminal.integrated.profiles.linux": {
 		"pwsh": {
-			"path": "pwsh",
-			"args": [
-				"-NoLogo"
-			]
-		}
-	},
-	"terminal.integrated.profiles.windows": {
-		"PowerShell": {
-			"source": "PowerShell",
+			"path": "/usr/bin/pwsh",
 			"args": [
 				"-NoLogo"
 			]

@@ -142,7 +142,7 @@ $PSDefaultParameterValues['Import-Module:Force'] = $true
 $PSDefaultParameterValues['Trace-Command:PSHost'] = $true
 
 function prompt {
-	return "`u{1F4BB} PS-$($PSVersionTable.PSVersion.ToString()) $(Get-Date -Format 'yy-MM-ddTHH:mm:ssK') $([System.Environment]::UserName)@$($env:WSL_DISTRO_NAME ?? [System.Environment]::UserDomainName) $($PSStyle.FileInfo.Directory)$($ExecutionContext.SessionState.Path.CurrentLocation)$($PSStyle.Reset)`n$('$' * ($NestedPromptLevel + 1)) "
+	return "`u{1F4BB} PS-$($PSVersionTable.PSVersion.ToString()) $(Get-Date -Format 'yy-MM-ddTHH:mm:ssK') $([System.Environment]::UserName)@$($env:WSL_DISTRO_NAME ?? [System.Environment]::MachineName) $($PSStyle.FileInfo.Directory)$($ExecutionContext.SessionState.Path.CurrentLocation)$($PSStyle.Reset)`n$('$' * ($NestedPromptLevel + 1)) "
 }
 
 if (Test-Path $PROFILEDIR\PwshProxy.xml) {

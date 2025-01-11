@@ -11,7 +11,10 @@ function Invoke-GitClone {
 		$Uri,
 
 		[uint]
-		$Depth
+		$Depth,
+
+		[switch]
+		$DisableAutoCrLf
 	)
 
 	$path = ConvertTo-GitCloneIntoRepositoryPath -Uri $Uri
@@ -19,6 +22,7 @@ function Invoke-GitClone {
 
 	$params = @(
 		if ($Depth) { '--depth', $Depth }
+		if ($DisableAutoCrLf) { '--config', 'core.autocrlf=false' }
 	)
 	git clone @params $Uri $path
 }

@@ -20,15 +20,22 @@ function Enable-PyVenv {
 	[CmdletBinding()]
 	param ()
 
-	if (!(Test-Path $ENV_DIR -PathType Container)) {
-		throw "Directory not found: $ENV_DIR"
-	}
-
 	if (Test-PyVenv) {
 		Write-Debug 'Venv is already enabled'
-	} else {
-		& (Join-Path $ENV_DIR Scripts Activate.ps1)
+		return
 	}
+
+	@(
+		Join-Path $ENV_DIR Scripts Activate.ps1 # Windows
+		Join-Path $ENV_DIR bin Activate.ps1 # Windows and others
+	) | % {
+		if (Test-Path $_ -PathType Leaf) {
+			& $_
+			return
+		}
+	}
+
+	throw "Activation script not found in the venv directory: $ENV_DIR"
 }
 
 function Disable-PyVenv {

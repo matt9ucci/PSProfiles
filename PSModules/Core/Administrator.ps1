@@ -1,3 +1,5 @@
+using namespace System.Security.Principal
+
 function Grant-Administrator {
 	$ps = switch ($PSVersionTable.PSVersion.Major) {
 		{ $_ -le 5 } { 'powershell' }
@@ -8,7 +10,7 @@ function Grant-Administrator {
 
 function Test-Administrator {
 	$currentUser = New-Object System.Security.Principal.WindowsPrincipal (
-		[System.Security.Principal.WindowsIdentity]::GetCurrent()
+		[WindowsIdentity]::GetCurrent()
 	)
-	$currentUser.IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)
+	$currentUser.IsInRole([WindowsBuiltInRole]::Administrator)
 }

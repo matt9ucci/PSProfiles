@@ -1,0 +1,35 @@
+{
+	"CDK v2 construct": {
+		"prefix": "cdkv2-construct",
+		"body": [
+			"import { } from 'aws-cdk-lib'",
+			"import { Construct } from 'constructs'",
+			"",
+			"export interface ${1:${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}}Props {",
+			"}",
+			"",
+			"export class ${1} extends Construct {",
+			"",
+			"\tconstructor(scope: Construct, id: string, props: ${1}Props) {",
+			"\t\tsuper(scope, id)",
+			"",
+			"\t\t${0}",
+			"\t}",
+			"}",
+		],
+	},
+	"CDK v2 import from construct": {
+		"prefix": "cdkv2-import-construct",
+		"body": [
+			"import { ${0} } from 'aws-cdk-lib/aws-${1}'"
+		],
+	},
+	"CDK v2 new class": {
+		"prefix": "cdkv2-new-class",
+		"body": [
+			"new ${1:ClassName}(this, '${2:${1}}', {",
+			"\t${0}",
+			"})",
+		],
+	},
+}

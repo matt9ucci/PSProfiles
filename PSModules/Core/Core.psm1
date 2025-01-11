@@ -1,6 +1,7 @@
 . $PSScriptRoot\Administrator.ps1
 . $PSScriptRoot\Command.ps1
 . $PSScriptRoot\Directory.ps1
+. $PSScriptRoot\PSReadLine.ps1
 
 function New-Junction {
 	param (

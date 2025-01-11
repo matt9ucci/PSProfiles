@@ -1,0 +1,188 @@
+$env:Path -split [IO.Path]::PathSeparator
+
+./.env/bin/activate
+.\.env\Scripts\activate
+pip install --requirement requirements.txt
+
+rustup component list --installed
+
+rustup self update
+
+rustup toolchain list
+
+rustup update
+
+google -Lang en terms
+google -Lang ja 検索
+google -Lang ko 검색
+
+Add-PsrlHistoryCommon; Remove-PsrlDuplicateHistory; Edit-PsrlHistory
+
+Version language | sort Name | ft -Wrap -AutoSize Name, Version
+
+NODE_OPTIONS=--max-old-space-size=8192 npx lerna run build --scope=aws-cdk-lib
+'sample-app' | % { mkdir $_ && sl $_ && npx cdk init sample-app --language typescript }
+
+cdklocal deploy --require-approval never
+cdklocal destroy --force
+
+################################
+# .NET
+################################
+
+$env:DOTNET_CLI_UI_LANGUAGE = 'en'
+$env:DOTNET_CLI_UI_LANGUAGE = 'ja'
+
+dotnet --help
+dotnet --info
+dotnet --list-runtimes
+dotnet --list-sdks
+dotnet --version
+
+################################
+# Git
+################################
+
+git clean -d -x -n # -f
+
+git clone
+git clone --depth 1
+git clone --branch v1.0.0
+
+git commit --allow-empty -m 'Initial empty commit'
+
+git config list --global
+
+git fetch --unshallow
+git fetch --depth 100
+git fetch --deepen 100
+git fetch --shallow-since "2024-01-23 12:34:56"
+
+git fetch --tags upstream
+
+git help config
+git help log
+
+git log --oneline --follow -S'string' path
+git log --oneline --grep=pattern
+git log --oneline v0.39.0..v1.0.0
+git log --pretty=format:'%C(auto)%as%d %s'
+git log --pretty=oneline
+
+git push --tags origin
+
+git remote --verbose
+git remote show origin
+git remote add upstream https://github.com/OWNER/REPOSITORY.git
+
+################################
+# npm
+################################
+
+npm audit fix
+npm audit fix --force
+
+npm install --global npm
+npm install --global yarn
+
+npm run build
+npm run compile
+npm run eslint
+
+npm test
+
+npx npm-check-updates
+npx npm-check-updates --dep dev,prod
+npx npm-check-updates --upgrade
+
+################################
+# PowerShell
+################################
+
+pwsh -c 'git clone https://github.com/matt9ucci/PSProfiles.git (Split-Path $PROFILE)'
+
+Get-Module -ListAvailable
+
+################################
+# yarn
+################################
+
+yarn run build
+yarn run compile
+yarn run eslint
+yarn run test
+
+################################
+# For Windows
+################################
+
+ii "$env:LOCALAPPDATA\Programs\Microsoft VS Code"
+
+################################
+# winget
+################################
+
+Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock { param ($WordToComplete, $CommandAst, $CursorPosition) winget complete --word $WordToComplete --commandline $CommandAst.ToString() --position $CursorPosition | ForEach-Object { [System.Management.Automation.CompletionResult]::new($_, $_, [System.Management.Automation.CompletionResultType]::Text, $_) } }
+
+winget --help
+winget --version
+winget install --help
+winget search
+winget search Microsoft.DotNet.SDK
+winget search PowerShell
+winget show dotnet-sdk-8
+winget show Microsoft.DotNet.SDK.8
+winget uninstall --source winget --exact --id Microsoft.DotNet.SDK.8 --version 8.0.206
+
+winget list
+winget list --help
+winget list --upgrade-available
+winget list Microsoft.DotNet.SDK
+winget list PowerShell
+
+winget upgrade
+winget upgrade --help
+winget upgrade --source winget --exact --id 7zip.7zip
+winget upgrade --source winget --exact --id Amazon.AWSCLI
+winget upgrade --source winget --exact --id Git.Git
+winget upgrade --source winget --exact --id Microsoft.DotNet.SDK.8
+winget upgrade --source winget --exact --id Microsoft.PowerShell
+winget upgrade --source winget --exact --id Microsoft.VCRedist.2015+.x64
+winget upgrade --source winget --exact --id Microsoft.VCRedist.2015+.x86
+winget upgrade --source winget --exact --id Microsoft.VisualStudioCode
+winget upgrade --source winget --exact --id Mozilla.Firefox
+winget upgrade --source winget --exact --id OmegaT.OmegaT
+winget upgrade --source winget --exact --id Python.Python.3.12
+winget upgrade --source winget --exact --id Schniz.fnm
+winget upgrade --source winget --exact --id VideoLAN.VLC
+
+################################
+# wsl
+################################
+
+$env:WSL_UTF8 = 1
+
+wsl --install Ubuntu
+wsl --shutdown
+wsl --version
+
+wsl --list
+wsl --list --all
+wsl --list --online
+wsl --list --quiet
+wsl --list --running
+wsl --list --verbose
+wsl -l -o
+wsl -l -q
+wsl -l -v
+
+wsl --set-default Ubuntu
+wsl --set-default DockerOnUbuntu
+
+wsl --terminate Ubuntu
+wsl --terminate DockerOnUbuntu
+
+wsl --user root
+wsl --user wsl-user
+
+wsl --distribution DockerOnUbuntu --exec dbus-launch true

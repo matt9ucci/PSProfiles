@@ -22,6 +22,15 @@ function Remove-FirefoxUserJs([string]$Name) {
 	Remove-Item (Get-FirefoxUserJs $Name)
 }
 
+function Copy-FirefoxUserCss([string]$Name) {
+	$chrome = Join-Path $PSScriptRoot chrome
+	Copy-Item $chrome (Get-FirefoxProfile $Name).FullName -Recurse -Force
+}
+
+function Remove-FirefoxUserCss([string]$Name) {
+	Remove-Item (Join-Path (Get-FirefoxProfile $Name) chrome) -Recurse -Force
+}
+
 function Uninstall-Firefox {
 	Start-Process -FilePath "$FIREFOX_HOME\uninstall\helper.exe" -ArgumentList '/S' -Wait
 	Remove-Item -Confirm -Recurse $env:APPDATA\Mozilla\Firefox

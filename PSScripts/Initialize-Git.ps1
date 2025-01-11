@@ -1,7 +1,7 @@
 ri -Confirm $HOME/.gitconfig
 
 git config --global user.name 'Matt Gucci'
-git config --global user.email matt9ucci@gmail.com
+git config --global user.email 8044346+matt9ucci@users.noreply.github.com
 
 git config --global core.editor vi
 git config --global credential.helper wincred

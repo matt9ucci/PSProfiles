@@ -1,4 +1,19 @@
 {
+	"editor.accessibilitySupport": "off",
+
+	"extensions.ignoreRecommendations": true,
+
+	"terminal.integrated.copyOnSelection": true,
+
+	"workbench.settings.editor": "json",
+
+	"workbench.settings.applyToAllProfiles": [
+		"editor.accessibilitySupport",
+		"extensions.ignoreRecommendations",
+		"terminal.integrated.copyOnSelection",
+		"workbench.settings.editor",
+	],
+
 	"[html]": {
 		"editor.defaultFormatter": "vscode.html-language-features"
 	},
@@ -23,7 +38,7 @@
 	"editor.renderWhitespace": "boundary",
 	"editor.tabCompletion": "on",
 	"explorer.confirmDelete": false,
-	"extensions.ignoreRecommendations": true,
+
 	"files.associations": {
 		"*.ps1xml": "xml"
 	},
@@ -92,7 +107,7 @@
 	"typescript.format.semicolons": "remove",
 	"update.mode": "manual",
 	"window.newWindowDimensions": "maximized",
-	"workbench.settings.editor": "json",
+
 	"workbench.settings.useSplitJSON": true,
 	"workbench.startupEditor": "newUntitledFile",
 	"zenMode.hideLineNumbers": false,

@@ -1,5 +1,5 @@
 param (
-	[ValidateSet('aws', 'command', 'js', 'language')]
+	[ValidateSet('aws', 'command', 'js', 'language', 'rust')]
 	[string[]]
 	$Tag
 )
@@ -60,9 +60,19 @@ param (
 	ScriptBlock = { python3 --version }
 },
 @{
-	Tag         = 'language'
+	Tag         = 'language', 'rust'
 	Name        = 'rustc'
 	ScriptBlock = { rustc --version }
+},
+@{
+	Tag         = 'rust'
+	Name        = 'cargo'
+	ScriptBlock = { cargo --version }
+},
+@{
+	Tag         = 'rust'
+	Name        = 'rustup'
+	ScriptBlock = { rustup --version }
 },
 @{
 	Tag         = 'aws'

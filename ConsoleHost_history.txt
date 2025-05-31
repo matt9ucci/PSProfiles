@@ -4,14 +4,6 @@ $env:Path -split [IO.Path]::PathSeparator
 .\.env\Scripts\activate
 pip install --requirement requirements.txt
 
-rustup component list --installed
-
-rustup self update
-
-rustup toolchain list
-
-rustup update
-
 google -Lang en terms
 google -Lang ja 検索
 google -Lang ko 검색
@@ -102,6 +94,30 @@ npx npm-check-updates --upgrade
 pwsh -c 'git clone https://github.com/matt9ucci/PSProfiles.git (Split-Path $PROFILE)'
 
 Get-Module -ListAvailable
+
+[System.Math]::Pow(2, 8)
+
+################################
+# Rust
+################################
+
+cargo --version
+cargo help
+
+cargo build --manifest-path ./Cargo.toml
+cargo check --manifest-path ./Cargo.toml
+cargo doc --manifest-path ./Cargo.toml --open
+cargo run --manifest-path ./Cargo.toml
+
+rustc --help
+rustc --version
+
+rustup --version
+rustup component list --installed
+rustup help
+rustup self update
+rustup toolchain list
+rustup update
 
 ################################
 # yarn

@@ -1,38 +1,37 @@
 // * [General profile settings](https://docs.microsoft.com/en-us/windows/terminal/customize-settings/profile-general)
 // * [ProfileIcons](https://github.com/microsoft/terminal/tree/main/src/cascadia/CascadiaPackage/ProfileIcons)
 {
+	"$help": "https://aka.ms/terminal-documentation",
 	"$schema": "https://aka.ms/terminal-profiles-schema",
 	"actions": [
-		{ "command": "find", "keys": "ctrl+f" },
-		{ "command": "paste", "keys": "ctrl+v" },
-
-		{ "command": { "action": "copy", "singleLine": false }, "keys": "ctrl+c" },
-        { "command": { "action": "commandPalette" }, "keys": "f1" },
-
-		{ "command": { "action": "closeTab" }, "keys": "ctrl+w" },
-		{ "command": { "action": "newTab" }, "keys": "ctrl+t" },
-		{ "command": { "action": "nextTab" }, "keys": "ctrl+pgdn" },
-		{ "command": { "action": "nextTab" }, "keys": "ctrl+tab" },
-		{ "command": { "action": "prevTab" }, "keys": "ctrl+shift+pgup" },
-		{ "command": { "action": "prevTab" }, "keys": "ctrl+shift+tab" },
-		{ "command": { "action": "switchToTab", "index": 0 }, "keys": "ctrl+1" },
-		{ "command": { "action": "switchToTab", "index": 1 }, "keys": "ctrl+2" },
-		{ "command": { "action": "switchToTab", "index": 2 }, "keys": "ctrl+3" },
-		{ "command": { "action": "switchToTab", "index": 3 }, "keys": "ctrl+4" },
-		{ "command": { "action": "switchToTab", "index": 4 }, "keys": "ctrl+5" },
-		{ "command": { "action": "switchToTab", "index": 5 }, "keys": "ctrl+6" },
-		{ "command": { "action": "switchToTab", "index": 6 }, "keys": "ctrl+7" },
-		{ "command": { "action": "switchToTab", "index": 7 }, "keys": "ctrl+8" },
-		{ "command": { "action": "switchToTab", "index": 8 }, "keys": "ctrl+9" },
-
-		{ "command": { "action": "scrollDown" }, "keys": "pgdn" },
-		{ "command": { "action": "scrollUp" }, "keys": "pgup" },
+		{ "command": { "action": "closeTab" }, "id": "User.closeTab.0" },
+		{ "command": { "action": "newTab" }, "id": "User.newTab.5DEADB41" },
 	],
 	"confirmCloseAllTabs": false,
+	"copyFormatting": "none",
 	"copyOnSelect": true,
 	"defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
 	"disabledProfileSources": [
 		"Windows.Terminal.Azure",
+	],
+	"keybindings": [
+		{ "id": "Terminal.CopyToClipboard", "keys": "ctrl+c" },
+		{ "id": "Terminal.DuplicatePaneAuto", "keys": "alt+shift+d" },
+		{ "id": "Terminal.FindText", "keys": "ctrl+f" },
+		{ "id": "Terminal.PasteFromClipboard", "keys": "ctrl+v" },
+		{ "id": "Terminal.ScrollDownPage", "keys": "pgdn" },
+		{ "id": "Terminal.ScrollUpPage", "keys": "pgup" },
+		{ "id": "Terminal.SwitchToTab0", "keys": "ctrl+1" },
+		{ "id": "Terminal.SwitchToTab1", "keys": "ctrl+2" },
+		{ "id": "Terminal.SwitchToTab2", "keys": "ctrl+3" },
+		{ "id": "Terminal.SwitchToTab3", "keys": "ctrl+4" },
+		{ "id": "Terminal.SwitchToTab4", "keys": "ctrl+5" },
+		{ "id": "Terminal.SwitchToTab5", "keys": "ctrl+6" },
+		{ "id": "Terminal.SwitchToTab6", "keys": "ctrl+7" },
+		{ "id": "Terminal.SwitchToTab7", "keys": "ctrl+8" },
+		{ "id": "Terminal.ToggleCommandPalette", "keys": "f1" },
+		{ "id": "User.closeTab.0", "keys": "ctrl+w" },
+		{ "id": "User.newTab.5DEADB41", "keys": "ctrl+t" },
 	],
 	"launchMode": "maximized",
 	"profiles": {
@@ -45,46 +44,14 @@
 			{
 				"name": "PowerShell",
 				"source": "Windows.Terminal.PowershellCore",
-				"backgroundImage": "ms-appdata:///Local/ProfileIcons/Powershell_black.ico",
-				"backgroundImageAlignment": "bottomRight",
-				"backgroundImageOpacity": 0.1,
-				"backgroundImageStretchMode": "none",
 				"colorScheme": "Campbell Powershell",
-				"icon": "ms-appdata:///Local/ProfileIcons/Powershell_avatar.ico",
 				"guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
 			},
 			{
-				"name": "Clang 64",
-				"commandline": "C:/Users/masa/Commands/MSYS2/msys2_shell.cmd -defterm -here -no-start -clang64",
-				"startingDirectory": "C:/Users/masa/Commands/MSYS2/home/%USERNAME%",
-				"icon": "C:/Users/masa/Commands/MSYS2/clang64.ico",
-				"guid": "{14e7805f-7466-4f34-b3db-42a2aa87f8a9}",
-				// https://www.msys2.org/docs/terminals/
-			},
-			{
-				"name": "MINGW 64",
-				"commandline": "C:/Users/masa/Commands/MSYS2/msys2_shell.cmd -defterm -here -no-start -mingw64",
-				"startingDirectory": "C:/Users/masa/Commands/MSYS2/home/%USERNAME%",
-				"icon": "C:/Users/masa/Commands/MSYS2/mingw64.ico",
-				"guid": "{e8a04619-a2ae-4add-9006-1ea2e19fd699}",
-				// https://www.msys2.org/docs/terminals/
-			},
-			{
-				"name": "MSYS2",
-				"commandline": "C:/Users/masa/Commands/MSYS2/msys2_shell.cmd -defterm -here -no-start -msys2",
-				"startingDirectory": "C:/Users/masa/Commands/MSYS2/home/%USERNAME%",
-				"icon": "C:/Users/masa/Commands/MSYS2/msys2.ico",
-				"guid": "{f98e00c0-6a08-4d94-96bf-c7d8f9a04b8c}",
-				// https://www.msys2.org/docs/terminals/
-			},
-			{
-				// $command = '& (Join-Path (& "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -property installationPath) "Common7/Tools/Launch-VsDevShell.ps1")'
-				// $bytes = [System.Text.Encoding]::Unicode.GetBytes($command)
-				// [Convert]::ToBase64String($bytes) | Set-Clipboard
-				"name": "Developer PowerShell for Visual Studio",
-				"commandline": "%ProgramFiles%\\PowerShell\\7\\pwsh.exe -NoExit -EncodedCommand JgAgACgASgBvAGkAbgAtAFAAYQB0AGgAIAAoACYAIAAiACQAewBlAG4AdgA6AFAAcgBvAGcAcgBhAG0ARgBpAGwAZQBzACgAeAA4ADYAKQB9AFwATQBpAGMAcgBvAHMAbwBmAHQAIABWAGkAcwB1AGEAbAAgAFMAdAB1AGQAaQBvAFwASQBuAHMAdABhAGwAbABlAHIAXAB2AHMAdwBoAGUAcgBlAC4AZQB4AGUAIgAgAC0AcAByAG8AcABlAHIAdAB5ACAAaQBuAHMAdABhAGwAbABhAHQAaQBvAG4AUABhAHQAaAApACAAIgBDAG8AbQBtAG8AbgA3AC8AVABvAG8AbABzAC8ATABhAHUAbgBjAGgALQBWAHMARABlAHYAUwBoAGUAbABsAC4AcABzADEAIgApAA==",
-				"icon": "ms-appx:///ProfileIcons/pwsh.png",
-				"guid": "{f1c2ca83-b22e-46c1-9d45-09fe33850cad}",
+				"name": "Windows PowerShell",
+				"commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+				"colorScheme": "Campbell Powershell",
+				"guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
 			},
 		],
 	},

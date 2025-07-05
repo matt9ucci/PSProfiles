@@ -27,8 +27,6 @@ ExecStart=/usr/bin/dockerd -H fd:// -H tcp://127.0.0.1:2375`n"
 $systemdUnitDirPath = "/etc/systemd/system/docker.service.d"
 $systemdUnitFilePath = "$systemdUnitDirPath/override.conf"
 $params = @(
-	'--distribution', $Name
-	'--user', 'root'
 	'mkdir', '-p', $systemdUnitDirPath
 	'&&'
 	'echo', $systemdUnitFileContent, '>', $systemdUnitFilePath
@@ -37,7 +35,7 @@ $params = @(
 	'&&'
 	'systemctl', 'restart', 'docker.service'
 )
-wsl @params
+wsl --distribution $Name --user root @params
 
 # Setup devcontainer tools
 wsl --distribution $Name --user $env:WSL_USER --cd $PSScriptRoot ./sh/install_devcontainer_tools_ubuntu.sh

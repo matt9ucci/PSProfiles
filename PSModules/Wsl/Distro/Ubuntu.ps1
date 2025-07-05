@@ -17,19 +17,18 @@ Register-WslDistro -Name $Name
 
 # Allow `sudo` without password
 $params = @(
-	'--distribution', $Name
-	'--user', 'root'
-	'echo', "$UserName ALL=(ALL) NOPASSWD: ALL", '>', "/etc/sudoers.d/$UserName"
+	'echo', "$UserName ALL=(ALL) NOPASSWD: ALL"
+	'>'
+	"/etc/sudoers.d/$UserName"
 )
-wsl @params
+wsl --distribution $Name --user root @params
 
 # Update packages & Install PowerShell
 $params = @(
-	'--distribution', $Name
 	'sudo', 'apt-get', 'update'
 	'&&'
 	'sudo', 'apt-get', 'upgrade', '--yes'
 	'&&'
 	'sudo', 'snap', 'install', 'powershell', '--classic'
 )
-wsl @params
+wsl --distribution $Name @params

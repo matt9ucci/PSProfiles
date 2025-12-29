@@ -5,7 +5,6 @@ sv PROFILEDIR (Split-Path $PROFILE) -Option ReadOnly, AllScope
 Add-Member -InputObject $PROFILEDIR -Name Private -Value "$HOME\.psprofiles" -MemberType NoteProperty
 sv SCRIPTS (Join-Path $HOME Scripts) -Option ReadOnly, AllScope
 
-sal gh help
 sal gcb Get-Clipboard
 sal scb Set-Clipboard
 sal FromJson ConvertFrom-Json
@@ -21,7 +20,7 @@ sal s syntax
 sal .n dotnet
 function .nr { dotnet run @Args }
 
-function gho { Get-Help @Args -Online }
+function helpo { Get-Help @Args -Online }
 function ll { gci @Args | ? Name -NotLike .* }
 function sl.. { sl .. }
 function Get-FileHash { $fh = Microsoft.PowerShell.Utility\Get-FileHash @Args; Set-Clipboard $fh.hash; $fh }

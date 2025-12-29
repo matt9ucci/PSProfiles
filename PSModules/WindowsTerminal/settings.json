@@ -1,40 +1,59 @@
-// Profile Settings
-// * [Microsoft Docs](https://docs.microsoft.com/en-us/windows/terminal/customize-settings/profile-settings)
-// * [GitHub](https://github.com/microsoft/terminal/blob/master/doc/cascadia/SettingsSchema.md)
+// * [General profile settings](https://docs.microsoft.com/en-us/windows/terminal/customize-settings/profile-general)
+// * [ProfileIcons](https://github.com/microsoft/terminal/tree/main/src/cascadia/CascadiaPackage/ProfileIcons)
 {
+	"$help": "https://aka.ms/terminal-documentation",
 	"$schema": "https://aka.ms/terminal-profiles-schema",
+	"actions": [
+		{ "command": { "action": "closeTab" }, "id": "User.closeTab.0" },
+		{ "command": { "action": "newTab" }, "id": "User.newTab.5DEADB41" },
+	],
 	"confirmCloseAllTabs": false,
+	"copyFormatting": "none",
 	"copyOnSelect": true,
 	"defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
 	"disabledProfileSources": [
 		"Windows.Terminal.Azure",
-		"Windows.Terminal.Wsl"
+	],
+	"keybindings": [
+		{ "id": "Terminal.CopyToClipboard", "keys": "ctrl+c" },
+		{ "id": "Terminal.DuplicatePaneAuto", "keys": "alt+shift+d" },
+		{ "id": "Terminal.FindText", "keys": "ctrl+f" },
+		{ "id": "Terminal.PasteFromClipboard", "keys": "ctrl+v" },
+		{ "id": "Terminal.ScrollDownPage", "keys": "pgdn" },
+		{ "id": "Terminal.ScrollUpPage", "keys": "pgup" },
+		{ "id": "Terminal.SwitchToTab0", "keys": "ctrl+1" },
+		{ "id": "Terminal.SwitchToTab1", "keys": "ctrl+2" },
+		{ "id": "Terminal.SwitchToTab2", "keys": "ctrl+3" },
+		{ "id": "Terminal.SwitchToTab3", "keys": "ctrl+4" },
+		{ "id": "Terminal.SwitchToTab4", "keys": "ctrl+5" },
+		{ "id": "Terminal.SwitchToTab5", "keys": "ctrl+6" },
+		{ "id": "Terminal.SwitchToTab6", "keys": "ctrl+7" },
+		{ "id": "Terminal.SwitchToTab7", "keys": "ctrl+8" },
+		{ "id": "Terminal.ToggleCommandPalette", "keys": "f1" },
+		{ "id": "User.closeTab.0", "keys": "ctrl+w" },
+		{ "id": "User.newTab.5DEADB41", "keys": "ctrl+t" },
+		{ "id": null, "keys": "win+sc(41)" },
 	],
 	"launchMode": "maximized",
 	"profiles": {
 		"defaults": {
-			"fontSize": 16
+			"font": {
+				"size": 14,
+			},
 		},
 		"list": [
 			{
-				"guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
 				"name": "PowerShell",
-				"backgroundImage": "ms-appdata:///Local/ProfileIcons/Powershell_black.ico",
-				"backgroundImageAlignment": "bottomRight",
-				"backgroundImageOpacity": 0.1,
-				"backgroundImageStretchMode": "none",
+				"source": "Windows.Terminal.PowershellCore",
 				"colorScheme": "Campbell Powershell",
-				"icon": "ms-appdata:///Local/ProfileIcons/Powershell_avatar.ico",
-				"source": "Windows.Terminal.PowershellCore"
-			}
-		]
+				"guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+			},
+			{
+				"name": "Windows PowerShell",
+				"commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+				"colorScheme": "Campbell Powershell",
+				"guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+			},
+		],
 	},
-	"schemes" : [],
-	"actions":
-	[
-		{ "command": "closeTab", "keys": "ctrl+w" },
-		{ "command": "find", "keys": "ctrl+f" },
-		{ "command": "newTab", "keys": "ctrl+t" },
-		{ "command": "paste", "keys": "ctrl+v" }
-	]
 }

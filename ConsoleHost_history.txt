@@ -4,14 +4,6 @@ $env:Path -split [IO.Path]::PathSeparator
 .\.env\Scripts\activate
 pip install --requirement requirements.txt
 
-rustup component list --installed
-
-rustup self update
-
-rustup toolchain list
-
-rustup update
-
 google -Lang en terms
 google -Lang ja 検索
 google -Lang ko 검색
@@ -38,6 +30,14 @@ dotnet --info
 dotnet --list-runtimes
 dotnet --list-sdks
 dotnet --version
+
+################################
+# fnm
+################################
+
+fnm install --lts
+fnm list
+fnm use v
 
 ################################
 # Git
@@ -76,6 +76,16 @@ git remote show origin
 git remote add upstream https://github.com/OWNER/REPOSITORY.git
 
 ################################
+# Java
+################################
+
+java -version
+
+# Payara
+asadmin start-domain
+asadmin stop-domain
+
+################################
 # npm
 ################################
 
@@ -102,6 +112,30 @@ npx npm-check-updates --upgrade
 pwsh -c 'git clone https://github.com/matt9ucci/PSProfiles.git (Split-Path $PROFILE)'
 
 Get-Module -ListAvailable
+
+[System.Math]::Pow(2, 8)
+
+################################
+# Rust
+################################
+
+cargo --version
+cargo help
+
+cargo build --manifest-path ./Cargo.toml
+cargo check --manifest-path ./Cargo.toml
+cargo doc --manifest-path ./Cargo.toml --open
+cargo run --manifest-path ./Cargo.toml
+
+rustc --help
+rustc --version
+
+rustup --version
+rustup component list --installed
+rustup help
+rustup self update
+rustup toolchain list
+rustup update
 
 ################################
 # yarn
@@ -134,27 +168,29 @@ winget show dotnet-sdk-8
 winget show Microsoft.DotNet.SDK.8
 winget uninstall --source winget --exact --id Microsoft.DotNet.SDK.8 --version 8.0.206
 
+winget import --import-file $PROFILEDIR\IaC\winget-import.json
+winget import --import-file $PROFILEDIR\IaC\winget-import.json --no-upgrade
+
 winget list
 winget list --help
 winget list --upgrade-available
 winget list Microsoft.DotNet.SDK
 winget list PowerShell
 
+winget install --help
+winget install --source winget --exact --id Amazon.AWSCLI
+winget install --source winget --exact --id EclipseAdoptium.Temurin.21.JDK
+winget install --source winget --exact --id EclipseAdoptium.Temurin.8.JDK
+winget install --source winget --exact --id Microsoft.AppInstaller
+winget install --source winget --exact --id Microsoft.DotNet.SDK.8
+winget install --source winget --exact --id Microsoft.VCRedist.2015+.x64
+winget install --source winget --exact --id Microsoft.VCRedist.2015+.x86
+winget install --source winget --exact --id Obsidian.Obsidian
+winget install --source winget --exact --id OmegaT.OmegaT
+winget install --source winget --exact --id Python.Python.3.12
+
 winget upgrade
 winget upgrade --help
-winget upgrade --source winget --exact --id 7zip.7zip
-winget upgrade --source winget --exact --id Amazon.AWSCLI
-winget upgrade --source winget --exact --id Git.Git
-winget upgrade --source winget --exact --id Microsoft.DotNet.SDK.8
-winget upgrade --source winget --exact --id Microsoft.PowerShell
-winget upgrade --source winget --exact --id Microsoft.VCRedist.2015+.x64
-winget upgrade --source winget --exact --id Microsoft.VCRedist.2015+.x86
-winget upgrade --source winget --exact --id Microsoft.VisualStudioCode
-winget upgrade --source winget --exact --id Mozilla.Firefox
-winget upgrade --source winget --exact --id OmegaT.OmegaT
-winget upgrade --source winget --exact --id Python.Python.3.12
-winget upgrade --source winget --exact --id Schniz.fnm
-winget upgrade --source winget --exact --id VideoLAN.VLC
 
 ################################
 # wsl

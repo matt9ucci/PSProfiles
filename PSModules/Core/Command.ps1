@@ -10,3 +10,4 @@ function syntax {
 }
 
 function Get-CommandDefinition([string[]]$Name) { (gcm $Name).Definition }
+sal gcmdefinition Get-CommandDefinition

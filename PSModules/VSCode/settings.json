@@ -1,17 +1,31 @@
 {
 	"editor.accessibilitySupport": "off",
+	"editor.renderWhitespace": "boundary",
 
 	"extensions.ignoreRecommendations": true,
 
+	"explorer.confirmDelete": false,
+	"explorer.confirmDragAndDrop": false,
+
 	"terminal.integrated.copyOnSelection": true,
+	"terminal.integrated.suggest.enabled": false,
+
+	"window.commandCenter": false,
 
 	"workbench.settings.editor": "json",
+	"workbench.startupEditor": "none",
 
 	"workbench.settings.applyToAllProfiles": [
 		"editor.accessibilitySupport",
+		"editor.renderWhitespace",
 		"extensions.ignoreRecommendations",
+		"explorer.confirmDelete",
+		"explorer.confirmDragAndDrop",
 		"terminal.integrated.copyOnSelection",
+		"terminal.integrated.suggest.enabled",
+		"window.commandCenter",
 		"workbench.settings.editor",
+		"workbench.startupEditor",
 	],
 
 	"[html]": {
@@ -30,20 +44,23 @@
 		"editor.defaultFormatter": "vscode.typescript-language-features"
 	},
 	"csharp.suppressBuildAssetsNotification": true,
+	"csharp.suppressDotnetRestoreNotification": true,
 	"debug.internalConsoleOptions": "openOnSessionStart",
 	"diffEditor.renderSideBySide": false,
-	"dotfiles.repository": "https://bitbucket.org/matt9ucci/dotfiles.git",
-	"editor.fontFamily": "'Cascadia Mono PL', Consolas, 'Courier New', monospace",
+	"dotfiles.repository": "https://github.com/matt9ucci/dotfiles.git",
+	"editor.acceptSuggestionOnCommitCharacter": false,
+	"editor.cursorBlinking": "solid",
+	"editor.fontFamily": "'Cascadia Mono', Consolas",
+	"editor.formatOnType": true,
 	"editor.insertSpaces": false,
-	"editor.renderWhitespace": "boundary",
 	"editor.tabCompletion": "on",
-	"explorer.confirmDelete": false,
-
 	"files.associations": {
 		"*.ps1xml": "xml"
 	},
 	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
+	"git-graph.openNewTabEditorGroup": "Two",
+	"git.enableSmartCommit": true,
 	"javascript.format.semicolons": "remove",
 	"json.schemas": [
 		{
@@ -53,29 +70,8 @@
 			"url": "http://json.schemastore.org/package"
 		}
 	],
-	"launch": {
-		"version": "0.2.0",
-		"configurations": [
-			{
-				"name": "PS Launch Current File",
-				"type": "PowerShell",
-				"request": "launch",
-				"script": "${file}",
-				"cwd": "${file}"
-			}
-		]
-	},
 	"markdown.extension.list.indentationSize": "inherit",
-	"markdownlint.config": {
-		"default": true,
-		"no-hard-tabs": false,
-		"MD004": {
-			"style": "sublist"
-		},
-		"MD007": {
-			"indent": 1
-		}
-	},
+	"openInGitHub.defaultRemote": "upstream",
 	"powershell.codeFormatting.newLineAfterCloseBrace": false,
 	"powershell.codeFormatting.useConstantStrings": true,
 	"powershell.codeFormatting.useCorrectCasing": true,
@@ -83,22 +79,31 @@
 	"powershell.integratedConsole.showOnStartup": false,
 	"powershell.promptToUpdatePowerShell": false,
 	"powershell.sideBar.CommandExplorerVisibility": false,
+	"remote.containers.defaultExtensions": [
+		"albert.TabOut",
+		"donjayamanne.githistory",
+		"ms-vscode.powershell",
+		"waderyan.gitblame",
+		"yzhang.markdown-all-in-one"
+	],
+	"remote.SSH.defaultExtensions": [
+		"albert.TabOut",
+		"donjayamanne.githistory",
+		"ms-vscode.powershell",
+		"waderyan.gitblame",
+		"yzhang.markdown-all-in-one"
+	],
 	"remote.SSH.remotePlatform": {
 		"primary.mshome.net": "linux"
 	},
+	"terminal.integrated.commandsToSkipShell": [
+		"workbench.action.toggleSidebarVisibility",
+	],
 	"terminal.integrated.defaultProfile.linux": "pwsh",
-	"terminal.integrated.defaultProfile.windows": "PowerShell",
+	"terminal.integrated.enablePersistentSessions": false,
 	"terminal.integrated.profiles.linux": {
 		"pwsh": {
-			"path": "pwsh",
-			"args": [
-				"-NoLogo"
-			]
-		}
-	},
-	"terminal.integrated.profiles.windows": {
-		"PowerShell": {
-			"source": "PowerShell",
+			"path": "/usr/bin/pwsh",
 			"args": [
 				"-NoLogo"
 			]
@@ -107,8 +112,9 @@
 	"typescript.format.semicolons": "remove",
 	"update.mode": "manual",
 	"window.newWindowDimensions": "maximized",
+	"window.restoreWindows": "none",
 
 	"workbench.settings.useSplitJSON": true,
-	"workbench.startupEditor": "newUntitledFile",
+	"xml.format.preserveAttributeLineBreaks": true,
 	"zenMode.hideLineNumbers": false,
 }

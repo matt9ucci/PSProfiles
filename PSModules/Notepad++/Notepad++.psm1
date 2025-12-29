@@ -17,6 +17,10 @@ function npp {
 	Invoke-Expression -Command ($command -join ' ')
 }
 
+function Update-NppConfigXml {
+	Copy-Item $PSScriptRoot\config.xml (Join-Path $NPP_HOME config.xml)
+}
+
 function Update-NppShortcutsXml {
 	Copy-Item $PSScriptRoot\shortcuts.xml (Join-Path $NPP_HOME shortcuts.xml)
 }

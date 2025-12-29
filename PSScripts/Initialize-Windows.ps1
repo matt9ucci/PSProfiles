@@ -13,6 +13,13 @@ sp Search SearchboxTaskbarMode 0 # Hide search box
 
 Pop-Location
 
+Push-Location HKCU:\Software\Policies\Microsoft\Windows\
+
+ni Explorer
+sp Explorer DisableSearchBoxSuggestions 1 # Disable web search in the Start menu
+
+Pop-Location
+
 Push-Location HKCU:\Software\Microsoft\IME\15.0\IMEJP\MSIME
 
 sp . InputSpace 2 # Space: Always Half-width
@@ -21,6 +28,7 @@ Pop-Location
 
 Push-Location 'HKCU:\Control Panel'
 
+sp Accessibility\StickyKeys Flags 506 # Disable sticky keys shortcut
 sp Desktop CursorBlinkRate -1 # Cursor blink rate: None
 sp Desktop\WindowMetrics ScrollWidth -320 # -255 on Windows 11, too thin!
 

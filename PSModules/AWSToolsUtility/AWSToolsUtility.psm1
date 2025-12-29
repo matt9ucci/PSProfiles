@@ -23,8 +23,12 @@ function Register-ArgumentCompleterByModuleName {
 	}
 }
 
+. $PSScriptRoot\Cfn.ps1
+. $PSScriptRoot\Cloud9.ps1
 . $PSScriptRoot\Ec2.ps1
+. $PSScriptRoot\Ec2ib.ps1
 . $PSScriptRoot\Iam.ps1
+. $PSScriptRoot\Vpc.ps1
 
 <#
 .LINK
@@ -44,7 +48,7 @@ function Set-AwsCredentialFromCsv {
 	$param = @{
 		AccessKey = $csv.'Access key ID'
 		SecretKey = $csv.'Secret access key'
-		StoreAs = $ProfileName
+		StoreAs   = $ProfileName
 	}
 	Set-AWSCredential @param
 }
@@ -60,6 +64,41 @@ function Set-AwsSharedCredentialsFileFromNetSDKCredentialsFile {
 		ProfileLocation = Join-Path $HOME .aws credentials
 	}
 	Set-AWSCredential @param
+}
+
+function Get-AwsProfile {
+	param (
+		[string]
+		$Name,
+
+		[ValidateSet('NetSDKCredentialsFile', 'SharedCredentialsFile')]
+		[string[]]
+		$StoreType,
+
+		[switch]
+		$Credential
+	)
+
+	$profiles = Get-AWSCredential -ListProfileDetail
+
+	if ($Name) {
+		$profiles = $profiles | ? ProfileName -Like $Name
+	}
+
+	if ($StoreType) {
+		$profiles = $profiles | ? StoreTypeName -In $StoreType
+	}
+
+	if ($Credential) {
+		foreach ($p in $profiles) {
+			$credential = ($p | Get-AWSCredential).GetCredentials()[0]
+			foreach ($prop in $credential.psobject.properties) {
+				$p | Add-Member $prop.Name $prop.Value
+			}
+		}
+	}
+
+	$profiles
 }
 
 function Get-AwsToolsModuleName {
@@ -80,16 +119,73 @@ function Get-AwsToolsModuleName {
 	$moduleName -like $Name | sort
 }
 
-filter FromBase64ToUtf8 {
-	[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($_))
+function Get-AwsIamGroupInlinePolicy {
+	param (
+		[string]
+		$GroupName
+	)
+
+	Get-IAMGroupPolicyList -GroupName $GroupName | % {
+		Get-IAMGroupPolicy -GroupName $GroupName -PolicyName $_
+	}
 }
 
-filter FromUrlEncodedString {
-	[System.Web.HttpUtility]::UrlDecode($_)
+function Save-AwsMfaCredential {
+	param (
+		[Parameter(Mandatory)]
+		[string]
+		$ProfileName,
+
+		[Parameter(Mandatory)]
+		[string]
+		$MfaDeviceSerialNumber,
+
+		[string]
+		$TokenCode,
+
+		[string]
+		$Region
+	)
+
+	$params = @{
+		ProfileName  = $ProfileName
+		SerialNumber = $MfaDeviceSerialNumber
+		TokenCode    = if ($TokenCode) { $TokenCode } else { Read-Host -Prompt 'TokenCode' }
+	}
+	if ($Region) { $params['Region'] = $Region }
+
+	$sessionToken = Get-STSSessionToken @params
+
+	$params = @{
+		AccessKey    = $sessionToken.AccessKeyId
+		SecretKey    = $sessionToken.SecretAccessKey
+		SessionToken = $sessionToken.SessionToken
+	}
+
+	# Save the MFA profile in AWS SDK store (Windows) or shared credential file
+	Set-AWSCredential -StoreAs ${ProfileName}_MFA @params
+	# Set the MFA profile for the current session
+	Set-AWSCredential -ProfileName ${ProfileName}_MFA -Scope Global
+}
+
+Set-Alias Add-AWSCredentialProfile Set-AWSCredential
+
+# Set aliases for tab completion
+Get-Command -Module AWSToolsUtility -Verb Get | % {
+	sal $_.Noun $_.Name
 }
 
 Register-ArgumentCompleter -ParameterName Name -CommandName Install-AWSToolsModule -ScriptBlock {
 	param ($commandName, $parameterName, $wordToComplete)
 
 	(Get-AwsToolsModuleName) -like "$wordToComplete*"
+}
+
+Register-ArgumentCompleter -ParameterName Path -CommandName Get-SSMParametersByPath -ScriptBlock {
+	param ($commandName, $parameterName, $wordToComplete)
+
+	@(
+		'/aws/service/ami-amazon-linux-latest'
+		'/aws/service/ami-windows-latest'
+	) -like "*$wordToComplete*"
 }

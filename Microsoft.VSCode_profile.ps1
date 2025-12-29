@@ -1,0 +1,2 @@
+ipmo EditorServicesCommandSuite
+Import-CommandSuite

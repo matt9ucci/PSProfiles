@@ -50,9 +50,91 @@ function ConvertTo-GitCloneIntoRepositoryPath {
 	}
 }
 
+function Get-GitRepository {
+	param (
+		[ArgumentCompleter({
+			param ($0, $1, [string]$WordToComplete, $3, [hashtable]$FakeBoundParameters)
+			$owner = $FakeBoundParameters.Owner ?? '*'
+			$repos = Get-GitRepository -Owner $owner
+			if ($repos) { $repos.Name -like "$WordToComplete*" }
+		})]
+		[string]
+		$Name = '*',
+
+		[ArgumentCompleter({
+			param ($0, $1, [string]$WordToComplete, $3, [hashtable]$FakeBoundParameters)
+			$name = $FakeBoundParameters.Name ?? '*'
+			$repos = Get-GitRepository -Name $name
+			if ($repos) { [string[]]$repos.Parent.Name -like "$WordToComplete*" }
+		})]
+		[string]
+		$Owner = '*',
+
+		[switch]
+		$FullPath,
+
+		[switch]
+		$Id
+	)
+
+	$repos = Get-ChildItem -Path $GitCloneIntoRootPath\*\$Owner\$Name
+	if ($Id) {
+		foreach ($r in $repos) {
+			Join-Path $r.Parent.Parent.Name $r.Parent.Name $r.Name
+		}
+	} elseif ($FullPath) {
+		$repos.FullPath
+	} else {
+		$repos
+	}
+}
+
+function Invoke-GitRepository {
+	[CmdletBinding(SupportsShouldProcess)]
+	param (
+		[ArgumentCompleter({
+			param ($0, $1, [string]$WordToComplete, $3, [hashtable]$FakeBoundParameters)
+			$owner = $FakeBoundParameters.Owner ?? '*'
+			$repos = Get-GitRepository -Owner $owner
+			if ($repos) { $repos.Name -like "$WordToComplete*" }
+		})]
+		[string]
+		$Name = '*',
+
+		[ArgumentCompleter({
+			param ($0, $1, [string]$WordToComplete, $3, [hashtable]$FakeBoundParameters)
+			$name = $FakeBoundParameters.Name ?? '*'
+			$repos = Get-GitRepository -Name $name
+			if ($repos) { [string[]]$repos.Parent.Name -like "$WordToComplete*" }
+		})]
+		[string]
+		$Owner = '*',
+
+		[scriptblock]
+		$ScriptBlock = { Invoke-Item -Path $Repo.FullPath },
+
+		[switch]
+		$Force
+	)
+
+	$repos = Get-GitRepository -Name $Name -Owner $Owner
+
+	if (
+		$Force -or
+		$repos.Count -lt 2 -or
+		$PSCmdlet.ShouldContinue("$($repos.Count) repositories", "Invoke {$ScriptBlock}")
+	) {
+		foreach ($repo in $repos) {
+			$ScriptBlock.InvokeWithContext($null, @([psvariable]::new('Repo', $repo)))
+		}
+	}
+}
+
 $params = @{
 	Function = @(
+		'Get-GitRepository'
 		'Invoke-GitClone'
+		'Invoke-GitRepository'
 	)
 	Variable = @(
 		'GitCloneIntoRootPath'

@@ -10,6 +10,23 @@ if ($env:no_proxy) {
 	$env:npm_config_noproxy = $env:no_proxy
 }
 
+function Get-NpmConfig {
+	npm config list --json | ConvertFrom-Json
+}
+
+function Invoke-NpmDoctor {
+	npm doctor
+}
+
+function Find-NpmPackage {
+	param (
+		[string]
+		$String
+	)
+
+	npm search --json $String | ConvertFrom-Json
+}
+
 Register-ArgumentCompleter -Native -CommandName npm -ScriptBlock {
 	param ($WordToComplete, $CommandAst, $CursorPosition)
 

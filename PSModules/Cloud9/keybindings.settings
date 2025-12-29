@@ -1,0 +1,13 @@
+[
+	{ "command": "formatcode", "keys": { "win": ["Alt-Shift-F"] } },
+	{ "command": "gotocommand", "keys": { "win": ["F1"] } },
+	{ "command": "hsplit", "keys": { "win": ["Alt-Shift-;"] } },
+	{ "command": "jumptodef", "keys": "F12" },
+	{ "command": "openCommandPallete", "keys": { "win": [""] } },
+	{ "command": "openterminal", "keys": { "win": ["Alt-Shift-T"] } },
+	{ "command": "removeline", "keys": "Ctrl-Shift-K" },
+	{ "command": "replace", "keys": { "win": ["Ctrl-H"] } },
+	{ "command": "toggleconsole", "keys": { "win": ["Ctrl-J"] } },
+	{ "command": "toggleWordWrap", "keys": { "win": ["Alt-Z"] } },
+	{ "command": "vsplit", "keys": { "win": ["Alt-Shift--"] } },
+]

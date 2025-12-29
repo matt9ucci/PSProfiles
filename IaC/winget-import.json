@@ -1,0 +1,23 @@
+{
+	"$schema": "https://aka.ms/winget-packages.schema.2.0.json",
+	"Sources": [
+		{
+			"Packages": [
+				{ "Scope": "machine", "PackageIdentifier": "7zip.7zip" },
+				{ "Scope": "machine", "PackageIdentifier": "Git.Git" },
+				{ "Scope": "machine", "PackageIdentifier": "Microsoft.PowerShell" },
+				{ "Scope": "machine", "PackageIdentifier": "Microsoft.VisualStudioCode" },
+				{ "Scope": "machine", "PackageIdentifier": "Microsoft.WindowsTerminal" },
+				{ "Scope": "machine", "PackageIdentifier": "Mozilla.Firefox" },
+				{ "Scope": "machine", "PackageIdentifier": "Schniz.fnm" },
+				{ "Scope": "machine", "PackageIdentifier": "VideoLAN.VLC" },
+			],
+			"SourceDetails": {
+				"Argument": "https://cdn.winget.microsoft.com/cache",
+				"Identifier": "Microsoft.Winget.Source_8wekyb3d8bbwe",
+				"Name": "winget",
+				"Type": "Microsoft.PreIndexed.Package"
+			}
+		},
+	],
+}

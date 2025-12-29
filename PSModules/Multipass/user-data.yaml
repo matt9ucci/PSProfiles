@@ -1,0 +1,66 @@
+#cloud-config
+
+# https://cloudinit.readthedocs.io/en/latest/topics/modules.html#package-update-upgrade-install
+package_update: true
+package_upgrade: true
+package_reboot_if_required: true
+
+packages:
+  - build-essential
+
+users:
+  - name: ubuntu
+    groups: docker
+
+apt:
+  preserve_sources_list: true
+  sources:
+    docker:
+      keyid: 0EBFCD88
+      keyserver: https://download.docker.com/linux/ubuntu/gpg
+      source: deb https://download.docker.com/linux/ubuntu $RELEASE stable
+snap:
+    commands:
+      - snap install powershell --classic
+
+runcmd:
+  - curl https://raw.githubusercontent.com/docker/cli/master/contrib/completion/bash/docker -o /etc/bash_completion.d/docker.sh
+  # Install Rust
+  - sudo -u ubuntu sh -c 'curl https://sh.rustup.rs -sSf | sh -s -- --target wasm32-wasi -y'
+  - sudo -u ubuntu sh -c 'rustup component add rust-analysis rust-src rls'
+  # Install .NET SDK https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
+  - wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && dpkg -i packages-microsoft-prod.deb
+  - apt update
+  - apt install -y apt-transport-https dotnet-sdk-3.1
+  - apt install -y docker-ce-cli
+
+write_files:
+  - content: |
+      # ---- Content of user-data.yaml START ----
+      alias sl='cd'
+      alias sl..='cd ..'
+      alias sl...='cd ../..'
+
+      alias d='docker'
+      alias g='git'
+
+      _dotnet_bash_complete() {
+        local word=${COMP_WORDS[COMP_CWORD]}
+        local completions="$(dotnet complete --position "${COMP_POINT}" "${COMP_LINE}" 2>/dev/null)"
+        if [ $? -ne 0 ]
+        then
+          completions=""
+        fi
+
+        COMPREPLY=($(compgen -W "$completions" -- "$word"))
+      }
+      complete -f -F _dotnet_bash_complete dotnet
+      # ---- Content of user-data.yaml END ----
+    append: true
+    path: /etc/skel/.bashrc
+  - content: |
+      # ---- Content of user-data.yaml START ----
+      Subsystem powershell /snap/bin/pwsh -sshs -NoLogo
+      # ---- Content of user-data.yaml END ----
+    append: true
+    path: /etc/ssh/sshd_config

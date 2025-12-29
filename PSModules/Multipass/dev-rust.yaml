@@ -1,0 +1,56 @@
+#cloud-config
+
+# https://cloudinit.readthedocs.io/en/latest/topics/modules.html#package-update-upgrade-install
+package_update: true
+package_upgrade: true
+package_reboot_if_required: true
+
+packages:
+  - build-essential
+  - docker-ce
+
+users:
+  - name: ubuntu
+    groups: docker
+
+apt:
+  preserve_sources_list: true
+  sources:
+    docker:
+      keyid: 0EBFCD88
+      keyserver: https://download.docker.com/linux/ubuntu/gpg
+      source: deb https://download.docker.com/linux/ubuntu $RELEASE stable
+snap:
+    commands:
+      - snap install powershell --classic
+
+runcmd:
+  - curl https://raw.githubusercontent.com/docker/cli/master/contrib/completion/bash/docker -o /etc/bash_completion.d/docker.sh
+  # Install Rust
+  - sudo -u ubuntu sh -c 'curl https://sh.rustup.rs -sSf | sh -s -- --target wasm32-wasi --component rust-analysis rust-src rls -y'
+
+write_files:
+  - content: |
+      # ---- Content of dev-rust.yaml START ----
+      alias sl='cd'
+      alias sl..='cd ..'
+      alias sl...='cd ../..'
+
+      alias c='code'
+      alias d='docker'
+      alias g='git'
+      # ---- Content of dev-rust.yaml END ----
+    append: true
+    path: /etc/skel/.bashrc
+  - content: |
+      # ---- Content of dev-rust.yaml START ----
+      Subsystem powershell /snap/bin/pwsh -sshs -NoLogo
+      # ---- Content of dev-rust.yaml END ----
+    append: true
+    path: /etc/ssh/sshd_config
+  - content: |
+      # ---- Content of dev-rust.yaml START ----
+      fs.inotify.max_user_watches=524288
+      # ---- Content of dev-rust.yaml END ----
+    append: true
+    path: /etc/sysctl.conf

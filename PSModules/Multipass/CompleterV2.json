@@ -1,0 +1,109 @@
+{
+	"Commands": [
+		{
+			"Name": "delete",
+			"Type": "Command",
+			"Description": "Delete instances"
+		},
+		{
+			"Name": "exec",
+			"Type": "Command",
+			"Description": "Run a command on an instance"
+		},
+		{
+			"Name": "find",
+			"Type": "Command",
+			"Description": "Display available images to create instances from"
+		},
+		{
+			"Name": "get",
+			"Type": "Command",
+			"Description": "Get a configuration setting"
+		},
+		{
+			"Name": "help",
+			"Type": "Command",
+			"Description": "Display help about a command"
+		},
+		{
+			"Name": "info",
+			"Type": "Command",
+			"Description": "Display information about instances"
+		},
+		{
+			"Name": "launch",
+			"Type": "Command",
+			"Description": "Create and start an Ubuntu instance"
+		},
+		{
+			"Name": "list",
+			"Type": "Command",
+			"Description": "List all available instances"
+		},
+		{
+			"Name": "mount",
+			"Type": "Command",
+			"Description": "Mount a local directory in the instance"
+		},
+		{
+			"Name": "networks",
+			"Type": "Command",
+			"Description": "List available network interfaces"
+		},
+		{
+			"Name": "purge",
+			"Type": "Command",
+			"Description": "Purge all deleted instances permanently"
+		},
+		{
+			"Name": "recover",
+			"Type": "Command",
+			"Description": "Recover deleted instances"
+		},
+		{
+			"Name": "restart",
+			"Type": "Command",
+			"Description": "Restart instances"
+		},
+		{
+			"Name": "set",
+			"Type": "Command",
+			"Description": "Set a configuration setting"
+		},
+		{
+			"Name": "shell",
+			"Type": "Command",
+			"Description": "Open a shell on a running instance"
+		},
+		{
+			"Name": "start",
+			"Type": "Command",
+			"Description": "Start instances"
+		},
+		{
+			"Name": "stop",
+			"Type": "Command",
+			"Description": "Stop running instances"
+		},
+		{
+			"Name": "suspend",
+			"Type": "Command",
+			"Description": "Suspend running instances"
+		},
+		{
+			"Name": "transfer",
+			"Type": "Command",
+			"Description": "Transfer files between the host and instances"
+		},
+		{
+			"Name": "umount",
+			"Type": "Command",
+			"Description": "Unmount a directory from an instance"
+		},
+		{
+			"Name": "version",
+			"Type": "Command",
+			"Description": "Show version details"
+		}
+	]
+}

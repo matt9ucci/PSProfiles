@@ -1,16 +1,5 @@
-function New-Directory {
-	[CmdletBinding(SupportsShouldProcess)]
-	[Alias('nd')]
-	param (
-		[Parameter(Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName)]
-		[string[]]
-		$Path
-	)
-
-	process {
-		New-Item $Path -ItemType Directory -Force
-	}
-}
+Set-Alias nd md
+Set-Alias New-Directory nd
 
 function Remove-Directory {
 	[CmdletBinding(SupportsShouldProcess)]

@@ -81,6 +81,13 @@ git remote add upstream https://github.com/OWNER/REPOSITORY.git
 
 java -version
 
+# Maven
+mvn --version
+
+mvn dependency:resolve-sources
+mvn dependency:tree --% -DoutputFile=tree.txt -Dincludes=jakarta.*,org.eclipse.*
+mvn package -DskipTests
+
 # Payara
 asadmin start-domain
 asadmin stop-domain

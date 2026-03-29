@@ -9,8 +9,8 @@
 				{ "Scope": "machine", "PackageIdentifier": "Microsoft.VisualStudioCode" },
 				{ "Scope": "machine", "PackageIdentifier": "Microsoft.WindowsTerminal" },
 				{ "Scope": "machine", "PackageIdentifier": "Mozilla.Firefox" },
-				{ "Scope": "machine", "PackageIdentifier": "Schniz.fnm" },
 				{ "Scope": "machine", "PackageIdentifier": "VideoLAN.VLC" },
+				{ "Scope": "user", "PackageIdentifier": "Schniz.fnm" },
 			],
 			"SourceDetails": {
 				"Argument": "https://cdn.winget.microsoft.com/cache",

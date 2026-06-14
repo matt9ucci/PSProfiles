@@ -3,14 +3,19 @@
 	"Sources": [
 		{
 			"Packages": [
-				{ "Scope": "machine", "PackageIdentifier": "7zip.7zip" },
-				{ "Scope": "machine", "PackageIdentifier": "Git.Git" },
-				{ "Scope": "machine", "PackageIdentifier": "Microsoft.PowerShell" },
-				{ "Scope": "machine", "PackageIdentifier": "Microsoft.VisualStudioCode" },
-				{ "Scope": "machine", "PackageIdentifier": "Microsoft.WindowsTerminal" },
-				{ "Scope": "machine", "PackageIdentifier": "Mozilla.Firefox" },
-				{ "Scope": "machine", "PackageIdentifier": "VideoLAN.VLC" },
-				{ "Scope": "user", "PackageIdentifier": "Schniz.fnm" },
+				{ "PackageIdentifier": "7zip.7zip" },
+				{ "PackageIdentifier": "astral-sh.uv" },
+				{ "PackageIdentifier": "Git.Git" },
+				{ "PackageIdentifier": "Microsoft.PowerShell" },
+				{ "PackageIdentifier": "Microsoft.PowerToys" },
+				{ "PackageIdentifier": "Microsoft.VisualStudioCode" },
+				{ "PackageIdentifier": "Microsoft.WindowsTerminal" },
+				{ "PackageIdentifier": "Microsoft.WSL" },
+				{ "PackageIdentifier": "Mozilla.Firefox" },
+				{ "PackageIdentifier": "Nushell.Nushell" },
+				{ "PackageIdentifier": "Rustlang.Rustup" },
+				{ "PackageIdentifier": "Schniz.fnm" },
+				{ "PackageIdentifier": "VideoLAN.VLC" },
 			],
 			"SourceDetails": {
 				"Argument": "https://cdn.winget.microsoft.com/cache",

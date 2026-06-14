@@ -1,59 +1,167 @@
-// * [General profile settings](https://docs.microsoft.com/en-us/windows/terminal/customize-settings/profile-general)
-// * [ProfileIcons](https://github.com/microsoft/terminal/tree/main/src/cascadia/CascadiaPackage/ProfileIcons)
 {
-	"$help": "https://aka.ms/terminal-documentation",
-	"$schema": "https://aka.ms/terminal-profiles-schema",
-	"actions": [
-		{ "command": { "action": "closeTab" }, "id": "User.closeTab.0" },
-		{ "command": { "action": "newTab" }, "id": "User.newTab.5DEADB41" },
-	],
-	"confirmCloseAllTabs": false,
-	"copyFormatting": "none",
-	"copyOnSelect": true,
-	"defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-	"disabledProfileSources": [
-		"Windows.Terminal.Azure",
-	],
-	"keybindings": [
-		{ "id": "Terminal.CopyToClipboard", "keys": "ctrl+c" },
-		{ "id": "Terminal.DuplicatePaneAuto", "keys": "alt+shift+d" },
-		{ "id": "Terminal.FindText", "keys": "ctrl+f" },
-		{ "id": "Terminal.PasteFromClipboard", "keys": "ctrl+v" },
-		{ "id": "Terminal.ScrollDownPage", "keys": "pgdn" },
-		{ "id": "Terminal.ScrollUpPage", "keys": "pgup" },
-		{ "id": "Terminal.SwitchToTab0", "keys": "ctrl+1" },
-		{ "id": "Terminal.SwitchToTab1", "keys": "ctrl+2" },
-		{ "id": "Terminal.SwitchToTab2", "keys": "ctrl+3" },
-		{ "id": "Terminal.SwitchToTab3", "keys": "ctrl+4" },
-		{ "id": "Terminal.SwitchToTab4", "keys": "ctrl+5" },
-		{ "id": "Terminal.SwitchToTab5", "keys": "ctrl+6" },
-		{ "id": "Terminal.SwitchToTab6", "keys": "ctrl+7" },
-		{ "id": "Terminal.SwitchToTab7", "keys": "ctrl+8" },
-		{ "id": "Terminal.ToggleCommandPalette", "keys": "f1" },
-		{ "id": "User.closeTab.0", "keys": "ctrl+w" },
-		{ "id": "User.newTab.5DEADB41", "keys": "ctrl+t" },
-		{ "id": null, "keys": "win+sc(41)" },
-	],
-	"launchMode": "maximized",
-	"profiles": {
-		"defaults": {
-			"font": {
-				"size": 14,
-			},
-		},
-		"list": [
-			{
-				"name": "PowerShell",
-				"source": "Windows.Terminal.PowershellCore",
-				"colorScheme": "Campbell Powershell",
-				"guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-			},
-			{
-				"name": "Windows PowerShell",
-				"commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-				"colorScheme": "Campbell Powershell",
-				"guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
-			},
-		],
-	},
+    "$help": "https://aka.ms/terminal-documentation",
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+    "actions": [],
+    "copyFormatting": "none",
+    "copyOnSelect": true,
+    "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+    "disabledProfileSources":
+    [
+        "Windows.Terminal.Azure",
+        "Windows.Terminal.Wsl"
+    ],
+    "keybindings":
+    [
+        {
+            "id": "Terminal.CopyToClipboard",
+            "keys": "ctrl+c"
+        },
+        {
+            "id": "Terminal.PasteFromClipboard",
+            "keys": "ctrl+v"
+        },
+        {
+            "id": "Terminal.FindText",
+            "keys": "ctrl+f"
+        },
+        {
+            "id": "Terminal.ScrollDownPage",
+            "keys": "pgdn"
+        },
+        {
+            "id": "Terminal.PrevTab",
+            "keys": "ctrl+pgup"
+        },
+        {
+            "id": "Terminal.ScrollUpPage",
+            "keys": "pgup"
+        },
+        {
+            "id": "Terminal.NextTab",
+            "keys": "ctrl+pgdn"
+        },
+        {
+            "id": "Terminal.ScrollUp",
+            "keys": "ctrl+up"
+        },
+        {
+            "id": "Terminal.SwitchToTab5",
+            "keys": "ctrl+6"
+        },
+        {
+            "id": "Terminal.ScrollDown",
+            "keys": "ctrl+down"
+        },
+        {
+            "id": "Terminal.SwitchToTab0",
+            "keys": "ctrl+1"
+        },
+        {
+            "id": "Terminal.SwitchToTab1",
+            "keys": "ctrl+2"
+        },
+        {
+            "id": "Terminal.SwitchToTab2",
+            "keys": "ctrl+3"
+        },
+        {
+            "id": "Terminal.SwitchToTab3",
+            "keys": "ctrl+4"
+        },
+        {
+            "id": "Terminal.SwitchToTab4",
+            "keys": "ctrl+5"
+        },
+        {
+            "id": "Terminal.SwitchToTab6",
+            "keys": "ctrl+7"
+        },
+        {
+            "id": "Terminal.SwitchToTab7",
+            "keys": "ctrl+8"
+        },
+        {
+            "id": "Terminal.ToggleCommandPalette",
+            "keys": "f1"
+        },
+        {
+            "id": "Terminal.ClosePane",
+            "keys": "ctrl+w"
+        },
+        {
+            "id": "Terminal.OpenNewTab",
+            "keys": "ctrl+t"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+t"
+        },
+        {
+            "id": null,
+            "keys": "win+sc(41)"
+        }
+    ],
+    "launchMode": "maximized",
+    "newTabMenu":
+    [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
+    "profiles":
+    {
+        "defaults":
+        {
+            "font":
+            {
+                "size": 14
+            }
+        },
+        "list":
+        [
+            {
+                "colorScheme": "Campbell Powershell",
+                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+                "hidden": false,
+                "name": "PowerShell",
+                "source": "Windows.Terminal.PowershellCore"
+            },
+            {
+                "guid": "{47302f9c-1ac4-566c-aa3e-8cf29889d6ab}",
+                "hidden": false,
+                "name": "Nushell",
+                "source": "nu"
+            },
+            {
+                "colorScheme": "Campbell Powershell",
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "name": "Windows PowerShell"
+            },
+            {
+                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                "name": "Command Prompt"
+            },
+            {
+                "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
+                "hidden": false,
+                "name": "Git Bash",
+                "source": "Git"
+            },
+            {
+                "guid": "{32bc3467-f636-5f7e-8246-0e173e16c55a}",
+                "hidden": false,
+                "name": "DockerHost",
+                "source": "Microsoft.WSL"
+            },
+            {
+                "guid": "{473ec906-39b3-55cc-ae34-f49d0380c0a1}",
+                "hidden": false,
+                "name": "Ubuntu-26.04",
+                "source": "Microsoft.WSL"
+            }
+        ]
+    },
+    "schemes": [],
+    "themes": [],
+    "warning.confirmCloseAllTabs": false
 }

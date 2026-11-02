@@ -1,121 +1,72 @@
 {
-	"editor.accessibilitySupport": "off",
+	"editor.cursorBlinking": "solid",
 	"editor.renderWhitespace": "boundary",
-
-	"extensions.ignoreRecommendations": true,
 
 	"explorer.confirmDelete": false,
 	"explorer.confirmDragAndDrop": false,
 
+	"extensions.autoUpdate": "off",
+	"extensions.ignoreRecommendations": true,
+
 	"terminal.integrated.copyOnSelection": true,
 	"terminal.integrated.suggest.enabled": false,
 
+	"update.mode": "manual",
+
 	"window.commandCenter": false,
 
+	"workbench.editor.useModal": "off",
 	"workbench.settings.editor": "json",
-	"workbench.startupEditor": "none",
+
+	"zenMode.hideLineNumbers": false,
 
 	"workbench.settings.applyToAllProfiles": [
-		"editor.accessibilitySupport",
+		"editor.cursorBlinking",
 		"editor.renderWhitespace",
+		"extensions.autoUpdate",
 		"extensions.ignoreRecommendations",
 		"explorer.confirmDelete",
 		"explorer.confirmDragAndDrop",
 		"terminal.integrated.copyOnSelection",
 		"terminal.integrated.suggest.enabled",
+		"update.mode",
+		"workbench.editor.useModal",
 		"window.commandCenter",
 		"workbench.settings.editor",
-		"workbench.startupEditor",
+		"zenMode.hideLineNumbers",
 	],
 
-	"[html]": {
-		"editor.defaultFormatter": "vscode.html-language-features"
-	},
-	"[javascript]": {
-		"editor.defaultFormatter": "vscode.typescript-language-features"
-	},
-	"[json]": {
-		"editor.defaultFormatter": "vscode.json-language-features"
-	},
-	"[jsonc]": {
-		"editor.defaultFormatter": "vscode.json-language-features"
-	},
-	"[typescript]": {
-		"editor.defaultFormatter": "vscode.typescript-language-features"
-	},
-	"csharp.suppressBuildAssetsNotification": true,
-	"csharp.suppressDotnetRestoreNotification": true,
-	"debug.internalConsoleOptions": "openOnSessionStart",
-	"diffEditor.renderSideBySide": false,
-	"dotfiles.repository": "https://github.com/matt9ucci/dotfiles.git",
-	"editor.acceptSuggestionOnCommitCharacter": false,
-	"editor.cursorBlinking": "solid",
-	"editor.fontFamily": "'Cascadia Mono', Consolas",
-	"editor.formatOnType": true,
+	"editor.detectIndentation": false,
+	"editor.fontFamily": "'Cascadia Mono', Consolas, 'Courier New', monospace",
 	"editor.insertSpaces": false,
-	"editor.tabCompletion": "on",
+
 	"files.associations": {
 		"*.ps1xml": "xml"
 	},
 	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
-	"git-graph.openNewTabEditorGroup": "Two",
-	"git.enableSmartCommit": true,
-	"javascript.format.semicolons": "remove",
-	"json.schemas": [
-		{
-			"fileMatch": [
-				"package.json"
-			],
-			"url": "http://json.schemastore.org/package"
-		}
-	],
+
+	"git.autofetch": true,
+
+	"json.format.keepLines": true,
+
 	"markdown.extension.list.indentationSize": "inherit",
+
 	"markdownlint.configFile": "${userHome}/.config/.markdownlint.jsonc",
-	"openInGitHub.defaultRemote": "upstream",
-	"powershell.codeFormatting.newLineAfterCloseBrace": false,
-	"powershell.codeFormatting.useConstantStrings": true,
-	"powershell.codeFormatting.useCorrectCasing": true,
-	"powershell.codeFormatting.whitespaceBetweenParameters": true,
-	"powershell.integratedConsole.showOnStartup": false,
-	"powershell.promptToUpdatePowerShell": false,
-	"powershell.sideBar.CommandExplorerVisibility": false,
-	"remote.containers.defaultExtensions": [
-		"albert.TabOut",
-		"donjayamanne.githistory",
-		"ms-vscode.powershell",
-		"waderyan.gitblame",
-		"yzhang.markdown-all-in-one"
-	],
-	"remote.SSH.defaultExtensions": [
-		"albert.TabOut",
-		"donjayamanne.githistory",
-		"ms-vscode.powershell",
-		"waderyan.gitblame",
-		"yzhang.markdown-all-in-one"
-	],
-	"remote.SSH.remotePlatform": {
-		"primary.mshome.net": "linux"
-	},
+
 	"terminal.integrated.commandsToSkipShell": [
 		"workbench.action.toggleSidebarVisibility",
 	],
-	"terminal.integrated.defaultProfile.linux": "pwsh",
-	"terminal.integrated.enablePersistentSessions": false,
-	"terminal.integrated.profiles.linux": {
-		"pwsh": {
-			"path": "/usr/bin/pwsh",
-			"args": [
-				"-NoLogo"
-			]
-		}
-	},
-	"typescript.format.semicolons": "remove",
-	"update.mode": "manual",
+
 	"window.newWindowDimensions": "maximized",
 	"window.restoreWindows": "none",
 
+	"workbench.startupEditor": "none",
 	"workbench.settings.useSplitJSON": true,
-	"xml.format.preserveAttributeLineBreaks": true,
-	"zenMode.hideLineNumbers": false,
+
+	"[yaml][yml]": {
+		"editor.detectIndentation": false,
+		"editor.insertSpaces": true,
+		"editor.tabSize": 2,
+	},
 }

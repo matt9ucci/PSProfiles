@@ -71,6 +71,7 @@
 		}
 	],
 	"markdown.extension.list.indentationSize": "inherit",
+	"markdownlint.configFile": "${userHome}/.config/.markdownlint.jsonc",
 	"openInGitHub.defaultRemote": "upstream",
 	"powershell.codeFormatting.newLineAfterCloseBrace": false,
 	"powershell.codeFormatting.useConstantStrings": true,

@@ -1,0 +1,9 @@
+{
+	"no-hard-tabs": false,
+	"ul-indent": {
+		"indent": 1,
+	},
+	"ul-style": {
+		"style": "sublist",
+	},
+}

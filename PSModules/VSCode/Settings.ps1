@@ -63,3 +63,8 @@ git commit -m 'New VS Code settings'
 '@ -ForegroundColor Green
 	}
 }
+
+function Update-MarkdownlintConfig {
+	$dst = Join-Path $HOME .config .markdownlint.jsonc
+	Copy-Item -Path $PSScriptRoot\.markdownlint.jsonc -Destination $dst -Force
+}

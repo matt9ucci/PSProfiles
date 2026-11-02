@@ -12,7 +12,7 @@
 	"powershell.codeFormatting.useCorrectCasing": true,
 	"powershell.codeFormatting.whitespaceBetweenParameters": true,
 
-	"workbench.colorTheme": "Default Dark+",
+	"workbench.colorTheme": "Dark 2026",
 	"workbench.colorCustomizations": {
 		"titleBar.activeBackground": "#012456",
 		"titleBar.activeForeground": "#cccccc",

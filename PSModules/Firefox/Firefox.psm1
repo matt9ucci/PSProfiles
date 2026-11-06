@@ -1,5 +1,11 @@
 Set-Variable FIREFOX_HOME "$env:ProgramFiles\Mozilla Firefox" -Scope Global -Option ReadOnly, AllScope
-Set-Variable FIREFOX_PROFILES "$env:APPDATA\Mozilla\Firefox\Profiles" -Scope Global -Option ReadOnly, AllScope
+Set-Variable FIREFOX_PROFILES $(
+	if ($IsLinux) {
+		"$HOME/.mozilla/firefox"
+	} else {
+		"$env:APPDATA\Mozilla\Firefox\Profiles"
+	}
+) -Scope Global -Option ReadOnly, AllScope
 Set-Variable FIREFOX_EXE (Join-Path $FIREFOX_HOME firefox.exe) -Scope Global -Option ReadOnly, AllScope
 
 function Get-FirefoxProfile {
@@ -8,10 +14,8 @@ function Get-FirefoxProfile {
 		$Name = '*'
 	)
 
-	if ($IsLinux) {
-		Get-ChildItem -Directory $HOME/.mozilla/firefox -Filter *.$Name
-	} else {
-		Get-ChildItem -Directory $FIREFOX_PROFILES -Filter *.$Name
+	Get-ChildItem -Directory -Path $FIREFOX_PROFILES | ? {
+		($Name -eq '*') -or ($_.Name -like "*.$Name") -or ($_.Name -eq $Name)
 	}
 }
 
@@ -19,26 +23,50 @@ function New-FirefoxProfile([string[]]$Name) {
 	$Name | % { Start-Process -FilePath $FIREFOX_EXE -ArgumentList "-CreateProfile $_" -Wait }
 }
 
-function Get-FirefoxUserJs([string]$Name) {
-	Join-Path (Get-FirefoxProfile $Name).FullName user.js
-}
+function Copy-FirefoxUserJs {
+	param (
+		[string]
+		$Name = '*'
+	)
 
-function Copy-FirefoxUserJs([string]$Name) {
 	$js = Join-Path $PSScriptRoot user.js
-	Copy-Item $js (Get-FirefoxUserJs $Name)
+	Get-FirefoxProfile -Name $Name | % {
+		Copy-Item -Path $js -Destination (Join-Path $_.FullName user.js) -Force -Verbose
+	}
 }
 
-function Remove-FirefoxUserJs([string]$Name) {
-	Remove-Item (Get-FirefoxUserJs $Name)
+function Remove-FirefoxUserJs {
+	param (
+		[string]
+		$Name = '*'
+	)
+
+	Get-FirefoxProfile -Name $Name | % {
+		Remove-Item -Path (Join-Path $_.FullName user.js) -Verbose
+	}
 }
 
-function Copy-FirefoxUserCss([string]$Name) {
+function Copy-FirefoxUserCss {
+	param (
+		[string]
+		$Name = '*'
+	)
+
 	$chrome = Join-Path $PSScriptRoot chrome
-	Copy-Item $chrome (Get-FirefoxProfile $Name).FullName -Recurse -Force
+	Get-FirefoxProfile -Name $Name | % {
+		Copy-Item -Path $chrome -Destination $_.FullName -Recurse -Force -Verbose
+	}
 }
 
-function Remove-FirefoxUserCss([string]$Name) {
-	Remove-Item (Join-Path (Get-FirefoxProfile $Name) chrome) -Recurse -Force
+function Remove-FirefoxUserCss {
+	param (
+		[string]
+		$Name = '*'
+	)
+
+	Get-FirefoxProfile -Name $Name | % {
+		Remove-Item -Path (Join-Path $_.FullName chrome) -Recurse -Force -Verbose
+	}
 }
 
 function Start-Firefox([string]$Name) {
